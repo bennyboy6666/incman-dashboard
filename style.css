@@ -119,16 +119,15 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 /* RULER TIMELINE */
 .tl-ruler { position: relative; }
 
-/* Month block — STRICT equal height ruler */
+/* Month block — each month gets equal visual weight, height proportional to events */
 .tl-month {
   position: relative;
   display: flex;
-  height: 800px;
+  min-height: 180px;
   border-left: 3px solid var(--border);
   margin-left: 70px;
-  overflow: hidden;
 }
-@media (max-width: 600px) { .tl-month { margin-left: 50px; height: 700px; } }
+@media (max-width: 600px) { .tl-month { margin-left: 50px; } }
 
 /* Gradient line for phase 1 months */
 #tl-mars, #tl-avril, #tl-mai { border-left-color: var(--accent2); }
@@ -180,15 +179,14 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 #tl-juin::before { background: var(--accent); }
 #tl-juillet::before, #tl-aout::before, #tl-sept::before, #tl-oct::before, #tl-nov::before, #tl-dec::before { background: var(--accent); }
 
-/* Track — events positioned inside, flex-fill to use full month height */
+/* Track — events positioned inside */
 .tl-month-track {
   position: relative;
   flex: 1;
-  padding: 4px 0 8px 24px;
+  padding: 4px 0 20px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 4px;
+  gap: 8px;
 }
 
 /* Event */
@@ -216,7 +214,7 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .tl-critical .tl-event-dot { background: #ff4d4d; border-color: #ff4d4d; box-shadow: 0 0 10px rgba(255,77,77,0.5); width: 14px; height: 14px; left: -32px; top: 9px; }
 .tl-milestone .tl-event-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(108,99,255,0.4); width: 14px; height: 14px; left: -32px; top: 9px; }
 
-/* Event card — full style */
+/* Event card */
 .tl-event-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -258,7 +256,8 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
   z-index: 3;
 }
 
-/* Months with few events still keep ruler proportions */
+/* Empty months get less height */
+.tl-month:has(.tl-month-track:empty) { min-height: 80px; }
 
 @media (max-width: 600px) {
   .tl-event-card { padding: 8px 10px; }
