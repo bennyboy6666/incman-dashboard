@@ -117,76 +117,66 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .btn-save { background: linear-gradient(135deg, var(--accent), #8b5cf6); border: none; border-radius: 8px; color: white; padding: 10px 20px; cursor: pointer; font-size: 0.88rem; font-weight: 600; }
 
 /* RULER TIMELINE */
-.tl-ruler { position: relative; }
+.tl-ruler { position: relative; padding: 0 16px; }
 
-/* Month block — each month gets equal visual weight, height proportional to events */
+/* Month block — vertical, label on top */
 .tl-month {
   position: relative;
-  display: flex;
-  min-height: 180px;
-  border-left: 3px solid var(--border);
-  margin-left: 70px;
+  margin-bottom: 8px;
 }
-@media (max-width: 600px) { .tl-month { margin-left: 50px; } }
 
-/* Gradient line for phase 1 months */
-#tl-mars, #tl-avril, #tl-mai { border-left-color: var(--accent2); }
-/* Phase 2 months */
-#tl-juin { border-image: linear-gradient(to bottom, var(--accent2), var(--accent)) 1; }
-#tl-juillet, #tl-aout, #tl-sept, #tl-oct, #tl-nov, #tl-dec { border-left-color: var(--accent); }
-
-/* Month label — left side */
+/* Month label — TOP banner, always visible */
 .tl-month-label {
-  position: absolute;
-  left: -73px;
-  top: 0;
-  width: 60px;
-  text-align: right;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 6px;
 }
-@media (max-width: 600px) { .tl-month-label { left: -53px; width: 44px; } }
 .tl-month-label > span:first-child {
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: var(--text);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .tl-month-phase {
-  font-size: 0.58rem;
-  font-weight: 600;
-  padding: 1px 5px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 8px;
   border-radius: 6px;
-  text-align: center;
+}
+/* Phase colors on label */
+#tl-mars .tl-month-label, #tl-avril .tl-month-label, #tl-mai .tl-month-label {
+  border-left: 4px solid var(--accent2);
+}
+#tl-juin .tl-month-label, #tl-juillet .tl-month-label, #tl-aout .tl-month-label,
+#tl-sept .tl-month-label, #tl-oct .tl-month-label, #tl-nov .tl-month-label, #tl-dec .tl-month-label {
+  border-left: 4px solid var(--accent);
 }
 #tl-mars .tl-month-phase { background: rgba(6,214,160,0.15); color: #06d6a0; }
 #tl-juin .tl-month-phase { background: rgba(108,99,255,0.15); color: #a79fff; }
 
-/* Tick mark at month start */
-.tl-month::before {
-  content: '';
-  position: absolute;
-  left: -10px;
-  top: 0;
-  width: 17px;
-  height: 3px;
-  background: inherit;
-  border-radius: 2px;
-}
-#tl-mars::before, #tl-avril::before, #tl-mai::before { background: var(--accent2); }
-#tl-juin::before { background: var(--accent); }
-#tl-juillet::before, #tl-aout::before, #tl-sept::before, #tl-oct::before, #tl-nov::before, #tl-dec::before { background: var(--accent); }
-
-/* Track — events positioned inside */
+/* Track — events stacked tight */
 .tl-month-track {
-  position: relative;
-  flex: 1;
-  padding: 4px 0 20px 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  padding: 0 0 0 18px;
+  border-left: 3px solid var(--border);
+  margin-left: 12px;
+}
+/* Phase colors on track line */
+#tl-mars .tl-month-track, #tl-avril .tl-month-track, #tl-mai .tl-month-track {
+  border-left-color: var(--accent2);
+}
+#tl-juin .tl-month-track { border-left-color: var(--accent); }
+#tl-juillet .tl-month-track, #tl-aout .tl-month-track, #tl-sept .tl-month-track,
+#tl-oct .tl-month-track, #tl-nov .tl-month-track, #tl-dec .tl-month-track {
+  border-left-color: var(--accent);
 }
 
 /* Event */
@@ -194,25 +184,24 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* Dot on the ruler line */
 .tl-event-dot {
   position: absolute;
-  left: -31px;
-  top: 10px;
-  width: 12px;
-  height: 12px;
+  left: -25px;
+  top: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--surface2);
   border: 2px solid var(--muted);
   z-index: 2;
-  flex-shrink: 0;
 }
 .tl-done .tl-event-dot { background: var(--accent2); border-color: var(--accent2); box-shadow: 0 0 8px rgba(0,212,170,0.4); }
-.tl-critical .tl-event-dot { background: #ff4d4d; border-color: #ff4d4d; box-shadow: 0 0 10px rgba(255,77,77,0.5); width: 14px; height: 14px; left: -32px; top: 9px; }
-.tl-milestone .tl-event-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(108,99,255,0.4); width: 14px; height: 14px; left: -32px; top: 9px; }
+.tl-critical .tl-event-dot { background: #ff4d4d; border-color: #ff4d4d; box-shadow: 0 0 8px rgba(255,77,77,0.5); width: 12px; height: 12px; left: -26px; top: 11px; }
+.tl-milestone .tl-event-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(108,99,255,0.4); width: 12px; height: 12px; left: -26px; top: 11px; }
 
 /* Event card */
 .tl-event-card {
@@ -221,9 +210,9 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
   border-radius: 8px;
   padding: 10px 14px;
   flex: 1;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s;
 }
-.tl-event-card:hover { border-color: rgba(108,99,255,0.4); transform: translateX(2px); }
+.tl-event-card:hover { border-color: rgba(108,99,255,0.4); }
 .tl-done .tl-event-card { border-color: rgba(0,212,170,0.3); }
 .tl-critical .tl-event-card { border-color: rgba(255,77,77,0.4); background: rgba(255,77,77,0.04); }
 .tl-milestone .tl-event-card { border-color: rgba(108,99,255,0.3); }
@@ -239,30 +228,27 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .tl-tag-blue { background: rgba(108,99,255,0.2); color: #a79fff; }
 
 /* Pivot banner (June) */
-.tl-month-pivot { border-left-width: 4px; }
+.tl-month-pivot .tl-month-label {
+  background: linear-gradient(90deg, rgba(108,99,255,0.12), var(--surface2));
+  border-color: rgba(108,99,255,0.4);
+}
 .tl-pivot-banner {
-  position: absolute;
-  top: -14px;
-  left: 20px;
-  right: 0;
   background: linear-gradient(90deg, rgba(108,99,255,0.15), transparent);
   border: 1px solid rgba(108,99,255,0.3);
   border-radius: 8px;
-  padding: 6px 14px;
-  font-size: 0.78rem;
+  padding: 8px 14px;
+  margin: 0 0 6px 12px;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.06em;
-  z-index: 3;
 }
-
-/* Empty months get less height */
-.tl-month:has(.tl-month-track:empty) { min-height: 80px; }
 
 @media (max-width: 600px) {
   .tl-event-card { padding: 8px 10px; }
   .tl-event-title { font-size: 0.8rem; }
   .tl-event-desc { font-size: 0.72rem; }
+  .tl-ruler { padding: 0 8px; }
 }
 
 /* ARCHITECTURE */
