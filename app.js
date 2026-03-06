@@ -85,9 +85,19 @@ function init() {
 function loadTasks() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
-    try { tasks = JSON.parse(saved); } catch { tasks = [...DEFAULT_TASKS]; }
+    try {
+      const parsed = JSON.parse(saved);
+      tasks = (Array.isArray(parsed) && parsed.length > 0) ? parsed : DEFAULT_TASKS.map(t => ({...t}));
+    } catch { tasks = DEFAULT_TASKS.map(t => ({...t})); }
   } else {
     tasks = DEFAULT_TASKS.map(t => ({...t}));
+  }
+}
+function resetTasks() {
+  if (confirm('Réinitialiser toutes les tâches aux valeurs par défaut? Les modifications seront perdues.')) {
+    tasks = DEFAULT_TASKS.map(t => ({...t}));
+    saveTasks();
+    renderTasks();
   }
 }
 function saveTasks() {

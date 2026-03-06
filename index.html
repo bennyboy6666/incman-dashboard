@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>IncMan Dashboard</title>
-<link rel="stylesheet" href="style.css?v=4"/>
+<link rel="stylesheet" href="style.css?v=5"/>
 </head>
 <body>
 <div id="login-screen">
@@ -48,241 +48,270 @@
         <select id="f-who" onchange="renderTasks()"><option value="">Tous</option><option value="benoit">Benoit</option><option value="jay">Jay</option><option value="both">Les deux</option></select>
         <select id="f-phase" onchange="renderTasks()"><option value="">Toutes phases</option><option value="1">Phase 1 (avant juin)</option><option value="2">Phase 2 (après juin)</option></select>
         <button class="btn-primary" onclick="openAddModal()">+ Ajouter une tâche</button>
+        <button class="btn-secondary" onclick="resetTasks()" style="margin-left:8px;font-size:0.75rem;padding:6px 12px;background:rgba(255,77,77,0.1);border:1px solid rgba(255,77,77,0.3);color:#ff8080;border-radius:8px;cursor:pointer;">🔄 Reset tâches</button>
       </div>
       <div id="tasks-container"></div>
     </div>
 
     <!-- TIMELINE -->
     <div class="page" id="page-timeline">
-      <div class="page-header"><h1>🗓️ Timeline</h1><p>Mars 2026 → Décembre 2026 — Dates cibles tentatives</p></div>
+      <div class="page-header"><h1>🗓️ Timeline</h1><p>Mars 2026 → Décembre 2026 — Graduation proportionnelle au temps réel</p></div>
 
-      <div class="vt-container">
-        <!-- PHASE 1 -->
-        <div class="vt-phase-header">
-          <span class="phase-badge phase1-badge">PHASE 1 — FONDATION</span>
-          <span class="vt-phase-sub">Mars → Mai 2026 — Tout mettre en place avant le départ de DVOLU</span>
-        </div>
-
-        <div class="vt-item vt-done">
-          <div class="vt-date">6 mars</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">✅ Planification lancée</div>
-            <div class="vt-desc">Structure 3 compagnies décidée. Dashboard déployé. Recherche KB complétée.</div>
+      <div class="tl-ruler">
+        <!-- MARS -->
+        <div class="tl-month" id="tl-mars">
+          <div class="tl-month-label"><span>MARS</span><span class="tl-month-phase">PHASE 1</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event tl-done">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">6 mars</div>
+                <div class="tl-event-title">✅ Planification lancée</div>
+                <div class="tl-event-desc">Structure 3 compagnies décidée. Dashboard déployé.</div>
+              </div>
+            </div>
+            <div class="tl-event tl-critical">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~10 mars</div>
+                <div class="tl-event-title">⚠️ Lire convention DVOLU <span class="tl-tag tl-tag-red">BLOCKER</span></div>
+                <div class="tl-event-desc">Non-concurrence, non-sollicitation, clauses IP.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15-20 mars</div>
+                <div class="tl-event-title">📞 Rencontrer un CPA</div>
+                <div class="tl-event-desc">Planification fiscale, structure, rémunération année 1.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~25 mars</div>
+                <div class="tl-event-title">🏛️ Décider LSAQ vs LCSA</div>
+                <div class="tl-event-desc">Trouver notaire ou avocat corporatif.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item vt-critical">
-          <div class="vt-date">~10 mars</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">⚠️ Lire convention DVOLU <span class="vt-tag vt-tag-red">BLOCKER</span></div>
-            <div class="vt-desc">Non-concurrence, non-sollicitation, clauses IP. Tout dépend de ça.</div>
+        <!-- AVRIL -->
+        <div class="tl-month" id="tl-avril">
+          <div class="tl-month-label"><span>AVRIL</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1er avril</div>
+                <div class="tl-event-title">🔍 Vérifier structure Jay Opco</div>
+                <div class="tl-event-desc">Compatibilité plan 50/50.</div>
+              </div>
+            </div>
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 avril</div>
+                <div class="tl-event-title">🏢 Incorporer Benoit Opco <span class="tl-tag tl-tag-blue">KEY</span></div>
+                <div class="tl-event-desc">Incorporation + compte bancaire business.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15-20 avril</div>
+                <div class="tl-event-title">💼 Définir offre de services + taux</div>
+                <div class="tl-event-desc">Offre solo + conjointe. Taux journaliers.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~15-20 mars</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">📞 Rencontrer un CPA</div>
-            <div class="vt-desc">Planification fiscale, structure optimale, rémunération année 1.</div>
+        <!-- MAI -->
+        <div class="tl-month" id="tl-mai">
+          <div class="tl-month-label"><span>MAI</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1er mai</div>
+                <div class="tl-event-title">🤝 Incorporer Cie Commune <span class="tl-tag tl-tag-blue">KEY</span></div>
+                <div class="tl-event-desc">50/50 Benoit Opco + Jay Opco.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1-15 mai</div>
+                <div class="tl-event-title">📄 Convention d'actionnaires signée</div>
+                <div class="tl-event-desc">Shotgun, drag-along, tag-along, IP, vesting.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 mai</div>
+                <div class="tl-event-title">🏦 Comptes bancaires x3 + TPS/TVQ</div>
+                <div class="tl-event-desc">Inscription taxes si revenus &gt; 30K$.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~20 mai</div>
+                <div class="tl-event-title">🌐 Site internet + emails pro</div>
+                <div class="tl-event-desc">Landing page + prenom@compagnie.com.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~25 mai</div>
+                <div class="tl-event-title">🎯 3-5 premiers prospects identifiés</div>
+                <div class="tl-event-desc">Réseau DVOLU + clients Jay.</div>
+              </div>
+            </div>
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~31 mai</div>
+                <div class="tl-event-title">🖥️ Contexo v1 fonctionnel <span class="tl-tag tl-tag-green">MILESTONE</span></div>
+                <div class="tl-event-desc">Pipeline: Capture → Core → KB → MCP.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~25 mars</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🏛️ Décider LSAQ vs LCSA</div>
-            <div class="vt-desc">Trouver un notaire ou avocat corporatif pour l'incorporation.</div>
+        <!-- JUIN — SEPARATOR -->
+        <div class="tl-month tl-month-pivot" id="tl-juin">
+          <div class="tl-month-label"><span>JUIN</span><span class="tl-month-phase">PHASE 2</span></div>
+          <div class="tl-pivot-banner">🚀 BENOIT TEMPS PLEIN</div>
+          <div class="tl-month-track">
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">1er juin</div>
+                <div class="tl-event-title">🚀 Benoit temps plein <span class="tl-tag tl-tag-green">MILESTONE</span></div>
+                <div class="tl-event-desc">Départ DVOLU. Début temps plein.</div>
+              </div>
+            </div>
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 juin</div>
+                <div class="tl-event-title">✍️ Premiers contrats signés</div>
+                <div class="tl-event-desc">Via opcos individuelles. PME industrielles QC.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~1er avril</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🔍 Vérifier structure Jay Opco</div>
-            <div class="vt-desc">Compatibilité avec le plan 50/50. Type de compagnie, clauses existantes.</div>
+        <!-- JUILLET -->
+        <div class="tl-month" id="tl-juillet">
+          <div class="tl-month-label"><span>JUILLET</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1er juillet</div>
+                <div class="tl-event-title">🤝 Premier projet conjoint</div>
+                <div class="tl-event-desc">Facturé sous cie commune.</div>
+              </div>
+            </div>
+            <div class="tl-event tl-span">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">juil–août</div>
+                <div class="tl-event-title">🏭 Dog-food Contexo sur clients réels</div>
+                <div class="tl-event-desc">Valider le produit sur vrais projets.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~15 avril</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🏢 Incorporer Benoit Opco</div>
-            <div class="vt-desc">Incorporation + ouverture compte bancaire business.</div>
+        <!-- AOÛT -->
+        <div class="tl-month" id="tl-aout">
+          <div class="tl-month-label"><span>AOÛT</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 août</div>
+                <div class="tl-event-title">📈 Première facture Cie Commune</div>
+                <div class="tl-event-desc">Premier revenu sous la structure conjointe.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~15-20 avril</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">💼 Définir offre de services + taux</div>
-            <div class="vt-desc">Offre solo Benoit + offre conjointe. Taux journaliers / forfaits.</div>
+        <!-- SEPTEMBRE -->
+        <div class="tl-month" id="tl-sept">
+          <div class="tl-month-label"><span>SEPT</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1er sept</div>
+                <div class="tl-event-title">💰 Optimiser rémunération</div>
+                <div class="tl-event-desc">Salaire vs dividendes avec CPA.</div>
+              </div>
+            </div>
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 sept</div>
+                <div class="tl-event-title">🧪 Beta Contexo <span class="tl-tag tl-tag-green">MILESTONE</span></div>
+                <div class="tl-event-desc">Beta ouverte au réseau de contacts élargi.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~1er mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🤝 Incorporer Cie Commune</div>
-            <div class="vt-desc">50/50 Benoit Opco + Jay Opco. SaaS + projets conjoints.</div>
+        <!-- OCTOBRE -->
+        <div class="tl-month" id="tl-oct">
+          <div class="tl-month-label"><span>OCT</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~1er oct</div>
+                <div class="tl-event-title">🔬 Dossier RS&amp;DE</div>
+                <div class="tl-event-desc">Crédits R&amp;D AI/SaaS (NLP, voice, algorithmes).</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~1-15 mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">📄 Convention d'actionnaires signée</div>
-            <div class="vt-desc">Shotgun, drag-along, tag-along, IP, dissolution, vesting.</div>
+        <!-- NOVEMBRE -->
+        <div class="tl-month" id="tl-nov">
+          <div class="tl-month-label"><span>NOV</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event tl-milestone">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 nov</div>
+                <div class="tl-event-title">🌍 Lancement international Contexo <span class="tl-tag tl-tag-green">MILESTONE</span></div>
+                <div class="tl-event-desc">contexo.app — lancement public.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="vt-item">
-          <div class="vt-date">~15 mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🏦 Comptes bancaires x3 + TPS/TVQ</div>
-            <div class="vt-desc">Comptes pour chaque compagnie. Inscription taxes si revenus &gt; 30K$.</div>
+        <!-- DÉCEMBRE -->
+        <div class="tl-month" id="tl-dec">
+          <div class="tl-month-label"><span>DÉC</span></div>
+          <div class="tl-month-track">
+            <div class="tl-event">
+              <div class="tl-event-dot"></div>
+              <div class="tl-event-card">
+                <div class="tl-event-date">~15 déc</div>
+                <div class="tl-event-title">📊 Révision fiscale année 1</div>
+                <div class="tl-event-desc">Bilan avec CPA. Ajuster pour année 2.</div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~20 mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🌐 Site internet + emails pro</div>
-            <div class="vt-desc">Landing page + prenom@compagnie.com.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~25 mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🎯 3-5 premiers prospects identifiés</div>
-            <div class="vt-desc">Réseau DVOLU (Benoit) + réseau clients Jay (LEM, Novago).</div>
-          </div>
-        </div>
-
-        <div class="vt-item vt-highlight">
-          <div class="vt-date">~31 mai</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🖥️ Contexo v1 fonctionnel <span class="vt-tag vt-tag-green">MILESTONE</span></div>
-            <div class="vt-desc">Prêt pour dog-food interne. Pipeline: Capture → Core → KB → MCP.</div>
-          </div>
-        </div>
-
-        <!-- SEPARATOR -->
-        <div class="vt-separator">
-          <div class="vt-sep-line"></div>
-          <div class="vt-sep-label">🚀 BENOIT TEMPS PLEIN — 1ER JUIN 2026</div>
-          <div class="vt-sep-line"></div>
-        </div>
-
-        <!-- PHASE 2 -->
-        <div class="vt-phase-header">
-          <span class="phase-badge phase2-badge">PHASE 2 — LANCEMENT</span>
-          <span class="vt-phase-sub">Juin → Décembre 2026 — Premiers revenus, scale, lancement Contexo</span>
-        </div>
-
-        <div class="vt-item vt-highlight">
-          <div class="vt-date">1er juin</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🚀 Benoit temps plein <span class="vt-tag vt-tag-green">MILESTONE</span></div>
-            <div class="vt-desc">Départ DVOLU confirmé. Début à temps plein dans les compagnies.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~15 juin</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">✍️ Premiers contrats signés</div>
-            <div class="vt-desc">Via opcos individuelles. PME industrielles QC.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~1er juillet</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🤝 Premier projet conjoint</div>
-            <div class="vt-desc">Facturé sous cie commune. Premier test de la structure.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">juil–août</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🏭 Dog-food Contexo sur clients réels</div>
-            <div class="vt-desc">Utiliser Contexo sur vrais projets pour valider le produit.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~15 août</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">📈 Première facture Cie Commune</div>
-            <div class="vt-desc">Premier revenu sous la structure conjointe.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~1er sept</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">💰 Optimiser rémunération</div>
-            <div class="vt-desc">Salaire vs dividendes — ajuster avec CPA selon revenus réels.</div>
-          </div>
-        </div>
-
-        <div class="vt-item vt-highlight">
-          <div class="vt-date">~15 sept</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🧪 Beta Contexo <span class="vt-tag vt-tag-green">MILESTONE</span></div>
-            <div class="vt-desc">Ouverture beta au réseau de contacts élargi.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~1er oct</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🔬 Dossier RS&amp;DE</div>
-            <div class="vt-desc">Crédits R&amp;D pour développement AI/SaaS. NLP, voice, algorithmes.</div>
-          </div>
-        </div>
-
-        <div class="vt-item vt-highlight">
-          <div class="vt-date">~15 nov</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">🌍 Lancement international Contexo <span class="vt-tag vt-tag-green">MILESTONE</span></div>
-            <div class="vt-desc">contexo.app — lancement public international.</div>
-          </div>
-        </div>
-
-        <div class="vt-item">
-          <div class="vt-date">~15 déc</div>
-          <div class="vt-dot"></div>
-          <div class="vt-content">
-            <div class="vt-title">📊 Révision fiscale année 1</div>
-            <div class="vt-desc">Bilan avec CPA. Ajuster structure si nécessaire pour année 2.</div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -398,6 +427,6 @@ Critères: expérience startup tech QC, bilingue si possible</textarea>
   </div>
 </div>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
