@@ -1,0 +1,100 @@
+direction: down
+
+benoit: "👤 Benoit Gagné\n(Actionnaire personnel)" {
+  style: {
+    fill: "#1a1d27"
+    stroke: "#6c63ff"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+jay: "👤 Jérémy (Jay)\n(Actionnaire personnel)" {
+  style: {
+    fill: "#1a1d27"
+    stroke: "#00d4aa"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+benoit_opco: "🏢 Benoit Opco\n(À incorporer)\nConsulting AI solo" {
+  style: {
+    fill: "#22263a"
+    stroke: "#6c63ff"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+jay_opco: "🏢 Jay Opco\n(Déjà créée)\nConsulting AI solo" {
+  style: {
+    fill: "#22263a"
+    stroke: "#00d4aa"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+cie_commune: "🚀 Cie Commune\nSaaS + Projets conjoints\n50% Benoit Opco | 50% Jay Opco" {
+  style: {
+    fill: "#22263a"
+    stroke: "#ffd166"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+contexo: "📱 Contexo SaaS\nAI Context Engine\ncontexo.app" {
+  style: {
+    fill: "#22263a"
+    stroke: "#06d6a0"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+clients: "💼 Clients\nPME industrielles QC" {
+  style: {
+    fill: "#22263a"
+    stroke: "#4ecdc4"
+    font-color: "#e8eaf6"
+    border-radius: 8
+  }
+}
+
+benoit -> benoit_opco: "100%" {
+  style.stroke: "#6c63ff"
+  style.font-color: "#a79fff"
+}
+jay -> jay_opco: "100%" {
+  style.stroke: "#00d4aa"
+  style.font-color: "#00d4aa"
+}
+benoit_opco -> cie_commune: "50%" {
+  style.stroke: "#6c63ff"
+  style.font-color: "#a79fff"
+}
+jay_opco -> cie_commune: "50%" {
+  style.stroke: "#00d4aa"
+  style.font-color: "#00d4aa"
+}
+cie_commune -> contexo: "Produit phare" {
+  style.stroke: "#ffd166"
+  style.font-color: "#ffd166"
+}
+benoit_opco -> clients: "Premiers contrats" {
+  style.stroke-dash: 5
+  style.stroke: "#6c63ff"
+  style.font-color: "#a79fff"
+}
+jay_opco -> clients: "Premiers contrats" {
+  style.stroke-dash: 5
+  style.stroke: "#00d4aa"
+  style.font-color: "#00d4aa"
+}
+cie_commune -> clients: "Projets conjoints" {
+  style.stroke-dash: 5
+  style.stroke: "#ffd166"
+  style.font-color: "#ffd166"
+}

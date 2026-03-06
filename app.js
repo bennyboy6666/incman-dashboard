@@ -79,8 +79,6 @@ function init() {
   loadTasks();
   loadNotes();
   renderTasks();
-  mermaid.initialize({ startOnLoad: false, theme: 'dark', themeVariables: { primaryColor: '#22263a', primaryTextColor: '#e8eaf6', primaryBorderColor: '#2e3250', lineColor: '#8892b0', secondaryColor: '#1a1d27', tertiaryColor: '#0f1117' }});
-  mermaid.run();
 }
 
 // STORAGE
@@ -128,9 +126,6 @@ function showPage(name, btn) {
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   btn.classList.add('active');
-  if (name === 'arch') {
-    setTimeout(() => mermaid.init(undefined, document.querySelectorAll('.mermaid')), 100);
-  }
   // auto-save notes on page leave
   ['note-decisions','note-questions','note-contacts','note-dvolu','arch-notes'].forEach(id => {
     const el = document.getElementById(id);

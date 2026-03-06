@@ -4,8 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>IncMan Dashboard</title>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<link rel="stylesheet" href="style.css?v=3"/>
+<link rel="stylesheet" href="style.css?v=4"/>
 </head>
 <body>
 <div id="login-screen">
@@ -55,55 +54,235 @@
 
     <!-- TIMELINE -->
     <div class="page" id="page-timeline">
-      <div class="page-header"><h1>🗓️ Timeline</h1><p>Mars 2026 → Décembre 2026 — Dates cibles tentatives (à ajuster au fur et à mesure)</p></div>
-      <div class="milestone-bar">
-        <h3>Jalons clés — dates cibles</h3>
-        <div class="milestones">
-          <div class="milestone done"><div class="milestone-dot">✅</div><div class="milestone-label">6 mars<br/>Planification lancée</div></div>
-          <div class="milestone active"><div class="milestone-dot">🔄</div><div class="milestone-label">~15 avril<br/>Incorporation Benoit Opco</div></div>
-          <div class="milestone"><div class="milestone-dot">📄</div><div class="milestone-label">~1er mai<br/>Cie Commune + Convention</div></div>
-          <div class="milestone"><div class="milestone-dot">🏢</div><div class="milestone-label">1er juin<br/>Benoit temps plein</div></div>
-          <div class="milestone"><div class="milestone-dot">🧪</div><div class="milestone-label">15 sept<br/>Beta Contexo</div></div>
-          <div class="milestone"><div class="milestone-dot">🌍</div><div class="milestone-label">15 nov<br/>Lancement intl</div></div>
+      <div class="page-header"><h1>🗓️ Timeline</h1><p>Mars 2026 → Décembre 2026 — Dates cibles tentatives</p></div>
+
+      <div class="vt-container">
+        <!-- PHASE 1 -->
+        <div class="vt-phase-header">
+          <span class="phase-badge phase1-badge">PHASE 1 — FONDATION</span>
+          <span class="vt-phase-sub">Mars → Mai 2026 — Tout mettre en place avant le départ de DVOLU</span>
         </div>
-      </div>
-      <div class="timeline-phases">
-        <div class="phase-card">
-          <div class="phase-badge phase1-badge">PHASE 1 — FONDATION</div>
-          <div class="phase-title">Avant Juin 2026</div>
-          <div class="phase-date">Mars → Mai 2026 — Tout mettre en place avant le départ de DVOLU</div>
-          <ul class="phase-items">
-            <li><span>⚠️</span><span><strong>~10 mars</strong> — Lire convention d'actionnaires DVOLU (non-concurrence, IP) — <strong style="color:#ff4d4d">CRITIQUE BLOCKER</strong></span></li>
-            <li><span>📞</span><span><strong>~15-20 mars</strong> — Rencontrer un CPA (planification fiscale, structure, rémunération)</span></li>
-            <li><span>🏛️</span><span><strong>~25 mars</strong> — Décider LSAQ vs LCSA + trouver notaire/avocat corporatif</span></li>
-            <li><span>🔍</span><span><strong>~1er avril</strong> — Vérifier structure Jay Opco (compatibilité avec plan 50/50)</span></li>
-            <li><span>🏢</span><span><strong>~15 avril</strong> — Incorporer Benoit Opco + ouvrir compte bancaire</span></li>
-            <li><span>💼</span><span><strong>~15-20 avril</strong> — Définir offre de services + taux journaliers (solo + conjointe)</span></li>
-            <li><span>🤝</span><span><strong>~1er mai</strong> — Incorporer Cie Commune (50/50 Benoit Opco + Jay Opco)</span></li>
-            <li><span>📄</span><span><strong>~1-15 mai</strong> — Convention d'actionnaires Cie Commune signée</span></li>
-            <li><span>🏦</span><span><strong>~15 mai</strong> — Comptes bancaires x3 + inscription TPS/TVQ</span></li>
-            <li><span>🌐</span><span><strong>~20 mai</strong> — Site internet + emails pro (@domaine)</span></li>
-            <li><span>🎯</span><span><strong>~25 mai</strong> — 3-5 premiers prospects identifiés (réseau DVOLU + Jay)</span></li>
-            <li><span>🖥️</span><span><strong style="color:#06d6a0">~31 mai</strong> — <strong style="color:#06d6a0">Contexo v1 fonctionnel</strong> — prêt pour dog-food interne</span></li>
-          </ul>
+
+        <div class="vt-item vt-done">
+          <div class="vt-date">6 mars</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">✅ Planification lancée</div>
+            <div class="vt-desc">Structure 3 compagnies décidée. Dashboard déployé. Recherche KB complétée.</div>
+          </div>
         </div>
-        <div class="phase-card">
-          <div class="phase-badge phase2-badge">PHASE 2 — LANCEMENT</div>
-          <div class="phase-title">Après Juin 2026</div>
-          <div class="phase-date">Juin → Décembre 2026 — Benoit temps plein, premiers revenus, scale</div>
-          <ul class="phase-items">
-            <li><span>🚀</span><span><strong>1er juin</strong> — Benoit temps plein dans les compagnies</span></li>
-            <li><span>✍️</span><span><strong>~15 juin</strong> — Premiers contrats signés (via opcos individuelles)</span></li>
-            <li><span>🤝</span><span><strong>~1er juillet</strong> — Premier projet conjoint facturé sous cie commune</span></li>
-            <li><span>🏭</span><span><strong>juil–août</strong> — Dog-food Contexo sur projets clients réels</span></li>
-            <li><span>📈</span><span><strong>~15 août</strong> — Première facture Cie Commune émise</span></li>
-            <li><span>💰</span><span><strong>~1er sept</strong> — Optimiser rémunération: salaire vs dividendes (avec CPA)</span></li>
-            <li><span>🧪</span><span><strong>~15 sept</strong> — Beta Contexo avec réseau de contacts élargi</span></li>
-            <li><span>🔬</span><span><strong>~1er oct</strong> — Dossier RS&amp;DE — crédits R&amp;D AI/SaaS</span></li>
-            <li><span>🌍</span><span><strong>~15 nov</strong> — Lancement international Contexo (contexo.app)</span></li>
-            <li><span>📊</span><span><strong>~15 déc</strong> — Révision structure fiscale année 1 avec CPA</span></li>
-          </ul>
+
+        <div class="vt-item vt-critical">
+          <div class="vt-date">~10 mars</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">⚠️ Lire convention DVOLU <span class="vt-tag vt-tag-red">BLOCKER</span></div>
+            <div class="vt-desc">Non-concurrence, non-sollicitation, clauses IP. Tout dépend de ça.</div>
+          </div>
         </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15-20 mars</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">📞 Rencontrer un CPA</div>
+            <div class="vt-desc">Planification fiscale, structure optimale, rémunération année 1.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~25 mars</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🏛️ Décider LSAQ vs LCSA</div>
+            <div class="vt-desc">Trouver un notaire ou avocat corporatif pour l'incorporation.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1er avril</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🔍 Vérifier structure Jay Opco</div>
+            <div class="vt-desc">Compatibilité avec le plan 50/50. Type de compagnie, clauses existantes.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15 avril</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🏢 Incorporer Benoit Opco</div>
+            <div class="vt-desc">Incorporation + ouverture compte bancaire business.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15-20 avril</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">💼 Définir offre de services + taux</div>
+            <div class="vt-desc">Offre solo Benoit + offre conjointe. Taux journaliers / forfaits.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1er mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🤝 Incorporer Cie Commune</div>
+            <div class="vt-desc">50/50 Benoit Opco + Jay Opco. SaaS + projets conjoints.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1-15 mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">📄 Convention d'actionnaires signée</div>
+            <div class="vt-desc">Shotgun, drag-along, tag-along, IP, dissolution, vesting.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15 mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🏦 Comptes bancaires x3 + TPS/TVQ</div>
+            <div class="vt-desc">Comptes pour chaque compagnie. Inscription taxes si revenus &gt; 30K$.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~20 mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🌐 Site internet + emails pro</div>
+            <div class="vt-desc">Landing page + prenom@compagnie.com.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~25 mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🎯 3-5 premiers prospects identifiés</div>
+            <div class="vt-desc">Réseau DVOLU (Benoit) + réseau clients Jay (LEM, Novago).</div>
+          </div>
+        </div>
+
+        <div class="vt-item vt-highlight">
+          <div class="vt-date">~31 mai</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🖥️ Contexo v1 fonctionnel <span class="vt-tag vt-tag-green">MILESTONE</span></div>
+            <div class="vt-desc">Prêt pour dog-food interne. Pipeline: Capture → Core → KB → MCP.</div>
+          </div>
+        </div>
+
+        <!-- SEPARATOR -->
+        <div class="vt-separator">
+          <div class="vt-sep-line"></div>
+          <div class="vt-sep-label">🚀 BENOIT TEMPS PLEIN — 1ER JUIN 2026</div>
+          <div class="vt-sep-line"></div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="vt-phase-header">
+          <span class="phase-badge phase2-badge">PHASE 2 — LANCEMENT</span>
+          <span class="vt-phase-sub">Juin → Décembre 2026 — Premiers revenus, scale, lancement Contexo</span>
+        </div>
+
+        <div class="vt-item vt-highlight">
+          <div class="vt-date">1er juin</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🚀 Benoit temps plein <span class="vt-tag vt-tag-green">MILESTONE</span></div>
+            <div class="vt-desc">Départ DVOLU confirmé. Début à temps plein dans les compagnies.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15 juin</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">✍️ Premiers contrats signés</div>
+            <div class="vt-desc">Via opcos individuelles. PME industrielles QC.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1er juillet</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🤝 Premier projet conjoint</div>
+            <div class="vt-desc">Facturé sous cie commune. Premier test de la structure.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">juil–août</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🏭 Dog-food Contexo sur clients réels</div>
+            <div class="vt-desc">Utiliser Contexo sur vrais projets pour valider le produit.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15 août</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">📈 Première facture Cie Commune</div>
+            <div class="vt-desc">Premier revenu sous la structure conjointe.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1er sept</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">💰 Optimiser rémunération</div>
+            <div class="vt-desc">Salaire vs dividendes — ajuster avec CPA selon revenus réels.</div>
+          </div>
+        </div>
+
+        <div class="vt-item vt-highlight">
+          <div class="vt-date">~15 sept</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🧪 Beta Contexo <span class="vt-tag vt-tag-green">MILESTONE</span></div>
+            <div class="vt-desc">Ouverture beta au réseau de contacts élargi.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~1er oct</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🔬 Dossier RS&amp;DE</div>
+            <div class="vt-desc">Crédits R&amp;D pour développement AI/SaaS. NLP, voice, algorithmes.</div>
+          </div>
+        </div>
+
+        <div class="vt-item vt-highlight">
+          <div class="vt-date">~15 nov</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">🌍 Lancement international Contexo <span class="vt-tag vt-tag-green">MILESTONE</span></div>
+            <div class="vt-desc">contexo.app — lancement public international.</div>
+          </div>
+        </div>
+
+        <div class="vt-item">
+          <div class="vt-date">~15 déc</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">📊 Révision fiscale année 1</div>
+            <div class="vt-desc">Bilan avec CPA. Ajuster structure si nécessaire pour année 2.</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -111,32 +290,8 @@
     <div class="page" id="page-arch">
       <div class="page-header"><h1>🏗️ Architecture Fiscale</h1><p>Structure des 3 compagnies — mise à jour au fur et à mesure</p></div>
       <div class="arch-note">⚠️ <strong>Structure temporaire</strong> — À confirmer avec un notaire/avocat et un CPA avant de procéder.</div>
-      <div class="mermaid-wrap">
-        <div class="mermaid">
-graph TD
-    B["👤 Benoit Gagné<br/>Actionnaire personnel"]
-    J["👤 Jérémy - Jay<br/>Actionnaire personnel"]
-    BO["🏢 Benoit Opco<br/>À incorporer<br/>Consulting AI solo"]
-    JO["🏢 Jay Opco<br/>Déjà créée<br/>Consulting AI solo"]
-    CC["🚀 Cie Commune<br/>SaaS + Projets conjoints<br/>50% Benoit Opco - 50% Jay Opco"]
-    CTX["📱 Contexo SaaS<br/>AI Context Engine"]
-    CLI["💼 Clients<br/>PME industrielles QC"]
-    B -->|"100%"| BO
-    J -->|"100%"| JO
-    BO -->|"50%"| CC
-    JO -->|"50%"| CC
-    CC --> CTX
-    BO -.->|"premiers contrats"| CLI
-    JO -.->|"premiers contrats"| CLI
-    CC -.->|"projets conjoints"| CLI
-    style B fill:#1a1d27,stroke:#6c63ff,color:#e8eaf6
-    style J fill:#1a1d27,stroke:#00d4aa,color:#e8eaf6
-    style BO fill:#22263a,stroke:#6c63ff,color:#e8eaf6
-    style JO fill:#22263a,stroke:#00d4aa,color:#e8eaf6
-    style CC fill:#22263a,stroke:#ffd166,color:#e8eaf6
-    style CTX fill:#22263a,stroke:#06d6a0,color:#e8eaf6
-    style CLI fill:#22263a,stroke:#4ecdc4,color:#e8eaf6
-        </div>
+      <div class="arch-diagram">
+        <img src="architecture.svg" alt="Structure fiscale — 3 compagnies" style="max-width:100%;height:auto;"/>
       </div>
       <div class="arch-notes-section">
         <h3>📝 Notes sur la structure</h3>
