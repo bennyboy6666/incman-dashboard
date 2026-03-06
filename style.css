@@ -119,15 +119,15 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 /* RULER TIMELINE */
 .tl-ruler { position: relative; }
 
-/* Month block — each month gets equal visual weight, height proportional to events */
+/* Month block — FIXED equal height for all months like a calendar ruler */
 .tl-month {
   position: relative;
   display: flex;
-  min-height: 180px;
+  min-height: 320px;
   border-left: 3px solid var(--border);
   margin-left: 70px;
 }
-@media (max-width: 600px) { .tl-month { margin-left: 50px; } }
+@media (max-width: 600px) { .tl-month { margin-left: 50px; min-height: 280px; } }
 
 /* Gradient line for phase 1 months */
 #tl-mars, #tl-avril, #tl-mai { border-left-color: var(--accent2); }
@@ -256,8 +256,7 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
   z-index: 3;
 }
 
-/* Empty months get less height */
-.tl-month:has(.tl-month-track:empty) { min-height: 80px; }
+/* Months with few events still keep ruler proportions */
 
 @media (max-width: 600px) {
   .tl-event-card { padding: 8px 10px; }

@@ -68,7 +68,8 @@ function doLogin() {
 if (localStorage.getItem(AUTH_KEY) === 'true') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  init();
+  // Defer init to ensure DOM is fully ready
+  setTimeout(init, 0);
 }
 
 // INIT
@@ -77,6 +78,7 @@ function init() {
   if (_initialized) return;
   _initialized = true;
   loadTasks();
+  saveTasks(); // persist defaults if first load
   loadNotes();
   renderTasks();
 }
