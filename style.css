@@ -180,26 +180,16 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 #tl-juin::before { background: var(--accent); }
 #tl-juillet::before, #tl-aout::before, #tl-sept::before, #tl-oct::before, #tl-nov::before, #tl-dec::before { background: var(--accent); }
 
-/* Track — events grid, wraps to 2 columns when needed */
+/* Track — events positioned inside, flex-fill to use full month height */
 .tl-month-track {
   position: relative;
   flex: 1;
   padding: 4px 0 8px 24px;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   gap: 4px;
 }
-/* 2 columns when 5+ events */
-.tl-month-track.tl-dense {
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 10px;
-}
-.tl-dense .tl-event { gap: 0; }
-.tl-dense .tl-event-dot { display: none; }
-.tl-dense .tl-event-card { border-left: 3px solid var(--muted); }
-.tl-dense .tl-milestone .tl-event-card { border-left-color: var(--accent); }
-.tl-dense .tl-critical .tl-event-card { border-left-color: #ff4d4d; }
 
 /* Event */
 .tl-event {
