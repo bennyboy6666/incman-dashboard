@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IncMan Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="login-screen">
+  <div class="login-box">
+    <h1>📜 IncMan</h1>
+    <p>Dashboard Incorporation &amp; Structure<br/>Benoit &amp; Jay</p>
+    <input type="password" id="pwd-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button onclick="doLogin()">Accéder au dashboard</button>
+    <div class="login-error" id="login-error">Mot de passe incorrect.</div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo">📜 IncMan</div>
+    <nav>
+      <button class="active" onclick="showPage('todo',this)">📋 Todo Board</button>
+      <button onclick="showPage('timeline',this)">🗓️ Timeline</button>
+      <button onclick="showPage('arch',this)">🏗️ Architecture</button>
+      <button onclick="showPage('notes',this)">📝 Notes</button>
+    </nav>
+    <div class="progress-pill">Progression: <span id="progress-pct">0%</span></div>
+  </header>
+  <main>
+
+    <!-- TODO -->
+    <div class="page active" id="page-todo">
+      <div class="page-header"><h1>📋 Todo Board</h1><p>Toutes les tâches classées par priorité — Benoit &amp; Jay</p></div>
+      <div class="progress-overview">
+        <div class="progress-stat"><div class="number" id="stat-total">0</div><div class="label">Total</div></div>
+        <div class="progress-stat"><div class="number" id="stat-done">0</div><div class="label">Complétées</div></div>
+        <div class="progress-stat"><div class="number" id="stat-remaining">0</div><div class="label">Restantes</div></div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-label" id="bar-label">0 / 0 complétées</div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <select id="f-priority" onchange="renderTasks()"><option value="">Toutes priorités</option><option value="critical">🔴 Critique</option><option value="high">🟠 Important</option><option value="medium">🟡 À faire</option><option value="low">🔵 Backlog</option></select>
+        <select id="f-cat" onchange="renderTasks()"><option value="">Toutes catégories</option><option value="legal">Structure légale</option><option value="fiscal">Fiscal</option><option value="offre">Offre services</option><option value="tech">Tech</option></select>
+        <select id="f-who" onchange="renderTasks()"><option value="">Tous</option><option value="benoit">Benoit</option><option value="jay">Jay</option><option value="both">Les deux</option></select>
+        <select id="f-phase" onchange="renderTasks()"><option value="">Toutes phases</option><option value="1">Phase 1 (avant juin)</option><option value="2">Phase 2 (après juin)</option></select>
+        <button class="btn-primary" onclick="openAddModal()">+ Ajouter une tâche</button>
+      </div>
+      <div id="tasks-container"></div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="page" id="page-timeline">
+      <div class="page-header"><h1>🗓️ Timeline</h1><p>Mars 2026 → Décembre 2026 — De la planification au lancement international</p></div>
+      <div class="milestone-bar">
+        <h3>Jalons clés</h3>
+        <div class="milestones">
+          <div class="milestone done"><div class="milestone-dot">✅</div><div class="milestone-label">Mars 2026 Planification</div></div>
+          <div class="milestone active"><div class="milestone-dot">🔄</div><div class="milestone-label">Avr–Mai Incorporation</div></div>
+          <div class="milestone"><div class="milestone-dot">🏢</div><div class="milestone-label">Juin 2026 Benoit temps plein</div></div>
+          <div class="milestone"><div class="milestone-dot">🚀</div><div class="milestone-label">Juil–Août Dog-food Contexo</div></div>
+          <div class="milestone"><div class="milestone-dot">🧪</div><div class="milestone-label">Sept–Oct Beta réseau</div></div>
+          <div class="milestone"><div class="milestone-dot">🌍</div><div class="milestone-label">Nov–Déc Lancement intl</div></div>
+        </div>
+      </div>
+      <div class="timeline-phases">
+        <div class="phase-card">
+          <div class="phase-badge phase1-badge">PHASE 1</div>
+          <div class="phase-title">Avant Juin 2026</div>
+          <div class="phase-date">Mars → Mai 2026 — Foundation</div>
+          <ul class="phase-items">
+            <li><span>⚠️</span><span>Lire convention d'actionnaires DVOLU (non-concurrence, IP) — <strong>CRITIQUE</strong></span></li>
+            <li><span>🏛️</span><span>Incorporer Benoit Opco (LSAQ ou LCSA)</span></li>
+            <li><span>🔍</span><span>Vérifier structure Jay Opco (compatibilité)</span></li>
+            <li><span>🤝</span><span>Incorporer Cie Commune (50/50 opcos)</span></li>
+            <li><span>📄</span><span>Convention d'actionnaires cie commune (shotgun, drag-along, IP)</span></li>
+            <li><span>🏦</span><span>Comptes bancaires business (x3 compagnies)</span></li>
+            <li><span>🧾</span><span>Inscription TPS/TVQ</span></li>
+            <li><span>📊</span><span>Rencontrer CPA — planification fiscale année 1</span></li>
+            <li><span>🌐</span><span>Site internet + emails pro (@domaine)</span></li>
+            <li><span>💼</span><span>Définir offre de services + taux journaliers</span></li>
+            <li><span>🎯</span><span>Identifier 3–5 premiers prospects (réseau DVOLU + Jay)</span></li>
+            <li><span>🖥️</span><span><strong style="color:#06d6a0">Contexo v1 fonctionnel</strong> — dog-food projets internes</span></li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-badge phase2-badge">PHASE 2</div>
+          <div class="phase-title">Après Juin 2026</div>
+          <div class="phase-date">Juin → Décembre 2026 — Lancement</div>
+          <ul class="phase-items">
+            <li><span>🚀</span><span>Benoit temps plein dans les compagnies</span></li>
+            <li><span>✍️</span><span>Premiers contrats signés (via opcos individuelles)</span></li>
+            <li><span>🤝</span><span>Projets conjoints facturés sous cie commune</span></li>
+            <li><span>🏭</span><span>Dog-food Contexo sur projets clients réels (juil–août)</span></li>
+            <li><span>🧪</span><span>Beta Contexo — réseau de contacts (sept–oct)</span></li>
+            <li><span>📈</span><span>Première facture Cie Commune émise</span></li>
+            <li><span>💰</span><span>Optimiser rémunération: salaire vs dividendes</span></li>
+            <li><span>🔬</span><span>Dossier RS&amp;DE — crédits R&amp;D AI/SaaS</span></li>
+            <li><span>🌍</span><span>Lancement international Contexo (nov–déc)</span></li>
+            <li><span>📊</span><span>Révision structure fiscale avec CPA (fin d'année)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="page" id="page-arch">
+      <div class="page-header"><h1>🏗️ Architecture Fiscale</h1><p>Structure des 3 compagnies — mise à jour au fur et à mesure</p></div>
+      <div class="arch-note">⚠️ <strong>Structure temporaire</strong> — À confirmer avec un notaire/avocat et un CPA avant de procéder.</div>
+      <div class="mermaid-wrap">
+        <div class="mermaid">
+graph TD
+    B["👤 Benoit Gagné (perso)"]
+    J["👤 Jérémy - Jay (perso)"]
+    BO["🏢 Benoit Opco\n(à incorporer)\nConsulting AI solo"]
+    JO["🏢 Jay Opco\n(déjà créée)\nConsulting AI solo"]
+    CC["🚀 Cie Commune\nSaaS + Projets conjoints\n50% Benoit Opco | 50% Jay Opco"]
+    CTX["📱 Contexo SaaS\nAI Context Engine"]
+    CLI["💼 Clients\nPME industrielles QC"]
+    B -->|100%| BO
+    J -->|100%| JO
+    BO -->|50%| CC
+    JO -->|50%| CC
+    CC --> CTX
+    BO -. premiers contrats .-> CLI
+    JO -. premiers contrats .-> CLI
+    CC -. projets conjoints .-> CLI
+    style B fill:#1a1d27,stroke:#6c63ff,color:#e8eaf6
+    style J fill:#1a1d27,stroke:#00d4aa,color:#e8eaf6
+    style BO fill:#22263a,stroke:#6c63ff,color:#e8eaf6
+    style JO fill:#22263a,stroke:#00d4aa,color:#e8eaf6
+    style CC fill:#22263a,stroke:#ffd166,color:#e8eaf6
+    style CTX fill:#22263a,stroke:#06d6a0,color:#e8eaf6
+    style CLI fill:#22263a,stroke:#4ecdc4,color:#e8eaf6
+        </div>
+      </div>
+      <div class="arch-notes-section">
+        <h3>📝 Notes sur la structure</h3>
+        <textarea id="arch-notes" placeholder="Ajouter des notes sur la structure fiscale, décisions, questions en suspens..."></textarea>
+        <br/><button class="save-btn" onclick="saveNote('arch-notes','arch-saved')">Sauvegarder</button>
+        <span class="saved-flash" id="arch-saved">✓ Sauvegardé</span>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="page" id="page-notes">
+      <div class="page-header"><h1>📝 Notes partagées</h1><p>Décisions, questions ouvertes, contacts — Benoit &amp; Jay</p></div>
+      <div class="notes-grid">
+        <div class="notes-card">
+          <h3>✅ Décisions prises</h3>
+          <textarea id="note-decisions" placeholder="Ex: Structure 3 compagnies confirmée le 2026-03-06...">Structure 3 compagnies confirmée (2026-03-06):
+- Benoit Opco (à créer) — consulting solo
+- Jay Opco (existante) — consulting solo
+- Cie Commune 50/50 — SaaS + projets conjoints
+
+Priorité go-to-market: consulting QC d'abord, Contexo SaaS ensuite.</textarea>
+          <br/><button class="notes-save" onclick="saveNote('note-decisions','saved-decisions')">Sauvegarder</button>
+          <span class="saved-flash" id="saved-decisions">✓</span>
+        </div>
+        <div class="notes-card">
+          <h3>❓ Questions ouvertes</h3>
+          <textarea id="note-questions" placeholder="Ex: LSAQ vs LCSA pour Benoit Opco?">- LSAQ vs LCSA pour Benoit Opco?
+- Répartition actions: 50/50 ferme ou vesting?
+- Rémunération année 1: salaire vs dividendes vs mix?
+- Timing: incorporer avant ou après départ DVOLU?
+- Transfert IP projets existants vers nouvelle cie?
+- Assurances: responsabilité, E&O?
+- Holdco personnelle au-dessus des opcos?</textarea>
+          <br/><button class="notes-save" onclick="saveNote('note-questions','saved-questions')">Sauvegarder</button>
+          <span class="saved-flash" id="saved-questions">✓</span>
+        </div>
+        <div class="notes-card">
+          <h3>👤 Contacts professionnels</h3>
+          <textarea id="note-contacts" placeholder="Notaire, CPA, avocat...">À trouver:
+- Notaire / avocat corporatif (incorporation)
+- CPA (planification fiscale, RS&DE)
+
+Critères: expérience startup tech QC, bilingue si possible</textarea>
+          <br/><button class="notes-save" onclick="saveNote('note-contacts','saved-contacts')">Sauvegarder</button>
+          <span class="saved-flash" id="saved-contacts">✓</span>
+        </div>
+        <div class="notes-card">
+          <h3>📋 Convention DVOLU — À analyser</h3>
+          <textarea id="note-dvolu" placeholder="Notes après lecture de la convention DVOLU...">À lire et noter:
+- Durée clause non-concurrence
+- Territoire couvert
+- Secteurs exclus
+- Clause non-sollicitation (clients + employés)
+- Assignation IP (ce que Benoit a créé = à qui?)
+- Date effective de libération</textarea>
+          <br/><button class="notes-save" onclick="saveNote('note-dvolu','saved-dvolu')">Sauvegarder</button>
+          <span class="saved-flash" id="saved-dvolu">✓</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="task-modal">
+  <div class="modal">
+    <h3 id="modal-title">Nouvelle tâche</h3>
+    <div class="form-group"><label>Titre</label><input type="text" id="m-title" placeholder="Description de la tâche"/></div>
+    <div class="form-group"><label>Priorité</label>
+      <select id="m-priority">
+        <option value="critical">🔴 Critique</option>
+        <option value="high">🟠 Important</option>
+        <option value="medium" selected>🟡 À faire</option>
+        <option value="low">🔵 Backlog</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Catégorie</label>
+      <select id="m-cat">
+        <option value="legal">Structure légale</option>
+        <option value="fiscal">Fiscal</option>
+        <option value="offre">Offre services</option>
+        <option value="tech">Tech</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Assigné à</label>
+      <select id="m-who">
+        <option value="both">Les deux</option>
+        <option value="benoit">Benoit</option>
+        <option value="jay">Jay</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Phase</label>
+      <select id="m-phase">
+        <option value="1">Phase 1 (avant juin)</option>
+        <option value="2">Phase 2 (après juin)</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Notes (optionnel)</label><textarea id="m-notes" placeholder="Détails supplémentaires..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Annuler</button>
+      <button class="btn-save" onclick="saveTask()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
