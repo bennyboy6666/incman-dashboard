@@ -216,12 +216,12 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .tl-critical .tl-event-dot { background: #ff4d4d; border-color: #ff4d4d; box-shadow: 0 0 10px rgba(255,77,77,0.5); width: 14px; height: 14px; left: -32px; top: 9px; }
 .tl-milestone .tl-event-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(108,99,255,0.4); width: 14px; height: 14px; left: -32px; top: 9px; }
 
-/* Event card — compact agenda style */
+/* Event card — full style */
 .tl-event-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 10px;
+  border-radius: 8px;
+  padding: 10px 14px;
   flex: 1;
   transition: border-color 0.2s, transform 0.2s;
 }
@@ -230,10 +230,9 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .tl-critical .tl-event-card { border-color: rgba(255,77,77,0.4); background: rgba(255,77,77,0.04); }
 .tl-milestone .tl-event-card { border-color: rgba(108,99,255,0.3); }
 
-.tl-event-date { font-size: 0.62rem; color: var(--muted); font-weight: 600; margin-bottom: 1px; }
-.tl-event-title { font-size: 0.78rem; font-weight: 600; line-height: 1.3; }
-.tl-event-desc { display: none; } /* Hidden by default for compact view */
-.tl-event-card:hover .tl-event-desc { display: block; font-size: 0.7rem; color: var(--muted); line-height: 1.3; margin-top: 2px; }
+.tl-event-date { font-size: 0.7rem; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+.tl-event-title { font-size: 0.85rem; font-weight: 600; line-height: 1.4; margin-bottom: 2px; }
+.tl-event-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
 
 /* Tags */
 .tl-tag { font-size: 0.58rem; padding: 1px 6px; border-radius: 6px; font-weight: 700; margin-left: 5px; letter-spacing: 0.04em; vertical-align: middle; }
