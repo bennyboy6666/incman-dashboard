@@ -123,12 +123,12 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 .tl-month {
   position: relative;
   display: flex;
-  height: 400px;
+  height: 800px;
   border-left: 3px solid var(--border);
   margin-left: 70px;
   overflow: hidden;
 }
-@media (max-width: 600px) { .tl-month { margin-left: 50px; height: 360px; } }
+@media (max-width: 600px) { .tl-month { margin-left: 50px; height: 700px; } }
 
 /* Gradient line for phase 1 months */
 #tl-mars, #tl-avril, #tl-mai { border-left-color: var(--accent2); }
