@@ -47,10 +47,13 @@ const WHO_LABELS = { benoit: 'Benoit', jay: 'Jay', both: 'Les deux' };
 const CAT_LABELS = { legal: 'Structure légale', fiscal: 'Fiscal', offre: 'Offre services', tech: 'Tech' };
 
 // AUTH
+const AUTH_KEY = 'incman_auth';
+
 function doLogin() {
   const val = document.getElementById('pwd-input').value;
   const err = document.getElementById('login-error');
   if (val === PASSWORD) {
+    localStorage.setItem(AUTH_KEY, 'true');
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     init();
@@ -60,6 +63,16 @@ function doLogin() {
     document.getElementById('pwd-input').focus();
   }
 }
+
+// Auto-login si déjà authentifié
+(function autoLogin() {
+  if (localStorage.getItem(AUTH_KEY) === 'true') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.addEventListener('DOMContentLoaded', init);
+    if (document.readyState !== 'loading') init();
+  }
+})();
 
 // INIT
 function init() {
