@@ -65,21 +65,22 @@ function doLogin() {
 }
 
 // Auto-login si déjà authentifié
-(function autoLogin() {
-  if (localStorage.getItem(AUTH_KEY) === 'true') {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    document.addEventListener('DOMContentLoaded', init);
-    if (document.readyState !== 'loading') init();
-  }
-})();
+if (localStorage.getItem(AUTH_KEY) === 'true') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  init();
+}
 
 // INIT
+let _initialized = false;
 function init() {
+  if (_initialized) return;
+  _initialized = true;
   loadTasks();
   loadNotes();
   renderTasks();
-  mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { primaryColor: '#22263a', primaryTextColor: '#e8eaf6', primaryBorderColor: '#2e3250', lineColor: '#8892b0', secondaryColor: '#1a1d27', tertiaryColor: '#0f1117' }});
+  mermaid.initialize({ startOnLoad: false, theme: 'dark', themeVariables: { primaryColor: '#22263a', primaryTextColor: '#e8eaf6', primaryBorderColor: '#2e3250', lineColor: '#8892b0', secondaryColor: '#1a1d27', tertiaryColor: '#0f1117' }});
+  mermaid.run();
 }
 
 // STORAGE
