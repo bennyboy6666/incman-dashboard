@@ -428,7 +428,7 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
 /* PROGRAMS GRID */
 .programs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   gap: 1rem;
 }
 .program-card {
@@ -717,27 +717,74 @@ main { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
   color: var(--muted);
 }
 
-/* RESPONSIVE FOR SUBVENTIONS */
-@media (max-width: 768px) {
-  .compare-boxes {
-    grid-template-columns: 1fr;
-  }
+/* RESPONSIVE FOR SUBVENTIONS — MOBILE */
+@media (max-width: 900px) {
   .programs-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
-  .exec-stats {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+  .compare-boxes {
+    grid-template-columns: 1fr !important;
   }
   .meeting-prep {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
-}
-
-@media (max-width: 600px) {
+  .exec-stats {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem;
+  }
   .exec-banner {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .subs-executive-summary {
+    padding: 1rem;
+  }
+  .program-card {
+    padding: 1rem;
+  }
+  .program-header {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .program-amount {
+    font-size: 0.95rem;
+  }
+  .exec-amount {
+    font-size: 1.4rem;
+  }
+  .stat-amount {
+    font-size: 1.1rem;
+  }
+  .subs-section h2 {
+    font-size: 1.1rem;
+  }
+  .firm-card {
+    padding: 1rem;
+  }
+  .steps-container {
+    padding: 1rem;
+  }
+  .step-item {
+    gap: 0.75rem;
+  }
+  .questions-card, .documents-card {
+    padding: 1rem;
+  }
+  /* Priority table scroll on mobile */
+  .priorities-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .priorities-table table {
+    min-width: 600px;
+  }
+  /* Simulation table scroll */
+  .simulation-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .simulation-table table {
+    min-width: 500px;
   }
 }
 
