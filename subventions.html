@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 IncMan — Guide Subventions & Financement AI/Tech QC</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --card: #1a1d27;
+            --card-border: #2a2d3a;
+            --accent-green: #4ade80;
+            --accent-yellow: #fbbf24;
+            --accent-orange: #f97316;
+            --accent-blue: #60a5fa;
+            --accent-purple: #a78bfa;
+            --accent-red: #f87171;
+            --accent-cyan: #22d3ee;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --highlight: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        .header .context {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(74, 222, 128, 0.08);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .header .context strong { color: var(--accent-green); }
+
+        /* DISCLAIMER */
+        .disclaimer {
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--accent-red);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .disclaimer .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+
+        /* NAV */
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            padding: 0.75rem 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .nav a {
+            padding: 0.5rem 1rem;
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .nav a:hover {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--card-border);
+        }
+        .section-header .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-green { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
+        .badge-yellow { background: rgba(251, 191, 36, 0.15); color: var(--accent-yellow); }
+        .badge-orange { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
+        .badge-blue { background: rgba(96, 165, 250, 0.15); color: var(--accent-blue); }
+        .badge-purple { background: rgba(167, 139, 250, 0.15); color: var(--accent-purple); }
+        .badge-cyan { background: rgba(34, 211, 238, 0.15); color: var(--accent-cyan); }
+        .section-header h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        /* CARDS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1rem;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .card .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        .card .org {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        .card .amount {
+            font-size: 1.1rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+        .card .desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .card .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .tag.green { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); }
+        .tag.yellow { background: rgba(251, 191, 36, 0.1); color: var(--accent-yellow); }
+        .tag.red { background: rgba(248, 113, 113, 0.1); color: var(--accent-red); }
+        .tag.blue { background: rgba(96, 165, 250, 0.1); color: var(--accent-blue); }
+
+        .card .link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+        .card .link:hover { text-decoration: underline; }
+
+        /* RELEVANCE INDICATOR */
+        .relevance {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-top: 40px solid;
+        }
+        .relevance.high { border-top-color: var(--accent-green); }
+        .relevance.medium { border-top-color: var(--accent-yellow); }
+        .relevance.low { border-top-color: var(--text-dim); }
+        .relevance .star {
+            position: absolute;
+            top: -34px;
+            right: 6px;
+            font-size: 0.7rem;
+        }
+
+        /* PRIORITY TABLE */
+        .priority-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            margin-bottom: 1.5rem;
+        }
+        .priority-table th {
+            background: #1e293b;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+        .priority-table td {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            background: var(--card);
+        }
+        .priority-table tr:hover td {
+            background: rgba(255,255,255,0.03);
+        }
+        .priority-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+        .priority-num.p1 { background: rgba(74, 222, 128, 0.2); color: var(--accent-green); }
+        .priority-num.p2 { background: rgba(251, 191, 36, 0.2); color: var(--accent-yellow); }
+        .priority-num.p3 { background: rgba(96, 165, 250, 0.2); color: var(--accent-blue); }
+
+        /* FIRMS SECTION */
+        .firm-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .firm-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .firm-card .firm-type {
+            font-size: 0.8rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.75rem;
+        }
+        .firm-card .firm-services {
+            list-style: none;
+            padding: 0;
+        }
+        .firm-card .firm-services li {
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .firm-card .firm-services li::before {
+            content: "→";
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+        .firm-highlight {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(167, 139, 250, 0.08);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .firm-highlight strong { color: var(--accent-purple); }
+        .firm-card .firm-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+        .firm-card .firm-link:hover { text-decoration: underline; }
+
+        /* NEXT STEPS */
+        .steps {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.08), rgba(34, 211, 238, 0.05));
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .steps h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(74, 222, 128, 0.15);
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .step-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 2rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .nav { flex-direction: column; }
+        }
+
+        /* COMPARISON TABLE (remboursable vs non) */
+        .compare-banner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .compare-box {
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+        .compare-box.non-remb {
+            background: rgba(74, 222, 128, 0.05);
+            border-color: rgba(74, 222, 128, 0.2);
+        }
+        .compare-box.remb {
+            background: rgba(251, 191, 36, 0.05);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+        .compare-box h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .compare-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .compare-box .big-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .compare-banner { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>📜 Guide Subventions & Financement</h1>
+    <p class="subtitle">Startup AI / Consultation technologique — Québec & Canada 2026</p>
+    <div class="context">
+        <strong>Votre profil:</strong> Benoit & Jérémy — 2 cofondateurs, consultation AI + développement SaaS (Contexo), PME tech au Québec. 
+        Structure prévue: 2 opcos individuelles + 1 cie commune 50/50.
+    </div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+    <span class="icon">⚠️</span>
+    <div>
+        <strong>Ce document est informatif seulement.</strong> IncMan n'est ni avocat, ni CPA. 
+        Les montants, taux et conditions peuvent varier. Validez toujours avec un professionnel 
+        (CPA spécialisé RS&DE, consultant en subventions) avant de prendre des décisions.
+        <br><em>Dernière mise à jour: 17 mars 2026</em>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="top">
+    <a href="#comprendre">💡 Comprendre</a>
+    <a href="#non-remboursables">🟢 Non remboursables</a>
+    <a href="#credits">🟡 Crédits d'impôt</a>
+    <a href="#remboursables">🟠 Prêts & remboursables</a>
+    <a href="#collaboratifs">🔵 Collaboratifs</a>
+    <a href="#regionaux">📍 Régionaux</a>
+    <a href="#priorites">🎯 Priorités</a>
+    <a href="#firmes">🏢 Firmes spécialisées</a>
+    <a href="#nextsteps">🚀 Next Steps</a>
+</nav>
+
+<!-- COMPRENDRE: Remboursable vs Non -->
+<section class="section" id="comprendre">
+    <div class="section-header">
+        <span class="badge badge-cyan">Intro</span>
+        <h2>💡 Remboursable vs Non remboursable — C'est quoi la différence?</h2>
+    </div>
+    <div class="compare-banner">
+        <div class="compare-box non-remb">
+            <div class="big-icon">🎁</div>
+            <h3 style="color: var(--accent-green);">Non remboursable = cadeau</h3>
+            <p>Tu reçois l'argent et tu ne le remets <strong style="color:var(--accent-green);">jamais</strong>. 
+            C'est une subvention pure. Exemples: PARI-CNRC, Scale AI, certains programmes MEIE. 
+            <br><br>💡 Souvent lié à la R&D, l'innovation, l'IA. Faut postuler et être accepté.</p>
+        </div>
+        <div class="compare-box remb">
+            <div class="big-icon">🔄</div>
+            <h3 style="color: var(--accent-yellow);">Remboursable = prêt avantageux</h3>
+            <p>Tu reçois l'argent mais tu dois le <strong style="color:var(--accent-yellow);">rembourser</strong> 
+            (souvent à taux 0% ou préférentiel, parfois seulement si le projet génère des revenus).
+            <br><br>💡 Exemples: Futurpreneur, BDC, certains volets Investissement Québec.</p>
+        </div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--accent-purple);">
+        <h3>🧾 Crédits d'impôt (RS&DE, CDAE) — cas spécial</h3>
+        <p class="desc">C'est un <strong>remboursement</strong> de taxes que tu aurais payées, basé sur tes dépenses en R&D. 
+        Pour une SPCC (société privée sous contrôle canadien), les crédits RS&DE sont <strong style="color:var(--accent-green);">remboursables</strong> 
+        même si tu n'as pas de profits — tu reçois un chèque du gouvernement. C'est essentiellement non remboursable, mais ça arrive 
+        <strong>après</strong> que tu aies dépensé l'argent (6-12 mois de délai).</p>
+    </div>
+</section>
+
+<!-- NON REMBOURSABLES -->
+<section class="section" id="non-remboursables">
+    <div class="section-header">
+        <span class="badge badge-green">Non remboursable</span>
+        <h2>🟢 Subventions non remboursables</h2>
+    </div>
+    <div class="card-grid">
+
+        <!-- PARI-CNRC -->
+        <div class="card">
+            <div class="relevance high"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>PARI-CNRC</h3>
+                    <span class="org">Conseil national de recherches Canada</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">~75%</span>
+            </div>
+            <p class="desc">
+                Le <strong>#1 pour vous</strong>. Contribution salariale + accompagnement technique par un conseiller dédié. 
+                Finance les salaires des ressources en R&D/innovation. Un CTI (conseiller en technologie industrielle) 
+                vous est assigné gratuitement.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag blue">PME innovantes</span>
+                <span class="tag">Techno / AI</span>
+                <span class="tag green">⭐ Priorité #1</span>
+            </div>
+            <a class="link" href="https://nrc.canada.ca/fr/soutien-linnovation-technologique" target="_blank">🔗 Site PARI-CNRC →</a>
+        </div>
+
+        <!-- Programme Innovation MEIE -->
+        <div class="card">
+            <div class="relevance high"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>Programme Innovation</h3>
+                    <span class="org">MEIE / Investissement Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">75 000$</span>
+            </div>
+            <p class="desc">
+                Aide non remboursable pour le développement, validation, prototypage ou mise en marché d'une technologie.
+                Couvre jusqu'à 60% du coût du projet. Contexo serait admissible.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag">Max 60% du projet</span>
+                <span class="tag">Toutes industries</span>
+            </div>
+            <a class="link" href="https://www.investquebec.com/quebec/fr/produits-financiers/toutes-nos-solutions/Programme-Innovations.html" target="_blank">🔗 Investissement Québec →</a>
+        </div>
+
+        <!-- Scale AI Accélération -->
+        <div class="card">
+            <div class="relevance high"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>Scale AI — Accélération</h3>
+                    <span class="org">Supergrappe d'IA du Canada</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">120 000$+</span>
+            </div>
+            <p class="desc">
+                Subventions pour startups et PME en IA. Accompagnement via incubateurs partenaires.
+                Fonds de co-investissement pour accélérer l'adoption de l'IA. Non dilutif.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag blue">Startups IA</span>
+                <span class="tag">Accompagnement inclus</span>
+            </div>
+            <a class="link" href="https://www.scaleai.ca/fr/" target="_blank">🔗 Scale AI →</a>
+        </div>
+
+        <!-- Invest AI -->
+        <div class="card">
+            <div class="relevance medium"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>Invest AI</h3>
+                    <span class="org">Fonds co-investissement 35 M$</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">~50%</span>
+            </div>
+            <p class="desc">
+                Subventions non remboursables allant jusqu'à 50% de la valeur du projet. 
+                Aide les entreprises québécoises à adopter les technologies d'IA.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag">50% du projet</span>
+                <span class="tag blue">Adoption IA</span>
+            </div>
+            <a class="link" href="https://go.moov.ai/financer-projet-intelligence-artificielle" target="_blank">🔗 Moov AI / Invest AI →</a>
+        </div>
+
+        <!-- NovaScience -->
+        <div class="card">
+            <div class="relevance medium"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>NovaScience</h3>
+                    <span class="org">Gouvernement du Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">200 000$</span>
+            </div>
+            <p class="desc">
+                Subventions pour stages, embauches de jeunes diplômés, formations liées à l'IA.
+                Jusqu'à 80% du coût du projet. Intégration de la relève dans les PME innovantes.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag">80% du projet</span>
+                <span class="tag">Talents / stages</span>
+            </div>
+            <a class="link" href="https://www.quebec.ca/entreprises-et-travailleurs-autonomes/aide-financiere/recherche-innovation/programme-novascience" target="_blank">🔗 NovaScience →</a>
+        </div>
+
+        <!-- DEC -->
+        <div class="card">
+            <div class="relevance medium"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>DEC — Croissance économique régionale</h3>
+                    <span class="org">Développement économique Canada</span>
+                </div>
+                <span class="amount" style="color: var(--accent-green);">Variable</span>
+            </div>
+            <p class="desc">
+                Appui aux PME qui commercialisent, développent ou adoptent des technologies d'IA.
+                Contributions non remboursables possibles selon le programme. 
+                Pertinent si vous êtes hors Montréal (ex: Beloeil = Montérégie).
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable possible</span>
+                <span class="tag">Régions QC</span>
+                <span class="tag blue">PME tech</span>
+            </div>
+            <a class="link" href="https://dec.canada.ca/" target="_blank">🔗 DEC →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- CRÉDITS D'IMPÔT -->
+<section class="section" id="credits">
+    <div class="section-header">
+        <span class="badge badge-yellow">Crédits d'impôt</span>
+        <h2>🟡 Crédits d'impôt (remboursables pour SPCC)</h2>
+    </div>
+    <div class="card-grid">
+
+        <!-- RS&DE -->
+        <div class="card">
+            <div class="relevance high"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>RS&DE — Fédéral + Québec</h3>
+                    <span class="org">ARC + Revenu Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-yellow);">~50%</span>
+            </div>
+            <p class="desc">
+                Le programme phare. Récupérez ~50% de vos dépenses en R&D (salaires, sous-traitance, matériaux).
+                <strong>Remboursable</strong> pour les SPCC même sans profit. 
+                Votre développement AI/NLP/Contexo est clairement admissible.
+                <br><br>
+                <strong>Fédéral:</strong> 35% remboursable (SPCC, premiers 3M$)<br>
+                <strong>Québec:</strong> 14-30% additionnel selon la taille
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Crédit remboursable (SPCC)</span>
+                <span class="tag">Toutes industries</span>
+                <span class="tag green">⭐ Priorité #1</span>
+            </div>
+            <div class="firm-highlight">
+                <strong>💡 Tu travailles déjà avec Leyton pour ça!</strong> Ils préparent la réclamation, 
+                documentent les projets, et s'occupent du suivi jusqu'au paiement.
+            </div>
+            <a class="link" href="https://www.canada.ca/fr/agence-revenu/services/recherche-scientifique-developpement-experimental-programme-encouragements-fiscaux.html" target="_blank">🔗 Programme RS&DE (ARC) →</a>
+        </div>
+
+        <!-- CDAE -->
+        <div class="card">
+            <div class="relevance high"><span class="star">⭐</span></div>
+            <div class="card-top">
+                <div>
+                    <h3>CDAE — Affaires électroniques</h3>
+                    <span class="org">Revenu Québec / Investissement QC</span>
+                </div>
+                <span class="amount" style="color: var(--accent-yellow);">25 000$/emp.</span>
+            </div>
+            <p class="desc">
+                Crédit d'impôt remboursable couvrant jusqu'à 30% des salaires admissibles en développement logiciel.
+                Parfait pour des cyberentreprises développant des solutions numériques ou intégrant de l'IA.
+                Cumulable avec RS&DE sous certaines conditions.
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Crédit remboursable</span>
+                <span class="tag">30% des salaires</span>
+                <span class="tag blue">Dev logiciel / IA</span>
+            </div>
+            <a class="link" href="https://www.investquebec.com/quebec/fr/produits-financiers/pme-et-grandes-entreprises/credits-d-impot/developpement-des-affaires-electroniques.html" target="_blank">🔗 CDAE →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- REMBOURSABLES / PRÊTS -->
+<section class="section" id="remboursables">
+    <div class="section-header">
+        <span class="badge badge-orange">Remboursable</span>
+        <h2>🟠 Prêts & financement remboursable</h2>
+    </div>
+    <div class="card-grid">
+
+        <!-- Futurpreneur -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>Futurpreneur Canada</h3>
+                    <span class="org">Futurpreneur</span>
+                </div>
+                <span class="amount" style="color: var(--accent-orange);">60 000$</span>
+            </div>
+            <p class="desc">
+                Prêt de démarrage + mentorat pour entrepreneurs de <strong>18 à 39 ans</strong>. 
+                Remboursable sur 5 ans à taux avantageux. Le mentorat est un gros bonus.
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Remboursable (prêt)</span>
+                <span class="tag red">⚠️ 18-39 ans seulement</span>
+                <span class="tag">Mentorat inclus</span>
+            </div>
+            <a class="link" href="https://futurpreneur.ca/fr/" target="_blank">🔗 Futurpreneur →</a>
+        </div>
+
+        <!-- ESSOR -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>Programme ESSOR</h3>
+                    <span class="org">Investissement Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-orange);">50 000$</span>
+            </div>
+            <p class="desc">
+                Financement pour la productivité par l'innovation. Inclut l'IA dans la modernisation 
+                des opérations. Subvention ou prêt selon le volet choisi. Jusqu'à 50% du projet.
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Mixte (sub. ou prêt)</span>
+                <span class="tag">Transfo numérique</span>
+                <span class="tag">Fabrication / Commerce</span>
+            </div>
+            <a class="link" href="https://www.investquebec.com/quebec/fr/produits-financiers/toutes-nos-solutions/Programme-de-financement-ESSOR.html" target="_blank">🔗 ESSOR →</a>
+        </div>
+
+        <!-- BDC -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>BDC — Prêts technologie</h3>
+                    <span class="org">Banque de développement du Canada</span>
+                </div>
+                <span class="amount" style="color: var(--accent-orange);">Variable</span>
+            </div>
+            <p class="desc">
+                Prêts à taux préférentiels pour l'achat ou le développement de solutions technologiques.
+                Capital de risque disponible pour startups à fort potentiel.
+                Parfois jumelé à des subventions.
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Remboursable (prêt)</span>
+                <span class="tag">Taux préférentiel</span>
+                <span class="tag blue">Capital de risque dispo</span>
+            </div>
+            <a class="link" href="https://www.bdc.ca/fr" target="_blank">🔗 BDC →</a>
+        </div>
+
+        <!-- Investissement Québec -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>Investissement Québec — Prêts PME</h3>
+                    <span class="org">Investissement Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-orange);">Variable</span>
+            </div>
+            <p class="desc">
+                Prêts sans intérêt ou à taux préférentiel pour projets d'investissement PME.
+                Avances remboursables conditionnelles (remboursées seulement si le projet atteint ses objectifs).
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Remboursable</span>
+                <span class="tag">Taux 0% possible</span>
+                <span class="tag">Conditionnel au succès</span>
+            </div>
+            <a class="link" href="https://www.investquebec.com" target="_blank">🔗 Investissement Québec →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- COLLABORATIFS -->
+<section class="section" id="collaboratifs">
+    <div class="section-header">
+        <span class="badge badge-blue">Collaboratif</span>
+        <h2>🔵 Programmes collaboratifs (gros $, plus complexes)</h2>
+    </div>
+    <div class="card-grid">
+
+        <!-- PARTENAR-IA -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>PARTENAR-IA Entreprise</h3>
+                    <span class="org">RSRI Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-blue);">1 500 000$</span>
+            </div>
+            <p class="desc">
+                Subvention pour projets collaboratifs en IA entre entreprises et centres de recherche 
+                (universités, CCTT). Jusqu'à 50% des coûts admissibles. Pour la co-innovation et le transfert techno.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag red">⚠️ Nécessite partenariat recherche</span>
+                <span class="tag blue">Phase 3+</span>
+            </div>
+            <a class="link" href="https://rsri.quebec/appel-a-projets-en-intelligence-artificielle-partenar-ia/appel-a-projets-partenar-ia-entreprise/" target="_blank">🔗 PARTENAR-IA →</a>
+        </div>
+
+        <!-- FSI -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>Fonds stratégique pour l'innovation (FSI)</h3>
+                    <span class="org">Innovation, Sciences et Dév. éco. Canada</span>
+                </div>
+                <span class="amount" style="color: var(--accent-blue);">Gros $</span>
+            </div>
+            <p class="desc">
+                Pour les projets d'innovation à fort impact. Vise les grandes entreprises ou projets structurants.
+                Moins pertinent pour le démarrage, mais à garder en tête pour le scale.
+            </p>
+            <div class="meta">
+                <span class="tag yellow">Mixte</span>
+                <span class="tag">50% du projet</span>
+                <span class="tag blue">Projets structurants</span>
+            </div>
+            <a class="link" href="https://ised-isde.canada.ca/site/fonds-strategique-innovation/fr" target="_blank">🔗 FSI →</a>
+        </div>
+
+        <!-- SQRI2 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>SQRI² — Stratégie QC innovation</h3>
+                    <span class="org">Gouvernement du Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-blue);">600 000$</span>
+            </div>
+            <p class="desc">
+                Cadre global soutenant la recherche collaborative, l'acquisition de talents et le déploiement 
+                de solutions IA. Financement indirect via différents ministères. Jusqu'à 80% des coûts.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag">80% du projet</span>
+                <span class="tag">Innovation / IA</span>
+            </div>
+            <a class="link" href="https://www.quebec.ca/gouvernement/ministeres-organismes/economie/publications/strategie-quebecoise-de-recherche-et-dinvestissement-en-innovation-2022-2027" target="_blank">🔗 SQRI² →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- RÉGIONAUX -->
+<section class="section" id="regionaux">
+    <div class="section-header">
+        <span class="badge badge-purple">Régional</span>
+        <h2>📍 Programmes régionaux & municipaux</h2>
+    </div>
+    <div class="card-grid">
+
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>Ville de Québec — Capitale Innovation</h3>
+                    <span class="org">Ville de Québec</span>
+                </div>
+                <span class="amount" style="color: var(--accent-purple);">150 000$</span>
+            </div>
+            <p class="desc">
+                Contribution maximale de 150 000$ par projet (50% des dépenses admissibles). 
+                Pertinent si vous avez des opérations dans la région de Québec.
+            </p>
+            <div class="meta">
+                <span class="tag green">Non remboursable</span>
+                <span class="tag">50% du projet</span>
+                <span class="tag">Région de Québec</span>
+            </div>
+            <a class="link" href="https://www.ville.quebec.qc.ca/gens_affaires/financement/innovation/capitale-innovation.aspx" target="_blank">🔗 Capitale Innovation →</a>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <h3>PME MTL / Économie du savoir</h3>
+                    <span class="org">Organismes locaux de développement</span>
+                </div>
+                <span class="amount" style="color: var(--accent-purple);">Variable</span>
+            </div>
+            <p class="desc">
+                Aide locale (Montréal, Montérégie, etc.). Accompagnement, diagnostics technologiques, 
+                financement pour projets liés à l'IA. Vérifier votre CLD/MRC local.
+            </p>
+            <div class="meta">
+                <span class="tag">Variable</span>
+                <span class="tag">Selon la région</span>
+                <span class="tag blue">Accompagnement inclus</span>
+            </div>
+            <a class="link" href="https://pmemtl.com/" target="_blank">🔗 PME MTL →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- PRIORITÉS -->
+<section class="section" id="priorites">
+    <div class="section-header">
+        <span class="badge badge-green">Stratégie</span>
+        <h2>🎯 Ordre de priorité pour vous</h2>
+    </div>
+
+    <table class="priority-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Programme</th>
+                <th>Type</th>
+                <th>Montant potentiel</th>
+                <th>Quand</th>
+                <th>Effort</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="priority-num p1">1</span></td>
+                <td><strong>PARI-CNRC</strong></td>
+                <td><span class="tag green">Non remboursable</span></td>
+                <td>75% des salaires R&D</td>
+                <td>Dès l'incorporation</td>
+                <td>⭐ Facile — un appel</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p1">2</span></td>
+                <td><strong>RS&DE</strong> (via Leyton)</td>
+                <td><span class="tag yellow">Crédit remboursable</span></td>
+                <td>~50% des dépenses R&D</td>
+                <td>Dès le jour 1 (documenter)</td>
+                <td>⭐ Leyton s'en occupe</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p1">3</span></td>
+                <td><strong>Scale AI / Invest AI</strong></td>
+                <td><span class="tag green">Non remboursable</span></td>
+                <td>50-120K$</td>
+                <td>Dès que le projet IA est défini</td>
+                <td>Moyen — demande à soumettre</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p2">4</span></td>
+                <td><strong>Programme Innovation MEIE</strong></td>
+                <td><span class="tag green">Non remboursable</span></td>
+                <td>Jusqu'à 75K$</td>
+                <td>Quand Contexo est en proto</td>
+                <td>Moyen — dossier technique</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p2">5</span></td>
+                <td><strong>CDAE</strong></td>
+                <td><span class="tag yellow">Crédit remboursable</span></td>
+                <td>30% des salaires dev</td>
+                <td>Quand vous avez des employés</td>
+                <td>Moyen — structure requise</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p2">6</span></td>
+                <td><strong>DEC</strong></td>
+                <td><span class="tag green">Non remboursable possible</span></td>
+                <td>Variable</td>
+                <td>Phase croissance</td>
+                <td>Moyen</td>
+            </tr>
+            <tr>
+                <td><span class="priority-num p3">7</span></td>
+                <td><strong>PARTENAR-IA</strong></td>
+                <td><span class="tag green">Non remboursable</span></td>
+                <td>Jusqu'à 1.5M$</td>
+                <td>Phase scale + partenariat univ.</td>
+                <td>Élevé — consortium requis</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- FIRMES SPÉCIALISÉES -->
+<section class="section" id="firmes">
+    <div class="section-header">
+        <span class="badge badge-purple">Partenaires</span>
+        <h2>🏢 Firmes qui peuvent vous aider à faire les demandes</h2>
+    </div>
+    
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
+        Ces firmes se spécialisent dans l'identification et la rédaction des demandes de subventions / crédits d'impôt. 
+        La plupart fonctionnent sur une <strong style="color: var(--accent-purple);">commission de succès (success fee)</strong> — 
+        tu paies seulement si la subvention est approuvée (typiquement 15-30% du montant obtenu pour les subventions, 
+        ou un % sur les crédits d'impôt réclamés).
+    </p>
+
+    <!-- Leyton -->
+    <div class="firm-card" style="border-left: 3px solid var(--accent-green);">
+        <h3>✅ Leyton Canada <span style="color: var(--accent-green); font-size: 0.8rem;">— Ton partenaire actuel</span></h3>
+        <div class="firm-type">Spécialiste en financement de l'innovation — Montréal</div>
+        <ul class="firm-services">
+            <li>RS&DE (crédits d'impôt R&D) — fédéral et QC</li>
+            <li>CDAE (crédit affaires électroniques)</li>
+            <li>CRIC (crédit relatif à l'investissement)</li>
+            <li>Subventions gouvernementales (PARI, MEIE, DEC, etc.)</li>
+            <li>Fiscalité immobilière et optimisation</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>💡 Tu travailles déjà avec eux pour la RS&DE chez DVOLU.</strong> 
+            Demande-leur s'ils peuvent aussi couvrir les subventions pour ta nouvelle compagnie. 
+            Ils ont une pratique dédiée aux subventions en plus des crédits d'impôt.
+        </div>
+        <a class="firm-link" href="https://leyton.com/ca/" target="_blank">🔗 leyton.com/ca →</a>
+    </div>
+
+    <!-- Ayming -->
+    <div class="firm-card">
+        <h3>Ayming Canada</h3>
+        <div class="firm-type">Premier cabinet national de subventions au Canada — 40+ ans d'expertise</div>
+        <ul class="firm-services">
+            <li>Subventions gouvernementales directes (PARI, MEIE, DEC, Scale AI)</li>
+            <li>RS&DE + crédits d'impôt à l'investissement</li>
+            <li>Stratégie de financement globale sur mesure</li>
+            <li>50+ ans d'expérience combinée en subventions</li>
+            <li>200+ ans d'expérience combinée en RS&DE</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>🏆 Pionniers au Canada</strong> — premier cabinet à avoir une pratique nationale dédiée aux subventions.
+            Ils identifient les programmes, rédigent les demandes, et font le suivi. Bonne option si Leyton ne couvre pas un programme spécifique.
+        </div>
+        <a class="firm-link" href="https://www.ayming.ca/fr/" target="_blank">🔗 ayming.ca →</a>
+    </div>
+
+    <!-- Ryan -->
+    <div class="firm-card">
+        <h3>Ryan Canada (funding.ryan.com)</h3>
+        <div class="firm-type">Chef de file en financement d'innovation — Subventions + RS&DE</div>
+        <ul class="firm-services">
+            <li>RS&DE (fédéral + provincial)</li>
+            <li>Subventions gouvernementales (PARI, MEIE, etc.)</li>
+            <li>Prêts sans intérêt et solutions sur mesure</li>
+            <li>Récupération de taxes de vente</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>📞 1-888-599-3111</strong> — Consultation gratuite pour évaluer l'admissibilité.
+        </div>
+        <a class="firm-link" href="https://funding.ryan.com/fr/" target="_blank">🔗 funding.ryan.com →</a>
+    </div>
+
+    <!-- helloDarwin -->
+    <div class="firm-card">
+        <h3>helloDarwin</h3>
+        <div class="firm-type">Plateforme de matching subventions — Gratuit pour l'estimation</div>
+        <ul class="firm-services">
+            <li>Estimateur de subventions gratuit en ligne (4 000+ programmes répertoriés)</li>
+            <li>Matching avec des partenaires d'exécution (agences, consultants)</li>
+            <li>Guide complet des subventions QC et fédérales par secteur</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>💡 Bon point de départ gratuit</strong> — utilise leur estimateur pour avoir une idée des montants 
+            avant d'engager un consultant. C'est plus un outil de recherche qu'un consultant.
+        </div>
+        <a class="firm-link" href="https://hellodarwin.com/fr/aide-aux-entreprises/subventions-et-financement/quebec" target="_blank">🔗 hellodarwin.com →</a>
+    </div>
+
+    <!-- Baseline -->
+    <div class="firm-card">
+        <h3>Baseline Québec</h3>
+        <div class="firm-type">Accompagnement spécialisé en IA et subventions</div>
+        <ul class="firm-services">
+            <li>Identification des programmes adaptés à votre réalité en IA</li>
+            <li>Accompagnement personnalisé pour les demandes</li>
+            <li>Expertise spécifique en projets d'intelligence artificielle</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>🎯 Spécialistes IA</strong> — contrairement aux firmes généralistes, ils se concentrent sur les projets AI/ML. 
+            Pertinent pour Contexo et vos projets de consultation AI.
+        </div>
+        <a class="firm-link" href="https://baseline.quebec/" target="_blank">🔗 baseline.quebec →</a>
+    </div>
+
+    <!-- RCGT -->
+    <div class="firm-card">
+        <h3>Raymond Chabot Grant Thornton (RCGT)</h3>
+        <div class="firm-type">Cabinet comptable majeur — Services de subventions</div>
+        <ul class="firm-services">
+            <li>Identification et demande de subventions gouvernementales</li>
+            <li>RS&DE et crédits d'impôt</li>
+            <li>Planification fiscale d'entreprise complète</li>
+            <li>Veille sur les programmes d'aide (incluant réponse aux tarifs douaniers)</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>🏛️ Option "tout-en-un"</strong> — si vous cherchez un CPA qui fait aussi les subventions. 
+            Plus cher que les firmes spécialisées, mais service complet (comptabilité + fiscalité + subventions).
+        </div>
+        <a class="firm-link" href="https://www.rcgt.com" target="_blank">🔗 rcgt.com →</a>
+    </div>
+
+    <!-- Moov AI -->
+    <div class="firm-card">
+        <h3>Moov AI</h3>
+        <div class="firm-type">Firme conseil en IA — Accompagnement subventions IA</div>
+        <ul class="firm-services">
+            <li>Accompagnement pour le programme Invest AI (fonds 35M$)</li>
+            <li>Identification des meilleurs programmes de subvention IA</li>
+            <li>Services-conseils en adoption de l'IA</li>
+        </ul>
+        <div class="firm-highlight">
+            <strong>🤖 Focus IA pur</strong> — ils aident à naviguer spécifiquement les programmes liés à l'intelligence artificielle.
+        </div>
+        <a class="firm-link" href="https://go.moov.ai/financer-projet-intelligence-artificielle" target="_blank">🔗 moov.ai →</a>
+    </div>
+
+</section>
+
+<!-- NEXT STEPS -->
+<section class="section" id="nextsteps">
+    <div class="steps">
+        <h2>🚀 Next Steps — Plan d'action concret</h2>
+
+        <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+                <h4>📞 Appeler Leyton</h4>
+                <p>Tu travailles déjà avec eux pour la RS&DE. Demande-leur: "Est-ce que vous pouvez aussi m'aider 
+                avec les subventions (PARI, MEIE, Scale AI) pour ma nouvelle compagnie?" Si oui → tu as un seul interlocuteur pour tout.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+                <h4>🌐 Contacter le PARI-CNRC</h4>
+                <p>Demander un conseiller en technologie industrielle (CTI). C'est gratuit, non remboursable, 
+                et c'est le programme le plus accessible pour une startup tech. 
+                <a href="https://portal-portail.nrc-cnrc.gc.ca/fr-CA" target="_blank" style="color: var(--accent-cyan);">Portail PARI →</a></p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+                <h4>📝 Commencer le journal de R&D</h4>
+                <p>Dès maintenant, documenter vos travaux sur Contexo: incertitudes techniques, expérimentations, 
+                heures investies. C'est la base pour la RS&DE et le PARI.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+                <h4>🔍 Faire l'estimation helloDarwin</h4>
+                <p>Gratuit et rapide — donne une vue d'ensemble des montants auxquels vous êtes admissibles. 
+                <a href="https://hellodarwin.com/fr/aide-aux-entreprises/subventions-et-financement/quebec" target="_blank" style="color: var(--accent-cyan);">Estimateur gratuit →</a></p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">5</span>
+            <div class="step-content">
+                <h4>👤 Vérifier l'âge pour Futurpreneur</h4>
+                <p>Si Benoit ou Jérémy a 39 ans ou moins → le prêt 60K$ + mentorat de Futurpreneur est une option facile.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">6</span>
+            <div class="step-content">
+                <h4>⚠️ Lire la convention DVOLU en premier!</h4>
+                <p>Rappel: avant toute démarche, vérifier les clauses de non-concurrence, non-sollicitation et IP 
+                dans ta convention d'actionnaires DVOLU. Ça conditionne tout le reste.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📜 <strong>IncMan</strong> — Guide subventions & financement AI/Tech QC</p>
+    <p>Généré le 17 mars 2026 | Benoit & Jérémy</p>
+    <p style="margin-top: 0.5rem;">⚠️ Ce document est informatif. Validez toujours avec un CPA ou un consultant en subventions.</p>
+</div>
+
+</body>
+</html>
