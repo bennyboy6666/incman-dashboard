@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>IncMan Dashboard</title>
-<link rel="stylesheet" href="style.css?v=14"/>
+<link rel="stylesheet" href="style.css?v=15"/>
 </head>
 <body>
 <div id="login-screen">
@@ -25,6 +25,7 @@
       <button onclick="showPage('timeline',this)">🗓️ Timeline</button>
       <button onclick="showPage('arch',this)">🏗️ Architecture</button>
       <button onclick="showPage('notes',this)">📝 Notes</button>
+      <button onclick="showPage('subs',this)">💰 Subventions</button>
     </nav>
     <div class="progress-pill">Progression: <span id="progress-pct">0%</span></div>
   </header>
@@ -382,6 +383,395 @@ Critères: expérience startup tech QC, bilingue si possible</textarea>
       </div>
     </div>
 
+    <!-- SUBVENTIONS -->
+    <div class="page" id="page-subs">
+      <div class="page-header"><h1>💰 Subventions &amp; Financement</h1><p>Guide complet des programmes disponibles pour startup AI/Tech — Benoit &amp; Jay</p></div>
+      
+      <!-- RÉSUMÉ EXÉCUTIF -->
+      <div class="subs-executive-summary">
+        <div class="exec-banner">
+          <div class="exec-highlight">
+            <span class="exec-amount">Jusqu'à 155K$/an</span>
+            <span class="exec-label">de retour potentiel</span>
+          </div>
+          <div class="exec-model">
+            <strong>Modèle 50/50:</strong> 50% R&amp;D subventionnable + 50% facturable
+          </div>
+        </div>
+        <div class="exec-stats">
+          <div class="exec-stat">
+            <div class="stat-amount">75K$</div>
+            <div class="stat-label">PARI (75% R&amp;D)</div>
+          </div>
+          <div class="exec-stat">
+            <div class="stat-amount">50K$</div>
+            <div class="stat-label">RS&amp;DE (~50%)</div>
+          </div>
+          <div class="exec-stat">
+            <div class="stat-amount">30K$</div>
+            <div class="stat-label">CDAEIA (30%)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPRENDRE: Remboursable vs Non -->
+      <div class="subs-section">
+        <h2>💡 Remboursable vs Non remboursable</h2>
+        <div class="compare-boxes">
+          <div class="compare-box non-remb">
+            <div class="big-icon">🎁</div>
+            <h3>Non remboursable = cadeau</h3>
+            <p>Tu reçois l'argent et tu ne le remets <strong>jamais</strong>. C'est une subvention pure. Exemples: PARI-CNRC, Scale AI, certains programmes MEIE.</p>
+          </div>
+          <div class="compare-box remb">
+            <div class="big-icon">🔄</div>
+            <h3>Remboursable = prêt avantageux</h3>
+            <p>Tu reçois l'argent mais tu dois le <strong>rembourser</strong> (souvent à taux 0% ou préférentiel). Exemples: Futurpreneur, BDC.</p>
+          </div>
+        </div>
+        <div class="compare-note">
+          <strong>🧾 Crédits d'impôt (RS&DE, CDAE):</strong> Remboursement de taxes basé sur tes dépenses R&D. Pour une SPCC, ils sont remboursables même sans profits.
+        </div>
+      </div>
+
+      <!-- MODÈLE 50/50 -->
+      <div class="subs-section">
+        <h2>📊 Simulation Modèle 50/50 — Année 1</h2>
+        <div class="simulation-table">
+          <table class="priority-table">
+            <thead>
+              <tr>
+                <th>Programme</th>
+                <th>Base de calcul</th>
+                <th>Retour estimé</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>RS&DE</strong> (fédéral + QC)</td>
+                <td>~50% des 100K$ R&D</td>
+                <td class="amount-cell">~50 000$</td>
+                <td><span class="badge badge-yellow">Crédit remboursable</span></td>
+              </tr>
+              <tr>
+                <td><strong>CDAEIA</strong></td>
+                <td>~30% des salaires dev</td>
+                <td class="amount-cell">~30 000$</td>
+                <td><span class="badge badge-yellow">Crédit remboursable</span></td>
+              </tr>
+              <tr>
+                <td><strong>PARI-CNRC</strong> (si approuvé)</td>
+                <td>~75% des salaires R&D</td>
+                <td class="amount-cell">~75 000$</td>
+                <td><span class="badge badge-green">Non remboursable</span></td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>TOTAL POTENTIEL</strong></td>
+                <td></td>
+                <td class="amount-cell total">~155 000$ ⚡</td>
+                <td><span class="badge badge-red">⚠️ Ne se cumulent pas tous</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="documentation-card">
+          <h3>📝 Documentation requise pour le 50% R&D</h3>
+          <ul class="doc-list">
+            <li>✅ <strong>Timesheets séparées</strong> — heures R&D vs heures facturables (dès le jour 1!)</li>
+            <li>✅ <strong>Journal technique</strong> — incertitudes, expérimentations, résultats</li>
+            <li>✅ <strong>Commits Git</strong> — descriptions claires = preuve technique gratuite</li>
+            <li>✅ <strong>Séparation comptable</strong> — dépenses R&D vs opérations courantes</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PROGRAMMES PAR TYPE -->
+      <div class="subs-section">
+        <h2>🟢 Programmes Non remboursables</h2>
+        <div class="programs-grid">
+          <div class="program-card priority">
+            <div class="program-header">
+              <h3>PARI-CNRC</h3>
+              <span class="program-amount">~75%</span>
+            </div>
+            <div class="program-org">Conseil national de recherches Canada</div>
+            <p class="program-desc">Le <strong>#1 pour vous</strong>. Finance les salaires R&D + accompagnement technique par un CTI dédié.</p>
+            <div class="program-contact"><strong>📞 1-877-994-4727</strong> — Processus relationnel</div>
+            <div class="program-tags">
+              <span class="tag green">Non remboursable</span>
+              <span class="tag blue">PME innovantes</span>
+              <span class="tag priority">⭐ Priorité #1</span>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <div class="program-header">
+              <h3>Scale AI — Accélération</h3>
+              <span class="program-amount">120K$+</span>
+            </div>
+            <div class="program-org">Supergrappe d'IA du Canada</div>
+            <p class="program-desc">Subventions pour startups et PME en IA. Accompagnement via incubateurs partenaires.</p>
+            <div class="program-tags">
+              <span class="tag green">Non remboursable</span>
+              <span class="tag blue">Startups IA</span>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <div class="program-header">
+              <h3>Programme Innovation MEIE</h3>
+              <span class="program-amount">75K$</span>
+            </div>
+            <div class="program-org">Investissement Québec</div>
+            <p class="program-desc">Aide non remboursable pour développement et validation de technologie. Jusqu'à 60% du projet.</p>
+            <div class="program-tags">
+              <span class="tag green">Non remboursable</span>
+              <span class="tag">Max 60%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subs-section">
+        <h2>🟡 Crédits d'impôt</h2>
+        <div class="programs-grid">
+          <div class="program-card priority">
+            <div class="program-header">
+              <h3>RS&DE — Fédéral + Québec</h3>
+              <span class="program-amount">~50%</span>
+            </div>
+            <div class="program-org">ARC + Revenu Québec</div>
+            <p class="program-desc">Le programme phare. Récupérez ~50% de vos dépenses en R&D. <strong>Remboursable</strong> pour les SPCC.</p>
+            <div class="program-highlight">💡 Tu travailles déjà avec Leyton pour ça!</div>
+            <div class="program-tags">
+              <span class="tag yellow">Crédit remboursable</span>
+              <span class="tag priority">⭐ Priorité #1</span>
+            </div>
+          </div>
+
+          <div class="program-card warning">
+            <div class="program-header">
+              <h3>CDAEIA (ex-CDAE)</h3>
+              <span class="program-amount">25K$/emp.</span>
+            </div>
+            <div class="program-org">Revenu Québec / Investissement QC</div>
+            <p class="program-desc">24% remboursable + 6% non remboursable sur salaires dev logiciel/IA.</p>
+            <div class="program-warning">⚠️ ATTESTATION IQ REQUISE AVANT DE COMMENCER!</div>
+            <div class="program-tags">
+              <span class="tag yellow">Crédit remboursable</span>
+              <span class="tag red">Attestation préalable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subs-section">
+        <h2>🟠 Prêts & remboursables</h2>
+        <div class="programs-grid">
+          <div class="program-card">
+            <div class="program-header">
+              <h3>Futurpreneur Canada</h3>
+              <span class="program-amount">60K$</span>
+            </div>
+            <div class="program-org">Futurpreneur</div>
+            <p class="program-desc">Prêt + mentorat pour entrepreneurs 18-39 ans. Remboursable sur 5 ans.</p>
+            <div class="program-tags">
+              <span class="tag orange">Remboursable</span>
+              <span class="tag red">⚠️ 18-39 ans</span>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <div class="program-header">
+              <h3>BDC — Prêts technologie</h3>
+              <span class="program-amount">Variable</span>
+            </div>
+            <div class="program-org">Banque de développement du Canada</div>
+            <p class="program-desc">Prêts à taux préférentiels pour développement de solutions technologiques.</p>
+            <div class="program-tags">
+              <span class="tag orange">Remboursable</span>
+              <span class="tag blue">Taux préférentiel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRIORITÉS -->
+      <div class="subs-section">
+        <h2>🎯 Ordre de priorité pour vous</h2>
+        <div class="priorities-table">
+          <table class="priority-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Programme</th>
+                <th>Type</th>
+                <th>Montant potentiel</th>
+                <th>Quand</th>
+                <th>Effort</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="priority-num p1">1</span></td>
+                <td><strong>PARI-CNRC</strong></td>
+                <td><span class="badge badge-green">Non remboursable</span></td>
+                <td>75% des salaires R&D</td>
+                <td>Dès l'incorporation</td>
+                <td>⭐ Facile — un appel</td>
+              </tr>
+              <tr>
+                <td><span class="priority-num p1">2</span></td>
+                <td><strong>RS&DE</strong> (via Leyton)</td>
+                <td><span class="badge badge-yellow">Crédit remboursable</span></td>
+                <td>~50% des dépenses R&D</td>
+                <td>Dès le jour 1</td>
+                <td>⭐ Leyton s'en occupe</td>
+              </tr>
+              <tr>
+                <td><span class="priority-num p1">3</span></td>
+                <td><strong>Scale AI / Invest AI</strong></td>
+                <td><span class="badge badge-green">Non remboursable</span></td>
+                <td>50-120K$</td>
+                <td>Quand projet IA défini</td>
+                <td>Moyen — demande à soumettre</td>
+              </tr>
+              <tr>
+                <td><span class="priority-num p2">4</span></td>
+                <td><strong>CDAEIA</strong></td>
+                <td><span class="badge badge-yellow">Crédit remboursable</span></td>
+                <td>30% des salaires dev</td>
+                <td>⚠️ Attestation IQ AVANT!</td>
+                <td>Moyen — attestation requise</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FIRMES SPÉCIALISÉES -->
+      <div class="subs-section">
+        <h2>🏢 Firmes spécialisées</h2>
+        
+        <div class="firm-card featured">
+          <div class="firm-header">
+            <h3>⭐ Leyton Canada <span class="firm-badge">RECOMMANDÉ • Partenaire actuel</span></h3>
+            <div class="firm-type">Spécialiste en financement de l'innovation — Montréal</div>
+          </div>
+          <div class="firm-services">
+            <div class="service-item">→ RS&DE + CRIC (crédits d'impôt R&D) — fédéral et QC</div>
+            <div class="service-item">→ CDAEIA (ex-CDAE, crédit affaires électroniques et IA)</div>
+            <div class="service-item">→ Subventions gouvernementales (PARI, MEIE, DEC)</div>
+            <div class="service-item">→ Success fee — tu paies seulement si approuvé</div>
+          </div>
+          <div class="firm-highlight">
+            <strong>🎯 Pourquoi Leyton est le #1:</strong><br>
+            ✅ Benoit travaille déjà avec eux chez DVOLU<br>
+            ✅ RS&DE + subventions → un seul interlocuteur<br>
+            ✅ Meeting jeudi 20 mars — opportunité de pitcher la nouvelle cie
+          </div>
+        </div>
+
+        <div class="other-firms">
+          <div class="other-firm">
+            <strong>Ayming Canada</strong> — Premier cabinet national, 40+ ans d'expertise
+          </div>
+          <div class="other-firm">
+            <strong>Ryan Canada</strong> — funding.ryan.com, consultation gratuite
+          </div>
+          <div class="other-firm">
+            <strong>Baseline Québec</strong> — Spécialistes projets IA
+          </div>
+        </div>
+      </div>
+
+      <!-- MEETING LEYTON -->
+      <div class="subs-section">
+        <h2>📋 Meeting Leyton — Jeudi 20 mars</h2>
+        <div class="meeting-prep">
+          <div class="questions-card">
+            <h3>🎯 Questions à poser</h3>
+            <ol class="questions-list">
+              <li><strong>Modèle 50/50:</strong> Comment structurer pour maximiser RS&DE + CRIC + CDAEIA?</li>
+              <li><strong>Subventions directes:</strong> Faites-vous aussi PARI, MEIE, Scale AI?</li>
+              <li><strong>Structure 3 cies:</strong> Dans quelle entité mettre la R&D?</li>
+              <li><strong>Seuil RS&DE:</strong> Le 35% s'applique sur 3M$ ou 6M$?</li>
+              <li><strong>CDAEIA timing:</strong> Délai pour obtenir l'attestation IQ?</li>
+              <li><strong>Nouvelle cie:</strong> Pouvez-vous nous accompagner dès le démarrage?</li>
+              <li><strong>Cumul:</strong> Comment optimiser les cumuls sans double-dipping?</li>
+            </ol>
+          </div>
+          <div class="documents-card">
+            <h3>📁 Documents à préparer</h3>
+            <ul class="documents-list">
+              <li>📄 Description Contexo (AI Context Engine, SaaS, NLP/voice)</li>
+              <li>👥 CV des fondateurs</li>
+              <li>🏗️ Structure 2 opcos + 1 cie commune 50/50</li>
+              <li>📊 Modèle 50% R&D + 50% facturable</li>
+              <li>🗓️ Timeline incorporation été 2026</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEXT STEPS -->
+      <div class="subs-section">
+        <h2>🚀 Next Steps — Plan d'action</h2>
+        <div class="steps-container">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <h4>📅 Meeting Leyton — Jeudi 20 mars</h4>
+              <p>Pitcher la nouvelle compagnie. Poser les 7 questions. Confirmer accompagnement.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <h4>📞 Appeler PARI-CNRC: 1-877-994-4727</h4>
+              <p>Demander un CTI. C'est relationnel, pas de formulaire. Préparer description projets innovants.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <h4>📝 Commencer le journal de R&D</h4>
+              <p>Documenter travaux sur Contexo: incertitudes techniques, expérimentations, heures.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <h4>🔍 Estimation helloDarwin</h4>
+              <p>Gratuit et rapide — vue d'ensemble des montants auxquels vous êtes admissibles.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">5</span>
+            <div class="step-content">
+              <h4>👤 Vérifier âge Futurpreneur</h4>
+              <p>Si ≤39 ans → prêt 60K$ + mentorat est une option facile.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">6</span>
+            <div class="step-content">
+              <h4>⚠️ Lire convention DVOLU en premier!</h4>
+              <p>Vérifier clauses non-concurrence et IP. Ça conditionne tout le reste.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </main>
 </div>
 
@@ -427,6 +817,6 @@ Critères: expérience startup tech QC, bilingue si possible</textarea>
   </div>
 </div>
 
-<script src="app.js?v=14"></script>
+<script src="app.js?v=15"></script>
 </body>
 </html>

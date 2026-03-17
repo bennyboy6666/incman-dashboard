@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📜 IncMan — Guide Subventions & Financement AI/Tech QC</title>
+    <script>
+        // Password protection
+        const PASS = 'IncMan$ubv2026!QcAiTech';
+        const AUTH_KEY = 'incman_subs_auth';
+        if (localStorage.getItem(AUTH_KEY) !== 'true') {
+            const input = prompt('🔒 Mot de passe requis:');
+            if (input !== PASS) {
+                document.documentElement.innerHTML = '<body style="background:#0f1117;color:#f87171;display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui;"><h1>⛔ Accès refusé</h1></body>';
+                throw new Error('unauthorized');
+            }
+            localStorage.setItem(AUTH_KEY, 'true');
+        }
+    </script>
     <style>
         :root {
             --bg: #0f1117;
