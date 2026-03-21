@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📜 PinnAI — Sélecteur de Services</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --border: #2e3250;
+  --accent: #22d3ee;
+  --accent2: #4ade80;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --text: #e8eaf6;
+  --muted: #8892b0;
+  --radius: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 1.5rem; max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+h1 span { color: var(--accent); }
+.subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+.stats-bar { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.85rem; }
+.stat strong { color: var(--accent); font-size: 1.1rem; }
+
+.category { margin-bottom: 2rem; }
+.cat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+.cat-title { font-size: 1.15rem; font-weight: 700; }
+.cat-badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.badge-green { background: rgba(74, 222, 128, 0.15); color: var(--accent2); }
+.badge-yellow { background: rgba(251, 191, 36, 0.15); color: var(--yellow); }
+.badge-blue { background: rgba(34, 211, 238, 0.15); color: var(--accent); }
+.badge-purple { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+.badge-red { background: rgba(248, 113, 113, 0.15); color: var(--red); }
+.select-all { font-size: 0.8rem; color: var(--accent); cursor: pointer; background: none; border: 1px solid rgba(34,211,238,0.3); padding: 0.3rem 0.8rem; border-radius: 6px; }
+.select-all:hover { background: rgba(34,211,238,0.1); }
+
+.service { display: flex; align-items: flex-start; gap: 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.15s; }
+.service:hover { border-color: rgba(255,255,255,0.15); transform: translateX(3px); }
+.service.checked { border-color: var(--accent); background: rgba(34, 211, 238, 0.05); }
+.service input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+.service-info { flex: 1; }
+.service-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; }
+.service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+.service-tags { display: flex; gap: 0.3rem; margin-top: 0.4rem; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--muted); }
+.tag.you { background: rgba(74, 222, 128, 0.1); color: var(--accent2); }
+
+/* SEND BAR */
+.send-bar { position: sticky; bottom: 0; background: linear-gradient(transparent, var(--bg) 20%); padding: 1.5rem 0 0.5rem; }
+.send-inner { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.send-count { font-size: 0.9rem; color: var(--muted); }
+.send-count strong { color: var(--accent); font-size: 1.1rem; }
+.send-btn { background: linear-gradient(135deg, var(--accent), #06b6d4); color: #0f1117; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; }
+.send-btn:hover { opacity: 0.85; }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.result-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+.result-overlay.show { display: flex; }
+.result-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; max-width: 700px; width: 100%; max-height: 80vh; overflow-y: auto; }
+.result-box h2 { margin-bottom: 1rem; font-size: 1.3rem; }
+.result-list { list-style: none; padding: 0; }
+.result-list li { padding: 0.4rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+.result-list li:last-child { border: none; }
+.result-actions { margin-top: 1.5rem; display: flex; gap: 0.75rem; }
+.btn-copy { background: var(--accent); color: #0f1117; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.btn-close { background: rgba(255,255,255,0.1); color: var(--text); border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; }
+
+@media (max-width: 600px) {
+  body { padding: 1rem; }
+  .stats-bar { flex-direction: column; }
+  .send-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<h1>pinn<span>AI</span> — Sélecteur de Services</h1>
+<p class="subtitle">Coche les services que tu veux offrir. Clique "Envoyer la sélection" quand t'as fini.</p>
+
+<div class="stats-bar">
+  <div class="stat">Sélectionnés: <strong id="count">0</strong></div>
+  <div class="stat">Total disponible: <strong>42</strong></div>
+</div>
+
+<!-- CATEGORY 1: SOFTWARE MANUFACTURIER -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">🏭 Software Manufacturier Sur Mesure</span>
+    <span class="cat-badge badge-green">Volet QC</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Suivi de production en temps réel</div>
+    <div class="service-desc">Dashboards live de l'état de production, taux de rendement, arrêts machine, OEE. Connecté aux automates/PLC.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">IoT</span><span class="tag">Dashboard</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">GMAO / CMMS (Gestion de maintenance)</div>
+    <div class="service-desc">Planification maintenance préventive et corrective, historique d'interventions, gestion pièces de rechange, bons de travail.</div>
+    <div class="service-tags"><span class="tag you">🟢 Jay: MaintenanceApp</span><span class="tag">Terrain</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Contrôle qualité</div>
+    <div class="service-desc">Formulaires d'inspection, SPC, gestion des non-conformités, rapports qualité automatisés, traçabilité des lots.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Conformité</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Gestion d'inventaire intelligente</div>
+    <div class="service-desc">Suivi des stocks en temps réel, alertes de réapprovisionnement, intégration avec ERP, gestion multi-entrepôt.</div>
+    <div class="service-tags"><span class="tag">ERP</span><span class="tag">Logistique</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Planification de production (MES)</div>
+    <div class="service-desc">Ordonnancement, scheduling, gestion des ordres de fabrication, calcul de capacité, suivi des temps de cycle.</div>
+    <div class="service-tags"><span class="tag">MES</span><span class="tag">Planification</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Traçabilité et conformité</div>
+    <div class="service-desc">Suivi lot par lot, traçabilité des matières premières, conformité réglementaire (HACCP, ISO, etc.), rapports d'audit.</div>
+    <div class="service-tags"><span class="tag">Agroalimentaire</span><span class="tag">Pharma</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Portails clients / fournisseurs</div>
+    <div class="service-desc">Portail self-service pour clients (suivi commandes, factures) et fournisseurs (soumissions, bons de commande).</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Web</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Dashboards KPI d'usine</div>
+    <div class="service-desc">Tableaux de bord exécutifs: OEE, taux de rejet, productivité par ligne, coûts de production, tendances.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">BI</span><span class="tag">Analytics</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Gestion de projets industriels</div>
+    <div class="service-desc">Suivi d'avancement de projets d'ingénierie, gestion des ressources, Gantt, budgets, rapports client.</div>
+    <div class="service-tags"><span class="tag you">🟢 Benoit: Agent PM</span><span class="tag">Ingénierie</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Santé-sécurité au travail (SST)</div>
+    <div class="service-desc">Rapports d'incidents, inspections, formulaires terrain, suivi des formations obligatoires, conformité CNESST.</div>
+    <div class="service-tags"><span class="tag you">🟢 Benoit: sécurité machine</span><span class="tag">Conformité</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Gestion des temps et feuilles de temps</div>
+    <div class="service-desc">Timesheet digitale, suivi des heures par projet/client, approbation, intégration paie, rapports productivité.</div>
+    <div class="service-tags"><span class="tag you">🟢 Benoit: Timesheet AI</span><span class="tag">RH</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">IoT / Connectivité machines</div>
+    <div class="service-desc">Connexion aux automates, capteurs, PLC. Collecte de données machine en temps réel. Edge computing.</div>
+    <div class="service-tags"><span class="tag">Industriel</span><span class="tag">Hardware</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Applications mobiles terrain</div>
+    <div class="service-desc">Apps pour techniciens/inspecteurs: formulaires offline, photos, signatures, géolocalisation, synchronisation auto.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Mobile</span><span class="tag">Terrain</span></div>
+  </div></label>
+</div>
+
+<!-- CATEGORY 2: ERP & INTÉGRATION -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">🔗 ERP & Intégration de Systèmes</span>
+    <span class="cat-badge badge-purple">Force Jay</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Intégration ERP — Odoo</div>
+    <div class="service-desc">Implémentation, personnalisation, modules sur mesure Odoo. Migration de données, formation utilisateurs.</div>
+    <div class="service-tags"><span class="tag you">🟢 Jay: expert Odoo</span><span class="tag">ERP</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Intégration ERP — SAP / NetSuite / autres</div>
+    <div class="service-desc">Connexion aux ERP existants via API, migration, intégrations bidirectionnelles, automatisation des flux.</div>
+    <div class="service-tags"><span class="tag">ERP</span><span class="tag">API</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Migration cloud / Azure</div>
+    <div class="service-desc">Migration d'applications on-premise vers Azure Canada. Architecture cloud, sécurité, monitoring, optimisation coûts.</div>
+    <div class="service-tags"><span class="tag you">🟢 Jay: infra Azure</span><span class="tag">Cloud</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">API Development & Intégration</div>
+    <div class="service-desc">Développement d'APIs REST/GraphQL, intégration de systèmes hétérogènes, middleware, ETL, webhooks.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Dev</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Data engineering / Pipelines de données</div>
+    <div class="service-desc">Architecture data, ETL/ELT, data lakes, entrepôts de données, nettoyage et transformation, scheduling.</div>
+    <div class="service-tags"><span class="tag you">🟢 Base de Contexo</span><span class="tag">Data</span></div>
+  </div></label>
+</div>
+
+<!-- CATEGORY 3: AI & INTELLIGENCE -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">🤖 Solutions AI Intégrées</span>
+    <span class="cat-badge badge-blue">Volet International</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Assistants AI métier (chatbots spécialisés)</div>
+    <div class="service-desc">Chatbots entraînés sur vos données métier: support client, aide aux techniciens, FAQ intelligentes, recherche documentaire.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">NLP</span><span class="tag">LLM</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Automatisation intelligente de processus</div>
+    <div class="service-desc">RPA + AI: automatisation de workflows avec prise de décision intelligente. Power Automate, n8n, custom.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">RPA</span><span class="tag">Workflow</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Analyse de documents / Extraction de données</div>
+    <div class="service-desc">OCR intelligent, extraction automatique de données de factures, bons de commande, rapports, plans. Classification de documents.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">NLP</span><span class="tag">OCR</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Voice-to-data (terrain → données structurées)</div>
+    <div class="service-desc">Enregistrements vocaux du terrain convertis en données structurées: rapports d'inspection, notes de réunion, comptes-rendus.</div>
+    <div class="service-tags"><span class="tag you">🟢 Contexo: voice pipeline</span><span class="tag">STT</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Computer vision industrielle</div>
+    <div class="service-desc">Inspection qualité visuelle, détection de défauts, comptage automatique, lecture de codes-barres/QR, monitoring vidéo.</div>
+    <div class="service-tags"><span class="tag">Vision</span><span class="tag">Manufacturier</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Maintenance prédictive</div>
+    <div class="service-desc">Modèles ML qui prédisent les pannes avant qu'elles arrivent. Réduction 30-50% des coûts de maintenance. Basé sur données capteurs/historique.</div>
+    <div class="service-tags"><span class="tag">ML</span><span class="tag">IoT</span><span class="tag">Manufacturier</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">RAG / Knowledge Base AI</div>
+    <div class="service-desc">Retrieval-Augmented Generation: AI qui répond en se basant sur VOS documents internes. Manuels, procédures, historiques.</div>
+    <div class="service-tags"><span class="tag you">🟢 Contexo: KB engine</span><span class="tag">LLM</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">AI Agents / Multi-agents</div>
+    <div class="service-desc">Agents AI autonomes qui exécutent des tâches complexes: recherche, analyse, reporting, coordination. Architecture multi-agents.</div>
+    <div class="service-tags"><span class="tag you">🟢 On bâtit des agents</span><span class="tag">Agents</span><span class="tag">Avancé</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">MLOps (déploiement et monitoring de modèles)</div>
+    <div class="service-desc">Pipeline CI/CD pour modèles AI, monitoring de performance, retraining automatique, versioning de modèles.</div>
+    <div class="service-tags"><span class="tag">DevOps</span><span class="tag">Avancé</span></div>
+  </div></label>
+</div>
+
+<!-- CATEGORY 4: CONSULTATION -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">📊 Consultation & Stratégie</span>
+    <span class="cat-badge badge-yellow">Haute marge</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Audit AI Readiness</div>
+    <div class="service-desc">Évaluation complète de votre potentiel AI: processus, données, infrastructure, équipe. Rapport avec recommandations et ROI estimé.</div>
+    <div class="service-tags"><span class="tag you">🟢 Service d'entrée</span><span class="tag">5-15K$</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Stratégie de transformation numérique</div>
+    <div class="service-desc">Roadmap complète de digitalisation: priorisation des projets, budget, timeline, quick wins vs projets long terme.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Stratégie</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Formation AI pour dirigeants et équipes</div>
+    <div class="service-desc">Workshops pratiques: comprendre l'AI, identifier les cas d'usage, utiliser les outils AI au quotidien. Adapté à votre secteur.</div>
+    <div class="service-tags"><span class="tag you">🟢 Facile, bonne marge</span><span class="tag">2-5K$/jour</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Prototypage rapide / AI Sprint</div>
+    <div class="service-desc">PoC (proof of concept) en 2-4 semaines. Valider une idée AI rapidement avec un prototype fonctionnel avant d'investir gros.</div>
+    <div class="service-tags"><span class="tag you">🟢 Notre force</span><span class="tag">5-15K$</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Audit de sécurité / Cybersécurité industrielle</div>
+    <div class="service-desc">Évaluation des risques, tests de pénétration, sécurité OT/IT, conformité, plan de remédiation. Environnements industriels.</div>
+    <div class="service-tags"><span class="tag you">🟢 Benoit: ex-DVOLU</span><span class="tag">Sécurité</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Gestion du changement technologique</div>
+    <div class="service-desc">Accompagner les équipes dans l'adoption de nouvelles technologies. Communication, formation, support post-déploiement.</div>
+    <div class="service-tags"><span class="tag">Conseil</span><span class="tag">RH</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Architecture logicielle / Design technique</div>
+    <div class="service-desc">Conception d'architectures scalables, choix technologiques, documentation technique, code review, best practices.</div>
+    <div class="service-tags"><span class="tag you">🟢 On sait faire</span><span class="tag">Architecture</span></div>
+  </div></label>
+</div>
+
+<!-- CATEGORY 5: CONFORMITÉ QC -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">🛡️ Conformité & Réglementaire (Québec)</span>
+    <span class="cat-badge badge-red">Différenciateur QC</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Conformité Loi 25 (protection des données)</div>
+    <div class="service-desc">Audit Loi 25, politiques de confidentialité, consentement, registre des incidents, formation équipe, plan de conformité.</div>
+    <div class="service-tags"><span class="tag you">🟢 Différenciateur</span><span class="tag">Légal</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Hébergement sécurisé Azure Canada</div>
+    <div class="service-desc">Déploiement et gestion d'infrastructure Azure dans les régions Canada Central/Est. Données qui restent au pays.</div>
+    <div class="service-tags"><span class="tag you">🟢 Jay: infra Azure</span><span class="tag">Cloud</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Accompagnement subventions tech (RS&DE, PARI)</div>
+    <div class="service-desc">Aide à identifier et demander les subventions: RS&DE, PARI-CNRC, CDAEIA, Scale AI. Documentation R&D pour les crédits.</div>
+    <div class="service-tags"><span class="tag you">🟢 On connaît bien</span><span class="tag">Financement</span></div>
+  </div></label>
+</div>
+
+<!-- CATEGORY 6: PRODUITS SAAS -->
+<div class="category">
+  <div class="cat-header">
+    <span class="cat-title">☁️ Produits SaaS</span>
+    <span class="cat-badge badge-blue">Revenus récurrents</span>
+    <button class="select-all" onclick="toggleCat(this)">Tout cocher</button>
+  </div>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Contexo — AI Context Engine</div>
+    <div class="service-desc">Notre produit phare. Structure le contexte de vos projets: capture terrain, interviews, KB structurée, distribution MCP. Voice-first.</div>
+    <div class="service-tags"><span class="tag you">🟢 Notre produit</span><span class="tag">SaaS</span><span class="tag">149$/mois</span></div>
+  </div></label>
+
+  <label class="service"><input type="checkbox" onchange="updateCount()"><div class="service-info">
+    <div class="service-name">Solutions AI sectorielles (white-label)</div>
+    <div class="service-desc">Versions spécialisées de nos outils AI pour des secteurs spécifiques: manufacturier, ingénierie, construction, agroalimentaire.</div>
+    <div class="service-tags"><span class="tag">Phase 2</span><span class="tag">SaaS</span></div>
+  </div></label>
+</div>
+
+<!-- SEND BAR -->
+<div class="send-bar">
+  <div class="send-inner">
+    <div class="send-count">Services sélectionnés: <strong id="count2">0</strong> / 42</div>
+    <button class="send-btn" id="sendBtn" onclick="showResult()" disabled>📩 Envoyer la sélection</button>
+  </div>
+</div>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-box">
+    <h2>✅ Services sélectionnés pour PinnAI</h2>
+    <div id="resultContent"></div>
+    <div class="result-actions">
+      <button class="btn-copy" onclick="copyResult()">📋 Copier</button>
+      <button class="btn-close" onclick="closeResult()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateCount(){const c=document.querySelectorAll('input[type="checkbox"]:checked').length;document.getElementById('count').textContent=c;document.getElementById('count2').textContent=c;document.getElementById('sendBtn').disabled=c===0;document.querySelectorAll('.service').forEach(s=>{s.classList.toggle('checked',s.querySelector('input').checked)});}
+function toggleCat(btn){const cat=btn.closest('.category');const boxes=cat.querySelectorAll('input[type="checkbox"]');const all=[...boxes].every(b=>b.checked);boxes.forEach(b=>b.checked=!all);btn.textContent=all?'Tout cocher':'Tout décocher';updateCount();}
+function showResult(){const sel=[];document.querySelectorAll('.service').forEach(s=>{if(s.querySelector('input').checked){sel.push({n:s.querySelector('.service-name').textContent,d:s.querySelector('.service-desc').textContent,c:s.closest('.category').querySelector('.cat-title').textContent});}});let h='',cc='';sel.forEach(s=>{if(s.c!==cc){cc=s.c;h+='<h3 style="margin:1rem 0 .5rem;font-size:1rem;color:var(--accent)">'+s.c+'</h3>';}h+='<div style="padding:.5rem 0;border-bottom:1px solid var(--border)"><strong>'+s.n+'</strong><br><span style="font-size:.82rem;color:var(--muted)">'+s.d+'</span></div>';});document.getElementById('resultContent').innerHTML=h;document.getElementById('resultOverlay').classList.add('show');}
+function closeResult(){document.getElementById('resultOverlay').classList.remove('show');}
+function copyResult(){const s=[];let cc='';document.querySelectorAll('.service').forEach(el=>{if(el.querySelector('input').checked){const c=el.closest('.category').querySelector('.cat-title').textContent;if(c!==cc){cc=c;s.push('\n'+c);}s.push('  ✅ '+el.querySelector('.service-name').textContent);}});navigator.clipboard.writeText(s.join('\n')).then(()=>{const b=document.querySelector('.btn-copy');b.textContent='✅ Copié!';setTimeout(()=>b.textContent='📋 Copier',2000);});}
+document.getElementById('resultOverlay').addEventListener('click',function(e){if(e.target===this)closeResult();});
+</script>
+</body>
+</html>
