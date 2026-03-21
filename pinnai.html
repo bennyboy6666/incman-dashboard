@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PinnAI - IA accessible, logiciel parfait</title>
+    <title>PinnAI - Custom software, powered by AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -13,14 +15,16 @@
         }
 
         :root {
-            --bg-dark: #0f1117;
-            --bg-darker: #0a0d14;
-            --bg-card: #1a1f2e;
+            --bg-primary: #0a0b0f;
+            --bg-surface: #12141c;
+            --bg-card: #1a1d28;
+            --accent-cyan: #22d3ee;
+            --accent-green: #4ade80;
             --text-primary: #ffffff;
-            --text-secondary: #b4bcd0;
-            --accent: #22d3ee;
-            --accent-hover: #0891b2;
-            --border: #2a3441;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(34, 211, 238, 0.2);
         }
 
         html {
@@ -28,63 +32,36 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Typography */
-        h1 { font-size: 3rem; font-weight: 700; }
-        h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 1rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-        p { color: var(--text-secondary); margin-bottom: 1rem; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            h3 { font-size: 1.25rem; }
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-        }
-
-        section {
-            padding: 6rem 0;
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 4rem 0;
-            }
-        }
-
-        /* Header */
-        header {
+        /* Navigation */
+        .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 17, 23, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
             z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
-        nav {
+        .nav.scrolled {
+            background: rgba(18, 20, 28, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1rem 2rem;
+            align-items: center;
         }
 
         .logo {
@@ -93,111 +70,99 @@
         }
 
         .logo .ai {
-            color: var(--accent);
+            color: var(--accent-cyan);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
             list-style: none;
+            gap: 2rem;
             align-items: center;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover {
             color: var(--text-primary);
         }
 
-        .nav-cta {
-            background: var(--accent);
-            color: var(--bg-dark);
+        .btn {
             padding: 0.5rem 1rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .nav-cta:hover {
-            background: var(--accent-hover);
-            color: var(--bg-dark);
-        }
-
-        .lang-toggle {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.875rem;
-            }
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.875rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
             cursor: pointer;
+            display: inline-block;
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: var(--bg-dark);
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
         }
 
         .btn-primary:hover {
-            background: var(--accent-hover);
-            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+        .btn-outline {
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
         }
 
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: var(--bg-dark);
+        .btn-outline:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.1);
+        }
+
+        .btn-ghost {
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
         }
 
         /* Hero Section */
         .hero {
-            padding: 12rem 0 8rem;
+            padding: 8rem 0 6rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(18, 20, 28, 0.8) 100%);
             text-align: center;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
         }
 
         .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
-        .hero p {
+        .hero .subtitle {
             font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
             max-width: 600px;
-            margin: 0 auto 3rem;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-ctas {
@@ -207,623 +172,930 @@
             margin-bottom: 4rem;
         }
 
-        @media (max-width: 768px) {
-            .hero-ctas {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-top: 4rem;
         }
 
-        .stat {
-            text-align: center;
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .stat .number {
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
         }
 
-        .stat .label {
-            font-size: 0.875rem;
+        .stat-label {
             color: var(--text-secondary);
         }
 
-        @media (max-width: 768px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Services Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
 
-        .service-card {
+        .service-pillar {
             background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: transform 0.3s, border-color 0.3s;
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .service-card:hover {
+        .service-pillar:hover {
             transform: translateY(-4px);
-            border-color: var(--accent);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .service-card .icon {
+        .service-icon {
             font-size: 2rem;
             margin-bottom: 1rem;
         }
 
-        /* Manufacturing Solutions Grid */
-        .manufacturing-grid {
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            list-style: none;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
         }
 
-        .manufacturing-item {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            transition: border-color 0.3s;
+        .service-features li {
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1rem;
         }
 
-        .manufacturing-item:hover {
-            border-color: var(--accent);
+        .service-features li:before {
+            content: "·";
+            color: var(--accent-cyan);
+            position: absolute;
+            left: 0;
         }
 
-        /* AI Services List */
-        .ai-services {
+        /* Manufacturing Section */
+        .manufacturing-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .ai-service {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
+        .feature-card {
             background: var(--bg-card);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .ai-service .icon {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-top: 0.25rem;
-        }
-
-        /* Highlight Boxes */
-        .highlight-box {
-            background: var(--bg-card);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
             padding: 2rem;
-            margin: 3rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s;
         }
 
-        .highlight-box h3 {
-            color: var(--accent);
+        .feature-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);
+        }
+
+        .feature-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+        }
+
+        .callout-box {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-card) 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+        }
+
+        .callout-box h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        /* AI Solutions */
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .ai-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-card h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .product-teaser {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #0891b2 100%);
+            color: var(--bg-primary);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .product-teaser h3 {
+            margin-bottom: 1rem;
+        }
+
+        .product-teaser .btn {
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .product-teaser .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* Process Steps */
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
         }
 
-        .step {
+        .process-step {
             text-align: center;
             position: relative;
         }
 
-        .step .number {
+        .step-number {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
             width: 60px;
             height: 60px;
-            background: var(--accent);
-            color: var(--bg-dark);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             font-weight: 700;
-            margin: 0 auto 1rem;
+            font-size: 1.25rem;
+            margin: 0 auto 2rem;
         }
 
-        /* Trust Section */
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .trust-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--bg-card);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .trust-item .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Team Profiles */
-        .team-profiles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin: 3rem 0;
-        }
-
-        .profile {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .profile h4 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .profile .role {
+        .step-title {
+            font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        /* Pricing */
+        .step-description {
+            color: var(--text-secondary);
+        }
+
+        /* Integration Logos */
+        .integration-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+
+        .logo-item:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Quebec Trust Cards */
+        .trust-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .trust-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .trust-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .trust-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .team-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+        }
+
+        .team-role {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Pricing Cards */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            gap: 3rem;
         }
 
         .pricing-card {
             background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
             text-align: center;
+            transition: all 0.2s;
         }
 
-        .pricing-card .price {
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-amount {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--accent);
-            margin: 1rem 0;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
         /* Final CTA */
         .final-cta {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, var(--bg-surface) 0%, #1e293b 100%);
             text-align: center;
-            padding: 4rem 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
+            padding: 6rem 0;
         }
 
         .final-cta h2 {
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .final-cta p {
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
+        .final-cta .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
         }
 
-        .final-cta .contact-info {
-            margin-top: 1rem;
-            color: var(--text-secondary);
+        .cta-contact {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-email {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
         }
 
         /* Footer */
-        footer {
-            background: var(--bg-darker);
-            border-top: 1px solid var(--border);
-            padding: 3rem 0 2rem;
+        .footer {
+            background: var(--bg-surface);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-subtle);
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
             margin-bottom: 2rem;
-        }
-
-        .footer-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .footer-logo .ai {
-            color: var(--accent);
-        }
-
-        .footer-tagline {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
         }
 
         .footer-links {
             display: flex;
             gap: 2rem;
-            list-style: none;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--text-primary);
+            color: var(--accent-cyan);
         }
 
         .footer-bottom {
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--border-subtle);
             padding-top: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .footer-content,
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .manufacturing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-contact {
+                flex-direction: column;
+            }
+            
             .footer-bottom {
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
             }
-
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            
+            .integration-logos {
+                gap: 1.5rem;
             }
+        }
+
+        /* Smooth animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
             <div class="logo">pinn<span class="ai">AI</span></div>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
-                <li><a href="#manufacturier">Manufacturier</a></li>
-                <li><a href="#ai-innovation">AI & Innovation</a></li>
-                <li><a href="#a-propos">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><button class="lang-toggle">FR/EN</button></li>
+                <li><a href="#manufacturing">Manufacturing</a></li>
+                <li><a href="#ai-solutions">AI Solutions</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#" class="btn btn-ghost">FR</a></li>
+                <li><a href="#contact" class="btn btn-primary">Let's Talk →</a></li>
             </ul>
-            <a href="#contact" class="nav-cta">Parlons de votre projet</a>
-        </nav>
-    </header>
+            <div class="mobile-nav">
+                <a href="#contact" class="btn btn-primary">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Le software sur mesure, accessible grâce à l'<span style="color: var(--accent);">AI</span></h1>
-            <p>On comprend vos défis industriels et on bâtit le logiciel qui vous rend plus productif. Plus rapide, plus précis, plus intelligent.</p>
+            <h1>Custom software, powered by AI.</h1>
+            <p class="subtitle">We build the exact software your business needs. Faster, smarter, and tailored to your operations.</p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Démarrer un projet</a>
-                <a href="#services" class="btn btn-secondary">Voir nos services</a>
+                <a href="#contact" class="btn btn-primary">Start a project</a>
+                <a href="#services" class="btn btn-outline">See our services</a>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="number">14 000+</div>
-                    <div class="label">manufacturiers au QC</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">35+ services</div>
+                    <div class="stat-label">End-to-end solutions</div>
                 </div>
-                <div class="stat">
-                    <div class="number">93%</div>
-                    <div class="label">sont des PME</div>
+                <div class="stat-card">
+                    <div class="stat-number">AI-first approach</div>
+                    <div class="stat-label">Built-in intelligence</div>
                 </div>
-                <div class="stat">
-                    <div class="number">Votre avantage</div>
-                    <div class="label">l'<span style="color: var(--accent);">AI</span></div>
+                <div class="stat-card">
+                    <div class="stat-number">Quebec to global</div>
+                    <div class="stat-label">Local expertise, world-class delivery</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Overview -->
-    <section id="services">
+    <section id="services" class="section">
         <div class="container">
-            <h2>Nos services</h2>
+            <div class="section-header">
+                <h2>What we do</h2>
+                <p class="subtitle">Three pillars. One mission: make your business smarter.</p>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon">🏭</div>
-                    <h3>Software Manufacturier</h3>
-                    <p>Applications sur mesure pour vos opérations industrielles. MES, GMAO, traçabilité, suivi de production, IoT.</p>
+                <div class="service-pillar">
+                    <div class="service-icon">🏭</div>
+                    <h3 class="service-title">Custom Manufacturing Software</h3>
+                    <p class="service-description">Purpose-built applications for industrial operations.</p>
+                    <ul class="service-features">
+                        <li>Production tracking</li>
+                        <li>CMMS/Maintenance</li>
+                        <li>Quality control</li>
+                        <li>Inventory management</li>
+                        <li>Production planning (MES)</li>
+                        <li>Traceability</li>
+                        <li>Client/supplier portals</li>
+                        <li>Factory KPI dashboards</li>
+                        <li>Project management</li>
+                        <li>Time tracking</li>
+                        <li>Mobile field apps</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <div class="icon">🤖</div>
-                    <h3>Solutions <span style="color: var(--accent);">AI</span> Intégrées</h3>
-                    <p>Assistants <span style="color: var(--accent);">AI</span> métier, automatisation intelligente, analyse de documents, maintenance prédictive, computer vision.</p>
+                <div class="service-pillar">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Solutions</h3>
+                    <p class="service-description">Artificial intelligence that solves real business problems.</p>
+                    <ul class="service-features">
+                        <li>Custom AI assistants</li>
+                        <li>Intelligent process automation</li>
+                        <li>Document analysis & extraction</li>
+                        <li>Voice-to-data (field → structured data)</li>
+                        <li>Predictive maintenance</li>
+                        <li>RAG / AI Knowledge Base</li>
+                        <li>Multi-agent AI systems</li>
+                        <li>MLOps & model management</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <div class="icon">📊</div>
-                    <h3>Consultation & Stratégie</h3>
-                    <p>Audit <span style="color: var(--accent);">AI</span> readiness, identification d'opportunités, formation d'équipes, roadmap technologique.</p>
+                <div class="service-pillar">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Consulting & Strategy</h3>
+                    <p class="service-description">Expert guidance from audit to deployment.</p>
+                    <ul class="service-features">
+                        <li>AI Readiness Audit</li>
+                        <li>Digital transformation strategy</li>
+                        <li>AI training for teams</li>
+                        <li>Rapid prototyping / AI Sprint</li>
+                        <li>Change management</li>
+                        <li>Software architecture design</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Manufacturier QC Section -->
-    <section id="manufacturier">
+    <!-- Manufacturing Section -->
+    <section id="manufacturing" class="section">
         <div class="container">
-            <h2>Software sur mesure pour le manufacturier québécois</h2>
-            <p style="font-size: 1.125rem; text-align: center; max-width: 600px; margin: 0 auto 3rem;">93% des manufacturiers québécois sont des PME. On bâtit les outils qui vous manquent.</p>
-            
-            <div class="manufacturing-grid">
-                <div class="manufacturing-item">
-                    <h4>Suivi de production en temps réel</h4>
+            <div class="section-header">
+                <h2>Built for manufacturers</h2>
+                <p class="subtitle">93% of Quebec's 14,000+ manufacturers are SMEs. We build the tools they've been missing.</p>
+            </div>
+            <div class="manufacturing-cards">
+                <div class="feature-card">
+                    <h4>Real-time production monitoring</h4>
+                    <p>Track production in real-time with dashboards that matter.</p>
                 </div>
-                <div class="manufacturing-item">
-                    <h4>Gestion de maintenance (GMAO)</h4>
+                <div class="feature-card">
+                    <h4>Smart maintenance (CMMS + AI)</h4>
+                    <p>Predictive maintenance that prevents costly downtime.</p>
                 </div>
-                <div class="manufacturing-item">
-                    <h4>Contrôle qualité automatisé</h4>
+                <div class="feature-card">
+                    <h4>Automated quality control</h4>
+                    <p>AI-powered quality assurance and defect detection.</p>
                 </div>
-                <div class="manufacturing-item">
-                    <h4>Gestion d'inventaire intelligente</h4>
+                <div class="feature-card">
+                    <h4>Intelligent inventory</h4>
+                    <p>Smart inventory management with automatic reordering.</p>
                 </div>
-                <div class="manufacturing-item">
-                    <h4>Planification de production</h4>
+                <div class="feature-card">
+                    <h4>Production planning & scheduling</h4>
+                    <p>Optimize production schedules with AI-driven insights.</p>
                 </div>
-                <div class="manufacturing-item">
-                    <h4>Traçabilité et conformité</h4>
-                </div>
-                <div class="manufacturing-item">
-                    <h4>Portails clients/fournisseurs</h4>
-                </div>
-                <div class="manufacturing-item">
-                    <h4>Dashboards KPI d'usine</h4>
+                <div class="feature-card">
+                    <h4>Traceability & compliance</h4>
+                    <p>Complete traceability from raw materials to finished goods.</p>
                 </div>
             </div>
-
-            <div class="highlight-box">
-                <h3>Avantage Pinn<span style="color: var(--accent);">AI</span></h3>
-                <p>Contrairement aux firmes traditionnelles, on intègre l'<span style="color: var(--accent);">AI</span> dès le départ. Maintenance prédictive, optimisation automatique, insights en temps réel — sans surcoût.</p>
+            <div class="callout-box">
+                <h4>The Pinn<span style="color: var(--accent-cyan);">AI</span> advantage:</h4>
+                <p>Unlike traditional firms, we integrate AI from day one. Predictive maintenance, automatic optimization, real-time insights — at no extra cost.</p>
             </div>
         </div>
     </section>
 
-    <!-- AI & Innovation Section -->
-    <section id="ai-innovation">
+    <!-- AI Solutions -->
+    <section id="ai-solutions" class="section">
         <div class="container">
-            <h2>Intelligence artificielle appliquée</h2>
-            <p style="font-size: 1.125rem; text-align: center; max-width: 600px; margin: 0 auto 3rem;">L'<span style="color: var(--accent);">AI</span> n'est plus réservée aux géants tech. On la rend accessible à votre réalité.</p>
-            
-            <div class="ai-services">
-                <div class="ai-service">
-                    <div class="icon">💬</div>
-                    <div>
-                        <h4>Assistants <span style="color: var(--accent);">AI</span> métier</h4>
-                        <p>Chatbots spécialisés pour votre domaine</p>
-                    </div>
+            <div class="section-header">
+                <h2>AI that works for you</h2>
+                <p class="subtitle">Artificial intelligence isn't just for tech giants. We make it work for your reality.</p>
+            </div>
+            <div class="ai-features">
+                <div class="ai-card">
+                    <h4>AI Assistants</h4>
+                    <p>Custom chatbots trained on YOUR business data. Support, operations, documentation — handled intelligently.</p>
                 </div>
-                <div class="ai-service">
-                    <div class="icon">⚡</div>
-                    <div>
-                        <h4>Automatisation intelligente</h4>
-                        <p>Automatisation de processus avec <span style="color: var(--accent);">AI</span></p>
-                    </div>
+                <div class="ai-card">
+                    <h4>Process Automation</h4>
+                    <p>RPA + AI. Automate workflows with intelligent decision-making.</p>
                 </div>
-                <div class="ai-service">
-                    <div class="icon">📄</div>
-                    <div>
-                        <h4>Analyse de documents</h4>
-                        <p>Extraction de données intelligente</p>
-                    </div>
+                <div class="ai-card">
+                    <h4>Document Intelligence</h4>
+                    <p>Extract data from invoices, reports, plans automatically. OCR + AI.</p>
                 </div>
-                <div class="ai-service">
-                    <div class="icon">🎤</div>
-                    <div>
-                        <h4>Voice-to-data</h4>
-                        <p>Terrain → données structurées</p>
-                    </div>
+                <div class="ai-card">
+                    <h4>Voice-to-Data</h4>
+                    <p>Field recordings → structured data. Perfect for inspectors, engineers, field teams.</p>
                 </div>
-                <div class="ai-service">
-                    <div class="icon">👁️</div>
-                    <div>
-                        <h4>Computer vision industrielle</h4>
-                        <p>Analyse visuelle automatisée</p>
-                    </div>
+                <div class="ai-card">
+                    <h4>Predictive Maintenance</h4>
+                    <p>ML models that predict failures before they happen. Cut maintenance costs 30-50%.</p>
                 </div>
-                <div class="ai-service">
-                    <div class="icon">🔧</div>
-                    <div>
-                        <h4>Maintenance prédictive</h4>
-                        <p>Prévenir les pannes avant qu'elles arrivent</p>
-                    </div>
-                </div>
-                <div class="ai-service">
-                    <div class="icon">🔗</div>
-                    <div>
-                        <h4>Intégration <span style="color: var(--accent);">AI</span></h4>
-                        <p>Dans vos systèmes existants</p>
-                    </div>
+                <div class="ai-card">
+                    <h4>AI Agents</h4>
+                    <p>Autonomous AI agents that execute complex tasks: research, analysis, reporting, coordination.</p>
                 </div>
             </div>
-
-            <div class="highlight-box">
-                <h3>Produit: Contexo</h3>
-                <p>Notre <span style="color: var(--accent);">AI</span> Context Engine. Contexo structure le contexte de vos projets pour que votre équipe travaille plus vite et plus intelligemment.</p>
-                <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">En savoir plus sur Contexo</a>
+            <div class="product-teaser">
+                <h3>Introducing Contexo</h3>
+                <p>Our AI Context Engine. Contexo structures your project context so your team works faster and smarter.</p>
+                <a href="#pricing" class="btn">Learn more about Contexo →</a>
             </div>
         </div>
     </section>
 
-    <!-- Comment ça marche -->
-    <section>
+    <!-- How It Works -->
+    <section class="section">
         <div class="container">
-            <h2>Comment ça marche</h2>
+            <div class="section-header">
+                <h2>From idea to impact in weeks, not months.</h2>
+            </div>
             <div class="process-steps">
-                <div class="step">
-                    <div class="number">1</div>
-                    <h4>Audit</h4>
-                    <p>Analyse de vos besoins et défis actuels</p>
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">Discover</h4>
+                    <p class="step-duration">(1-2 weeks)</p>
+                    <p class="step-description">We meet your team, analyze your processes, identify opportunities.</p>
                 </div>
-                <div class="step">
-                    <div class="number">2</div>
-                    <h4>Conception</h4>
-                    <p>Design de la solution optimale avec <span style="color: var(--accent);">AI</span></p>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">Design</h4>
+                    <p class="step-duration">(2-3 weeks)</p>
+                    <p class="step-description">Architecture, prototypes, and a clear development plan.</p>
                 </div>
-                <div class="step">
-                    <div class="number">3</div>
-                    <h4>Développement</h4>
-                    <p>Création du logiciel sur mesure</p>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">Build</h4>
+                    <p class="step-duration">(4-12 weeks)</p>
+                    <p class="step-description">Agile sprints, bi-weekly demos, continuous adjustments.</p>
                 </div>
-                <div class="step">
-                    <div class="number">4</div>
-                    <h4>Livraison</h4>
-                    <p>Déploiement et formation de votre équipe</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Québec / Confiance -->
-    <section>
-        <div class="container">
-            <h2>100% québécois, confiance garantie</h2>
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <div class="icon">🛡️</div>
-                    <h4>Conformité Loi 25</h4>
-                    <p>Protection des données personnelles respectée</p>
-                </div>
-                <div class="trust-item">
-                    <div class="icon">🇨🇦</div>
-                    <h4>Hébergement Azure Canada</h4>
-                    <p>Vos données restent au Canada</p>
-                </div>
-                <div class="trust-item">
-                    <div class="icon">🇫🇷</div>
-                    <h4>Service en français</h4>
-                    <p>Communication claire et directe</p>
-                </div>
-                <div class="trust-item">
-                    <div class="icon">💰</div>
-                    <h4>Subventions disponibles</h4>
-                    <p>RS&DE, PARI-CNRC, CDAEIA — on vous guide</p>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4 class="step-title">Launch</h4>
+                    <p class="step-duration">(1-2 weeks)</p>
+                    <p class="step-description">Deployment, team training, and post-launch support.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section À propos -->
-    <section id="a-propos">
+    <!-- ERP & Integration -->
+    <section class="section">
         <div class="container">
-            <h2>L'équipe derrière Pinn<span style="color: var(--accent);">AI</span></h2>
-            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.125rem;">Deux entrepreneurs tech qui comprennent l'industrie.</p>
-            
-            <div class="team-profiles">
-                <div class="profile">
+            <div class="section-header">
+                <h2>Connect everything</h2>
+                <p class="subtitle">We integrate with your existing systems — ERP, CRM, databases, APIs.</p>
+            </div>
+            <div class="integration-logos">
+                <div class="logo-item">Odoo</div>
+                <div class="logo-item">SAP</div>
+                <div class="logo-item">NetSuite</div>
+                <div class="logo-item">Azure</div>
+                <div class="logo-item">Salesforce</div>
+                <div class="logo-item">Custom APIs</div>
+            </div>
+            <div class="ai-features">
+                <div class="feature-card">
+                    <h4>ERP implementation (Odoo specialist)</h4>
+                    <p>Full ERP deployment and customization for growing businesses.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Cloud migration (Azure Canada)</h4>
+                    <p>Secure cloud migration with Canadian data residency.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>API development</h4>
+                    <p>Custom APIs and integrations between existing systems.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Data pipelines & engineering</h4>
+                    <p>Robust data infrastructure for analytics and AI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quebec Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Proudly Quebec. Globally ready.</h2>
+            </div>
+            <div class="trust-cards">
+                <div class="trust-card">
+                    <div class="trust-icon">🛡️</div>
+                    <h4>Loi 25 Compliant</h4>
+                    <p>Full compliance with Quebec's data privacy law.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">🇨🇦</div>
+                    <h4>Azure Canada Hosted</h4>
+                    <p>Your data stays in Canada. Period.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">🇫🇷</div>
+                    <h4>Bilingual Service</h4>
+                    <p>We work in French and English.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">💰</div>
+                    <h4>Grant Guidance</h4>
+                    <p>We help you access RS&DE, NRC-IRAP, and CDAEIA credits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Team -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The team behind Pinn<span style="color: var(--accent-cyan);">AI</span></h2>
+                <p class="subtitle">Two tech entrepreneurs who understand industry.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
                     <h4>Benoit</h4>
-                    <div class="role">Co-fondateur | <span style="color: var(--accent);">AI</span> & Sécurité Machine</div>
-                    <p>Ex-DVOLU. Expert en automatisation industrielle et intelligence artificielle appliquée.</p>
+                    <p class="team-role">Co-founder | AI & Machine Safety</p>
+                    <p>Former DVOLU. Expert in industrial automation and applied artificial intelligence.</p>
                 </div>
-                <div class="profile">
+                <div class="team-card">
                     <h4>Jérémy</h4>
-                    <div class="role">Co-fondateur | ERP & Infrastructure</div>
-                    <p>Expert Odoo, Azure, intégration de systèmes industriels. Clients actifs en manufacturier.</p>
+                    <p class="team-role">Co-founder | ERP & Infrastructure</p>
+                    <p>Odoo & Azure expert. Active manufacturing clients. Systems integration specialist.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section>
+    <section id="pricing" class="section">
         <div class="container">
-            <h2>Tarification indicative</h2>
+            <div class="section-header">
+                <h2>Transparent pricing</h2>
+                <p class="subtitle">No surprises. Clear pricing from the start.</p>
+            </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Audit & Stratégie</h3>
-                    <div class="price">À partir de 5 000$</div>
-                    <p>Audit <span style="color: var(--accent);">AI</span>, roadmap, identification d'opportunités</p>
+                    <h3 class="pricing-title">Audit & Strategy</h3>
+                    <div class="pricing-amount">From $5,000</div>
+                    <p class="pricing-description">AI readiness audit, opportunity mapping, transformation roadmap.</p>
+                    <a href="#contact" class="btn btn-primary">Book an audit →</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>Projet Sur Mesure</h3>
-                    <div class="price">15K$ - 150K$</div>
-                    <p>Application métier, intégration, déploiement</p>
+                    <h3 class="pricing-title">Custom Project</h3>
+                    <div class="pricing-amount">$15K – $150K</div>
+                    <p class="pricing-description">Custom application, integration, deployment, training, 3-month support.</p>
+                    <a href="#contact" class="btn btn-primary">Estimate my project →</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>SaaS Contexo</h3>
-                    <div class="price">149$/mois</div>
-                    <p><span style="color: var(--accent);">AI</span> Context Engine, support inclus</p>
+                    <h3 class="pricing-title">Contexo SaaS</h3>
+                    <div class="pricing-amount">$149/mo</div>
+                    <p class="pricing-description">AI Context Engine, unlimited projects, team collaboration, support included.</p>
+                    <a href="#contact" class="btn btn-primary">Try free for 14 days →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Final -->
-    <section id="contact">
+    <!-- Final CTA -->
+    <section id="contact" class="final-cta">
         <div class="container">
-            <div class="final-cta">
-                <h2>Prêt à transformer votre entreprise?</h2>
-                <p>Première consultation gratuite. Réponse garantie en 24h.</p>
-                <a href="mailto:info@pinnai.com" class="btn btn-primary">Réserver un appel</a>
-                <div class="contact-info">info@pinnai.com</div>
+            <h2>Ready to build something great?</h2>
+            <p class="subtitle">Free initial consultation. Response guaranteed in 24 hours.</p>
+            <div class="cta-contact">
+                <a href="#contact" class="btn btn-primary">Book a call →</a>
+                <a href="mailto:info@pinnai.com" class="contact-email">info@pinnai.com</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <div class="footer-logo">pinn<span class="ai">AI</span></div>
-                    <div class="footer-tagline">IA accessible, logiciel parfait</div>
+                    <div class="logo">pinn<span class="ai">AI</span></div>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">Custom software, powered by AI.</p>
                 </div>
-                <ul class="footer-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#manufacturier">Manufacturier</a></li>
-                    <li><a href="#ai-innovation"><span style="color: var(--accent);">AI</span></a></li>
-                    <li><a href="#a-propos">À propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <div class="footer-links">
+                    <a href="#services">Services</a>
+                    <a href="#manufacturing">Manufacturing</a>
+                    <a href="#ai-solutions">AI Solutions</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
             </div>
             <div class="footer-bottom">
-                <div>© 2026 Pinn<span style="color: var(--accent);">AI</span> inc. — Québec, Canada</div>
-                <div>Conformité Loi 25 | Politique de confidentialité</div>
+                <p>© 2026 PinnAI inc. — Quebec, Canada</p>
+                <div class="footer-links">
+                    <a href="#">Loi 25 Compliant</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Sticky navigation with background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
