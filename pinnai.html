@@ -614,7 +614,9 @@
             }
             
             .mobile-nav {
-                display: block;
+                display: flex;
+                gap: 1rem;
+                align-items: center;
             }
             
             .container {
@@ -685,6 +687,35 @@
             }
         }
 
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.06);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 0.35rem 0.75rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+
+        /* Language content visibility */
+        .lang-fr {
+            display: none;
+        }
+
         /* Smooth animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -702,15 +733,22 @@
         <div class="nav-container">
             <div class="logo">pinn<span class="ai">AI</span></div>
             <ul class="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#manufacturing">Manufacturing</a></li>
-                <li><a href="#ai-solutions">AI Solutions</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#" class="btn btn-ghost">FR</a></li>
-                <li><a href="#contact" class="btn btn-primary">Let's Talk →</a></li>
+                <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+                <li><a href="#manufacturing" data-en="Manufacturing" data-fr="Manufacturier">Manufacturing</a></li>
+                <li><a href="#ai-solutions" data-en="AI Solutions" data-fr="Solutions IA">AI Solutions</a></li>
+                <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
+                <li class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+                </li>
+                <li><a href="#contact" class="btn btn-primary" data-en="Let's Talk →" data-fr="Parlons-en →">Let's Talk →</a></li>
             </ul>
             <div class="mobile-nav">
-                <a href="#contact" class="btn btn-primary">Let's Talk</a>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+                </div>
+                <a href="#contact" class="btn btn-primary" data-en="Let's Talk" data-fr="Parlons-en">Let's Talk</a>
             </div>
         </div>
     </nav>
@@ -718,24 +756,26 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Custom software, powered by AI.</h1>
-            <p class="subtitle">AI has made custom software 3-5x faster to build and dramatically more affordable. We build exactly what your business needs — no compromises, no off-the-shelf limitations.</p>
+            <h1 data-en="Custom software, powered by AI." data-fr="Software sur mesure, propulsé par l'IA.">Custom software, powered by AI.</h1>
+            <p style="font-size:1.4rem;color:var(--accent-cyan);font-weight:500;margin-bottom:1.5rem;font-style:italic;" data-en="If you can imagine it, we can build it." data-fr="Si vous pouvez l'imaginer, on peut le bâtir.">If you can imagine it, we can build it.</p>
+            <p class="subtitle lang-en">AI has made custom software 3-5x faster to build and dramatically more affordable. We build exactly what your business needs — no compromises, no off-the-shelf limitations.</p>
+            <p class="subtitle lang-fr">L'IA rend le développement de logiciels sur mesure 3 à 5 fois plus rapide et beaucoup plus abordable. On bâtit exactement ce dont votre entreprise a besoin — sans compromis, sans les limites du prêt-à-porter.</p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Start a project</a>
-                <a href="#services" class="btn btn-outline">See our services</a>
+                <a href="#contact" class="btn btn-primary" data-en="Start a project" data-fr="Démarrer un projet">Start a project</a>
+                <a href="#services" class="btn btn-outline" data-en="See our services" data-fr="Voir nos services">See our services</a>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">35+ services</div>
-                    <div class="stat-label">End-to-end solutions</div>
+                    <div class="stat-number" data-en="35+ services" data-fr="35+ services">35+ services</div>
+                    <div class="stat-label" data-en="End-to-end solutions" data-fr="Solutions complètes">End-to-end solutions</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">AI-first approach</div>
-                    <div class="stat-label">Built-in intelligence</div>
+                    <div class="stat-number" data-en="AI-first approach" data-fr="Approche IA d'abord">AI-first approach</div>
+                    <div class="stat-label" data-en="Built-in intelligence" data-fr="Intelligence intégrée">Built-in intelligence</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">Quebec to global</div>
-                    <div class="stat-label">Local expertise, world-class delivery</div>
+                    <div class="stat-number" data-en="Quebec to global" data-fr="Du Québec au monde">Quebec to global</div>
+                    <div class="stat-label" data-en="Local expertise, world-class delivery" data-fr="Expertise locale, livraison internationale">Local expertise, world-class delivery</div>
                 </div>
             </div>
         </div>
@@ -745,54 +785,55 @@
     <section id="services" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>What we do</h2>
-                <p class="subtitle">Three pillars. One mission: make your business smarter.</p>
+                <h2 data-en="What we do" data-fr="Ce qu'on fait">What we do</h2>
+                <p class="subtitle" data-en="Three pillars. One mission: make your business smarter." data-fr="Trois piliers. Une mission : rendre votre entreprise plus intelligente.">Three pillars. One mission: make your business smarter.</p>
             </div>
             <div class="services-grid">
                 <div class="service-pillar">
                     <div class="service-icon">🏭</div>
-                    <h3 class="service-title">Custom Manufacturing Software</h3>
-                    <p class="service-description">Purpose-built applications for industrial operations.</p>
+                    <h3 class="service-title" data-en="Custom Manufacturing Software" data-fr="Software manufacturier sur mesure">Custom Manufacturing Software</h3>
+                    <p class="service-description" data-en="Purpose-built applications for industrial operations." data-fr="Applications conçues pour vos opérations industrielles.">Purpose-built applications for industrial operations.</p>
                     <ul class="service-features">
-                        <li>Production tracking</li>
-                        <li>CMMS/Maintenance</li>
-                        <li>Quality control</li>
-                        <li>Inventory management</li>
-                        <li>Production planning (MES)</li>
-                        <li>Traceability</li>
-                        <li>Client/supplier portals</li>
-                        <li>Factory KPI dashboards</li>
-                        <li>Project management</li>
-                        <li>Time tracking</li>
-                        <li>Mobile field apps</li>
+                        <li data-en="Production tracking" data-fr="Suivi de production">Production tracking</li>
+                        <li data-en="CMMS/Maintenance" data-fr="GMAO/Maintenance">CMMS/Maintenance</li>
+                        <li data-en="Quality control" data-fr="Contrôle qualité">Quality control</li>
+                        <li data-en="Inventory management" data-fr="Gestion d'inventaire">Inventory management</li>
+                        <li data-en="Production planning (MES)" data-fr="Planification de production (MES)">Production planning (MES)</li>
+                        <li data-en="Traceability" data-fr="Traçabilité">Traceability</li>
+                        <li data-en="Client/supplier portals" data-fr="Portails clients/fournisseurs">Client/supplier portals</li>
+                        <li data-en="Factory KPI dashboards" data-fr="Tableaux de bord KPI usine">Factory KPI dashboards</li>
+                        <li data-en="Project management" data-fr="Gestion de projets">Project management</li>
+                        <li data-en="Time tracking" data-fr="Suivi du temps">Time tracking</li>
+                        <li data-en="Mobile field apps" data-fr="Apps mobiles terrain">Mobile field apps</li>
                     </ul>
                 </div>
                 <div class="service-pillar">
                     <div class="service-icon">🤖</div>
-                    <h3 class="service-title">AI-Powered Solutions</h3>
-                    <p class="service-description">Artificial intelligence that solves real business problems.</p>
+                    <h3 class="service-title" data-en="AI-Powered Solutions" data-fr="Solutions propulsées par l'IA">AI-Powered Solutions</h3>
+                    <p class="service-description" data-en="Artificial intelligence that solves real business problems." data-fr="L'intelligence artificielle qui résout vos vrais problèmes d'affaires.">Artificial intelligence that solves real business problems.</p>
                     <ul class="service-features">
-                        <li>Custom AI assistants</li>
-                        <li>Intelligent process automation</li>
-                        <li>Document analysis & extraction</li>
-                        <li>Voice-to-data (field → structured data)</li>
-                        <li>Predictive maintenance</li>
-                        <li>RAG / AI Knowledge Base</li>
-                        <li>Multi-agent AI systems</li>
-                        <li>MLOps & model management</li>
+                        <li data-en="Custom AI assistants" data-fr="Assistants IA personnalisés">Custom AI assistants</li>
+                        <li data-en="Intelligent process automation" data-fr="Automatisation intelligente des processus">Intelligent process automation</li>
+                        <li data-en="Document analysis & extraction" data-fr="Analyse et extraction de documents">Document analysis & extraction</li>
+                        <li data-en="Voice-to-data (field → structured data)" data-fr="Voix vers données (terrain → données structurées)">Voice-to-data (field → structured data)</li>
+                        <li data-en="Predictive maintenance" data-fr="Maintenance prédictive">Predictive maintenance</li>
+                        <li data-en="RAG / AI Knowledge Base" data-fr="RAG / Base de connaissances IA">RAG / AI Knowledge Base</li>
+                        <li data-en="Multi-agent AI systems" data-fr="Systèmes IA multi-agents">Multi-agent AI systems</li>
+                        <li data-en="MLOps & model management" data-fr="MLOps et gestion de modèles">MLOps & model management</li>
                     </ul>
                 </div>
                 <div class="service-pillar">
                     <div class="service-icon">📊</div>
-                    <h3 class="service-title">Consulting & Strategy</h3>
-                    <p class="service-description">Not sure where to start? That's exactly where we come in. From "I think we need AI" to a working prototype in weeks.</p>
+                    <h3 class="service-title" data-en="Consulting & Strategy" data-fr="Consultation et stratégie">Consulting & Strategy</h3>
+                    <p class="service-description lang-en">Not sure where to start? That's exactly where we come in. From "I think we need AI" to a working prototype in weeks.</p>
+                    <p class="service-description lang-fr">Pas sûr par où commencer? C'est exactement là qu'on entre en jeu. De "je pense qu'on a besoin d'IA" à un prototype fonctionnel en quelques semaines.</p>
                     <ul class="service-features">
-                        <li>AI Readiness Audit — find out what's possible</li>
-                        <li>Digital transformation roadmap — clear priorities, clear budget</li>
-                        <li>AI training for your team — hands-on, not theory</li>
-                        <li>AI Sprint — working prototype in 2-4 weeks</li>
-                        <li>Change management — make adoption stick</li>
-                        <li>Architecture design — built to scale, not to break</li>
+                        <li data-en="AI Readiness Audit — find out what's possible" data-fr="Audit IA — découvrez ce qui est possible">AI Readiness Audit — find out what's possible</li>
+                        <li data-en="Digital transformation roadmap — clear priorities, clear budget" data-fr="Feuille de route transformation numérique — priorités claires, budget clair">Digital transformation roadmap — clear priorities, clear budget</li>
+                        <li data-en="AI training for your team — hands-on, not theory" data-fr="Formation IA pour votre équipe — pratique, pas théorie">AI training for your team — hands-on, not theory</li>
+                        <li data-en="AI Sprint — working prototype in 2-4 weeks" data-fr="Sprint IA — prototype fonctionnel en 2-4 semaines">AI Sprint — working prototype in 2-4 weeks</li>
+                        <li data-en="Change management — make adoption stick" data-fr="Gestion du changement — assurer l'adoption">Change management — make adoption stick</li>
+                        <li data-en="Architecture design — built to scale, not to break" data-fr="Conception d'architecture — bâti pour grandir, pas pour casser">Architecture design — built to scale, not to break</li>
                     </ul>
                 </div>
             </div>
@@ -803,44 +844,64 @@
     <section id="manufacturing" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Built for manufacturers</h2>
-                <p class="subtitle">93% of Quebec's 14,000+ manufacturers are SMEs. We build the tools they've been missing.</p>
+                <h2 data-en="Built for manufacturers" data-fr="Conçu pour les manufacturiers">Built for manufacturers</h2>
+                <p class="subtitle" data-en="93% of Quebec's 14,000+ manufacturers are SMEs. We build the tools they've been missing." data-fr="93% des 14 000+ manufacturiers du Québec sont des PME. On bâtit les outils qui leur manquent.">93% of Quebec's 14,000+ manufacturers are SMEs. We build the tools they've been missing.</p>
             </div>
             <div class="manufacturing-cards">
                 <div class="feature-card">
-                    <h4>Real-time production monitoring</h4>
-                    <p><strong>You're making decisions based on yesterday's data.</strong> Your floor managers are walking around with clipboards. Meanwhile, a machine has been running at 60% efficiency for 3 hours and nobody noticed.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Live OEE, cycle times, and downtime across every line — on a screen, on your phone, everywhere. Alerts hit before the problem costs you money. Plugs into your existing PLCs and sensors. No rip-and-replace.</p>
+                    <h4 data-en="Real-time production monitoring" data-fr="Suivi de production en temps réel">Real-time production monitoring</h4>
+                    <p class="lang-en"><strong>You're making decisions based on yesterday's data.</strong> Your floor managers are walking around with clipboards. Meanwhile, a machine has been running at 60% efficiency for 3 hours and nobody noticed.</p>
+                    <p class="lang-fr"><strong>Vous prenez des décisions basées sur les données d'hier.</strong> Vos contremaîtres se promènent avec des clipboards. Pendant ce temps, une machine roule à 60% depuis 3 heures et personne l'a remarqué.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Live OEE, cycle times, and downtime across every line — on a screen, on your phone, everywhere. Alerts hit before the problem costs you money. Plugs into your existing PLCs and sensors. No rip-and-replace.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : OEE, temps de cycle et arrêts en direct — sur un écran, sur votre cell, partout. Les alertes arrivent avant que le problème vous coûte de l'argent. Se branche sur vos automates existants. Pas besoin de tout changer.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Smart maintenance (CMMS + AI)</h4>
-                    <p><strong>Your maintenance is reactive.</strong> Something breaks, you scramble. Techs waste time on paperwork. Parts are either overstocked or missing when you need them most.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Preventive maintenance schedules itself. Work orders flow automatically to the right technician. Parts inventory tracks itself. And AI learns your machine patterns to predict failures weeks before they happen.</p>
+                    <h4 data-en="Smart maintenance (CMMS + AI)" data-fr="Maintenance intelligente (GMAO + IA)">Smart maintenance (CMMS + AI)</h4>
+                    <p class="lang-en"><strong>Your maintenance is reactive.</strong> Something breaks, you scramble. Techs waste time on paperwork. Parts are either overstocked or missing when you need them most.</p>
+                    <p class="lang-fr"><strong>Votre maintenance est réactive.</strong> Quelque chose brise, vous courrez. Les techs perdent du temps sur la paperasse. Les pièces sont soit en trop, soit manquantes quand vous en avez besoin.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Preventive maintenance schedules itself. Work orders flow automatically to the right technician. Parts inventory tracks itself. And AI learns your machine patterns to predict failures weeks before they happen.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : La maintenance préventive se planifie toute seule. Les bons de travail vont automatiquement au bon technicien. L'inventaire de pièces se gère lui-même. Et l'IA apprend les patterns de vos machines pour prédire les pannes des semaines à l'avance.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Automated quality control</h4>
-                    <p><strong>Paper inspection forms are slowing you down.</strong> Data entry errors, lost reports, clients asking for documentation you can't find fast enough. Your quality process works, but it doesn't scale.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Digital inspection with photo capture right on the floor. SPC charts update in real time. Non-conformances trigger automatic workflows. Client quality reports generate themselves.</p>
+                    <h4 data-en="Automated quality control" data-fr="Contrôle qualité automatisé">Automated quality control</h4>
+                    <p class="lang-en"><strong>Paper inspection forms are slowing you down.</strong> Data entry errors, lost reports, clients asking for documentation you can't find fast enough. Your quality process works, but it doesn't scale.</p>
+                    <p class="lang-fr"><strong>Les formulaires d'inspection en papier vous ralentissent.</strong> Erreurs de saisie, rapports perdus, clients qui demandent de la documentation que vous trouvez pas assez vite.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Digital inspection with photo capture right on the floor. SPC charts update in real time. Non-conformances trigger automatic workflows. Client quality reports generate themselves.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : Inspection numérique avec capture photo directement sur le plancher. Cartes SPC en temps réel. Les non-conformités déclenchent des workflows automatiques. Les rapports qualité pour vos clients se génèrent tout seuls.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Intelligent inventory</h4>
-                    <p><strong>You've stopped production because a $12 part wasn't in stock.</strong> Or worse — you're sitting on $200K of inventory that won't move for 6 months. Either way, it's costing you.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Know exactly what you have, where it is, when to reorder. AI analyzes your actual consumption patterns and optimizes reorder points automatically. No more gut-feel purchasing.</p>
+                    <h4 data-en="Intelligent inventory" data-fr="Inventaire intelligent">Intelligent inventory</h4>
+                    <p class="lang-en"><strong>You've stopped production because a $12 part wasn't in stock.</strong> Or worse — you're sitting on $200K of inventory that won't move for 6 months. Either way, it's costing you.</p>
+                    <p class="lang-fr"><strong>Vous avez déjà arrêté la production parce qu'une pièce de 12$ était pas en stock.</strong> Ou pire — vous avez 200K$ d'inventaire qui bougera pas pendant 6 mois.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Know exactly what you have, where it is, when to reorder. AI analyzes your actual consumption patterns and optimizes reorder points automatically. No more gut-feel purchasing.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : Sachez exactement ce que vous avez, où c'est, quand recommander. L'IA analyse vos vrais patterns de consommation et optimise les points de commande automatiquement.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Production planning</h4>
-                    <p><strong>Your planner is a hero — and that's the problem.</strong> Everything lives in their head (or a spreadsheet). When they're sick, the floor grinds. When a rush order comes in, it's chaos.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Visual scheduling that anyone can read. Capacity planning that accounts for reality. Order tracking from raw material to shipping. Your delivery dates? You'll actually trust them.</p>
+                    <h4 data-en="Production planning" data-fr="Planification de production">Production planning</h4>
+                    <p class="lang-en"><strong>Your planner is a hero — and that's the problem.</strong> Everything lives in their head (or a spreadsheet). When they're sick, the floor grinds. When a rush order comes in, it's chaos.</p>
+                    <p class="lang-fr"><strong>Votre planificateur est un héros — et c'est ça le problème.</strong> Tout vit dans sa tête (ou un Excel). Quand il est malade, le plancher bloque.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Visual scheduling that anyone can read. Capacity planning that accounts for reality. Order tracking from raw material to shipping. Your delivery dates? You'll actually trust them.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : Cédule visuelle que tout le monde peut lire. Planification de capacité qui tient compte de la réalité. Suivi des commandes du matériel brut au shipping.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Traceability & compliance</h4>
-                    <p><strong>An auditor shows up tomorrow. Are you ready?</strong> Can you trace lot #4582 back to every raw material, every machine, every operator that touched it? In under 5 minutes?</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Full lot-by-lot traceability from supplier to customer. Every step documented automatically. HACCP, ISO, industry-specific compliance — handled. Audits go from stressful to routine.</p>
+                    <h4 data-en="Traceability & compliance" data-fr="Traçabilité et conformité">Traceability & compliance</h4>
+                    <p class="lang-en"><strong>An auditor shows up tomorrow. Are you ready?</strong> Can you trace lot #4582 back to every raw material, every machine, every operator that touched it? In under 5 minutes?</p>
+                    <p class="lang-fr"><strong>Un auditeur arrive demain. Êtes-vous prêt?</strong> Pouvez-vous retracer le lot #4582 jusqu'à chaque matière première, chaque machine, chaque opérateur?</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Full lot-by-lot traceability from supplier to customer. Every step documented automatically. HACCP, ISO, industry-specific compliance — handled. Audits go from stressful to routine.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : Traçabilité lot par lot du fournisseur au client. Chaque étape documentée automatiquement. HACCP, ISO — géré. Les audits passent de stressants à routiniers.</p>
+                </div>
+                <div class="feature-card">
+                    <h4 data-en="Product Configurator & E-commerce" data-fr="Configurateur de produits et e-commerce">Product Configurator & E-commerce</h4>
+                    <p class="lang-en"><strong>Your customers call your sales rep to ask about options. They email back and forth for a week.</strong> By the time the order is placed, everyone's frustrated and you've lost 3 other leads who didn't want to wait.</p>
+                    <p class="lang-fr"><strong>Vos clients appellent votre représentant pour connaître les options. Ils s'échangent des emails pendant une semaine.</strong> Le temps que la commande soit placée, tout le monde est frustré et vous avez perdu 3 autres leads qui voulaient pas attendre.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">With PinnAI: Your customers configure their product directly on your website. For example — a furniture manufacturer lets clients pick their sofa model, choose the fabric, select the legs, adjust dimensions, add options — and see the price update in real-time. The order goes straight to production. No back-and-forth. Works for any manufacturer with configurable products: furniture, cabinetry, industrial equipment, custom packaging, and more.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Avec PinnAI : Vos clients configurent leur produit directement sur votre site web. Par exemple — un fabricant de meubles permet à ses clients de choisir leur modèle de sofa, sélectionner le tissu, les pattes, ajuster les dimensions, ajouter des options — et voir le prix se mettre à jour en temps réel. La commande part directement en production. Pas d'allers-retours. Fonctionne pour tout manufacturier avec des produits configurables : meubles, ébénisterie, équipements industriels, emballage sur mesure, et plus encore.</p>
                 </div>
             </div>
             <div class="callout-box">
-                <h4>The Pinn<span style="color: var(--accent-cyan);">AI</span> advantage:</h4>
-                <p>Unlike traditional firms, we integrate AI from day one. Predictive maintenance, automatic optimization, real-time insights — at no extra cost.</p>
+                <h4 data-en="The PinnAI advantage:" data-fr="L'avantage PinnAI :">The Pinn<span style="color: var(--accent-cyan);">AI</span> advantage:</h4>
+                <p class="lang-en">Unlike traditional firms, we integrate AI from day one. Predictive maintenance, automatic optimization, real-time insights — at no extra cost.</p>
+                <p class="lang-fr">Contrairement aux firmes traditionnelles, on intègre l'IA dès le départ. Maintenance prédictive, optimisation automatique, insights en temps réel — sans surcoût.</p>
             </div>
         </div>
     </section>
@@ -849,45 +910,59 @@
     <section id="ai-solutions" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>AI that works for you</h2>
-                <p class="subtitle">Artificial intelligence isn't just for tech giants. We make it work for your reality.</p>
+                <h2 data-en="AI that works for you" data-fr="L'IA qui travaille pour vous">AI that works for you</h2>
+                <p class="subtitle" data-en="Artificial intelligence isn't just for tech giants. We make it work for your reality." data-fr="L'intelligence artificielle n'est plus réservée aux géants tech. On la rend accessible à votre réalité.">Artificial intelligence isn't just for tech giants. We make it work for your reality.</p>
             </div>
             <div class="ai-features">
                 <div class="ai-card">
-                    <h4>AI Assistants</h4>
-                    <p><strong>Your team spends 2 hours a day searching for information.</strong> Digging through shared drives, emailing colleagues, flipping through binders. The answer exists — they just can't find it fast enough.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Imagine a chatbot that knows your entire product catalog, maintenance history, and every technical document you've ever created. Your team asks in plain language — "What's the torque spec for valve model X?" — and gets the answer instantly. Trained on YOUR data. Accurate. Available 24/7.</p>
+                    <h4 data-en="AI Assistants" data-fr="Assistants IA">AI Assistants</h4>
+                    <p class="lang-en"><strong>Your team spends 2 hours a day searching for information.</strong> Digging through shared drives, emailing colleagues, flipping through binders. The answer exists — they just can't find it fast enough.</p>
+                    <p class="lang-fr"><strong>Votre équipe passe 2 heures par jour à chercher de l'information.</strong> Fouiller dans les drives partagés, envoyer des emails, feuilleter des cartables.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Imagine a chatbot that knows your entire product catalog, maintenance history, and every technical document you've ever created. Your team asks in plain language — "What's the torque spec for valve model X?" — and gets the answer instantly. Trained on YOUR data. Accurate. Available 24/7.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Imaginez un chatbot qui connaît tout votre catalogue de produits, votre historique de maintenance, chaque document technique. Votre équipe pose sa question — "C'est quoi le torque spec pour la valve modèle X?" — et obtient la réponse instantanément. Entraîné sur VOS données. Précis. Disponible 24/7.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Process Automation</h4>
-                    <p><strong>Your AP team processes 50 invoices a day by hand.</strong> Copy-paste from emails to the ERP. Match POs. Chase approvals. It's tedious, error-prone, and costs you real money in labor.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">What if that 2-hour daily grind took 10 minutes? AI reads invoices, matches them to purchase orders, routes approvals, and enters everything into your system. Same for onboarding, expense reports, compliance checks — any repetitive process with decisions. Automated intelligently.</p>
+                    <h4 data-en="Process Automation" data-fr="Automatisation de processus">Process Automation</h4>
+                    <p class="lang-en"><strong>Your AP team processes 50 invoices a day by hand.</strong> Copy-paste from emails to the ERP. Match POs. Chase approvals. It's tedious, error-prone, and costs you real money in labor.</p>
+                    <p class="lang-fr"><strong>Votre équipe aux comptes payables traite 50 factures par jour à la main.</strong> Copy-paste des emails vers l'ERP. Matcher les bons de commande. Courir après les approbations.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">What if that 2-hour daily grind took 10 minutes? AI reads invoices, matches them to purchase orders, routes approvals, and enters everything into your system. Same for onboarding, expense reports, compliance checks — any repetitive process with decisions. Automated intelligently.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Et si cette corvée de 2 heures prenait 10 minutes? L'IA lit les factures, les matche aux bons de commande, route les approbations, et entre tout dans votre système. Pareil pour l'onboarding, les notes de frais, les vérifications de conformité.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Document Intelligence</h4>
-                    <p><strong>You have 10 years of engineering drawings sitting in a filing cabinet.</strong> Inspection reports in PDF. Safety docs in Word. Technical specs in Excel. All valuable. All unsearchable.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">AI extracts the data from every document — drawings, reports, specs, contracts. Organizes it. Makes it searchable. Need to find every project where you used a specific material? 3 seconds. That filing cabinet just became your most valuable database.</p>
+                    <h4 data-en="Document Intelligence" data-fr="Intelligence documentaire">Document Intelligence</h4>
+                    <p class="lang-en"><strong>You have 10 years of engineering drawings sitting in a filing cabinet.</strong> Inspection reports in PDF. Safety docs in Word. Technical specs in Excel. All valuable. All unsearchable.</p>
+                    <p class="lang-fr"><strong>Vous avez 10 ans de dessins d'ingénierie dans un classeur.</strong> Des rapports d'inspection en PDF. Des specs techniques en Excel. Tout précieux. Tout impossible à chercher.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">AI extracts the data from every document — drawings, reports, specs, contracts. Organizes it. Makes it searchable. Need to find every project where you used a specific material? 3 seconds. That filing cabinet just became your most valuable database.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">L'IA extrait les données de chaque document — dessins, rapports, specs, contrats. Organise tout. Rend tout cherchable. Besoin de trouver chaque projet où vous avez utilisé un matériau spécifique? 3 secondes.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Voice-to-Data</h4>
-                    <p><strong>Your field tech finishes an inspection and now has to sit in the truck for 30 minutes filling out forms.</strong> Half the details get lost. Handwriting is illegible. The report arrives 3 days late.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Instead: they talk into their phone for 5 minutes. AI transcribes it, extracts every data point, fills out the inspection form, attaches the photos, flags issues, and sends the report — all before they start the truck. Field work stays in the field. Paperwork does itself.</p>
+                    <h4 data-en="Voice-to-Data" data-fr="Voix vers données">Voice-to-Data</h4>
+                    <p class="lang-en"><strong>Your field tech finishes an inspection and now has to sit in the truck for 30 minutes filling out forms.</strong> Half the details get lost. Handwriting is illegible. The report arrives 3 days late.</p>
+                    <p class="lang-fr"><strong>Votre technicien terrain finit une inspection et doit s'asseoir dans le truck 30 minutes pour remplir des formulaires.</strong> La moitié des détails se perdent.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Instead: they talk into their phone for 5 minutes. AI transcribes it, extracts every data point, fills out the inspection form, attaches the photos, flags issues, and sends the report — all before they start the truck. Field work stays in the field. Paperwork does itself.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">À la place : il parle dans son cell pendant 5 minutes. L'IA transcrit, extrait chaque donnée, remplit le formulaire d'inspection, attache les photos, flag les problèmes, et envoie le rapport — avant même qu'il démarre le truck.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Predictive Maintenance</h4>
-                    <p><strong>That CNC machine just went down unexpectedly. Again.</strong> The repair takes 6 hours. The parts are on backorder. You missed a delivery deadline. The cost? $15,000 in lost production — for a bearing that costs $200.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Your machines generate data 24/7 — vibration, temperature, pressure, current. AI watches all of it and tells you which machine needs attention BEFORE it breaks. "Replace bearing on Machine 7 within 2 weeks." That's the difference between a $200 planned repair and a $15,000 emergency. Reduce unplanned downtime by 30-50%.</p>
+                    <h4 data-en="Predictive Maintenance" data-fr="Maintenance prédictive">Predictive Maintenance</h4>
+                    <p class="lang-en"><strong>That CNC machine just went down unexpectedly. Again.</strong> The repair takes 6 hours. The parts are on backorder. You missed a delivery deadline. The cost? $15,000 in lost production — for a bearing that costs $200.</p>
+                    <p class="lang-fr"><strong>Cette CNC vient de tomber en panne. Encore.</strong> La réparation prend 6 heures. Les pièces sont en commande spéciale. Coût? 15 000$ en production perdue — pour un bearing qui coûte 200$.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Your machines generate data 24/7 — vibration, temperature, pressure, current. AI watches all of it and tells you which machine needs attention BEFORE it breaks. "Replace bearing on Machine 7 within 2 weeks." That's the difference between a $200 planned repair and a $15,000 emergency. Reduce unplanned downtime by 30-50%.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Vos machines génèrent des données 24/7 — vibration, température, pression. L'IA surveille tout et vous dit quelle machine a besoin d'attention AVANT qu'elle brise. C'est la différence entre une réparation planifiée de 200$ et une urgence de 15 000$.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>AI Agents</h4>
-                    <p><strong>Your managers spend half their day on tasks a machine could do better.</strong> Compiling reports, monitoring KPIs, checking inventory levels, following up on overdue items. Important work — but not the best use of their brain.</p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Deploy AI agents that work 24/7: monitoring your systems, spotting anomalies, generating daily reports, sending alerts when something needs attention. Think of them as tireless digital team members who never miss a detail, never take a sick day, and never forget to follow up.</p>
+                    <h4 data-en="AI Agents" data-fr="Agents IA">AI Agents</h4>
+                    <p class="lang-en"><strong>Your managers spend half their day on tasks a machine could do better.</strong> Compiling reports, monitoring KPIs, checking inventory levels, following up on overdue items. Important work — but not the best use of their brain.</p>
+                    <p class="lang-fr"><strong>Vos gestionnaires passent la moitié de leur journée sur des tâches qu'une machine ferait mieux.</strong> Compiler des rapports, surveiller des KPIs, vérifier les niveaux d'inventaire.</p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Deploy AI agents that work 24/7: monitoring your systems, spotting anomalies, generating daily reports, sending alerts when something needs attention. Think of them as tireless digital team members who never miss a detail, never take a sick day, and never forget to follow up.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Déployez des agents IA qui travaillent 24/7 : surveillance de vos systèmes, détection d'anomalies, génération de rapports quotidiens, alertes quand quelque chose demande attention. Des coéquipiers numériques infatigables.</p>
                 </div>
             </div>
             <div class="product-teaser">
-                <h3>Introducing Contexo</h3>
-                <p>Our AI Context Engine. Contexo structures your project context so your team works faster and smarter.</p>
-                <a href="#contact" class="btn">Learn more about Contexo →</a>
+                <h3 data-en="Contexo — Coming Soon" data-fr="Contexo — Bientôt disponible">Contexo — Coming Soon</h3>
+                <p class="lang-en">Our AI Context Engine. Capture your project context like never before — multiple capture methods, structured knowledge, universal distribution. Built for teams who move fast.</p>
+                <p class="lang-fr">Notre AI Context Engine. Capturez le contexte de vos projets comme jamais — multiples méthodes de capture, connaissances structurées, distribution universelle. Conçu pour les équipes qui bougent vite.</p>
+                <p style="margin-top:1rem;font-size:0.9rem;opacity:0.8;" data-en="🚧 Currently in development. Get early access." data-fr="🚧 Présentement en développement. Obtenez un accès anticipé.">🚧 Currently in development. Get early access.</p>
+                <a href="#contact" class="btn" data-en="Get early access →" data-fr="Obtenir un accès anticipé →">Get early access →</a>
             </div>
         </div>
     </section>
@@ -896,34 +971,44 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Solutions for your industry</h2>
-                <p class="subtitle">Every industry has unique challenges. Here's how PinnAI solves them.</p>
+                <h2 data-en="Solutions for your industry" data-fr="Des solutions pour votre industrie">Solutions for your industry</h2>
+                <p class="subtitle" data-en="Every industry has unique challenges. Here's how PinnAI solves them." data-fr="Chaque industrie a ses défis uniques. Voici comment PinnAI les résout.">Every industry has unique challenges. Here's how PinnAI solves them.</p>
             </div>
             <div class="ai-features">
                 <div class="ai-card">
-                    <h4>🔩 Metal Fabrication / Machining</h4>
-                    <p><strong>You quote jobs in hours, track them in spreadsheets, and hope the delivery date holds.</strong></p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">We build systems that track every job from quote to ship. Real-time machine utilization so you know which CNC is available. Tool life tracking that tells you when to change before the part is scrap. Quality inspection at each operation. And delivery date predictions your sales team can actually trust.</p>
+                    <h4 data-en="🔩 Metal Fabrication / Machining" data-fr="🔩 Fabrication métallique / Usinage">🔩 Metal Fabrication / Machining</h4>
+                    <p class="lang-en"><strong>You quote jobs in hours, track them in spreadsheets, and hope the delivery date holds.</strong></p>
+                    <p class="lang-fr"><strong>Vous soumissionnez en heures, trackez dans des spreadsheets, et espérez que la date de livraison tienne.</strong></p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">We build systems that track every job from quote to ship. Real-time machine utilization so you know which CNC is available. Tool life tracking that tells you when to change before the part is scrap. Quality inspection at each operation. And delivery date predictions your sales team can actually trust.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">On bâtit des systèmes qui suivent chaque job de la soumission au shipping. Utilisation machine en temps réel. Suivi de vie d'outil. Inspection qualité à chaque opération. Et des prédictions de livraison que votre équipe de ventes peut vraiment utiliser.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>🍔 Food & Beverage</h4>
-                    <p><strong>One recall can cost you your business. And your current traceability is a stack of paper logs.</strong></p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">HACCP compliance that runs itself. Lot traceability from every ingredient to every finished product — digitally, instantly. Temperature monitoring with alerts. Recall management in minutes, not days. Supplier quality tracking so you catch problems at receiving, not at the customer.</p>
+                    <h4 data-en="🍔 Food & Beverage" data-fr="🍔 Alimentation et boissons">🍔 Food & Beverage</h4>
+                    <p class="lang-en"><strong>One recall can cost you your business. And your current traceability is a stack of paper logs.</strong></p>
+                    <p class="lang-fr"><strong>Un rappel peut vous coûter votre entreprise. Et votre traçabilité actuelle c'est une pile de logs papier.</strong></p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">HACCP compliance that runs itself. Lot traceability from every ingredient to every finished product — digitally, instantly. Temperature monitoring with alerts. Recall management in minutes, not days. Supplier quality tracking so you catch problems at receiving, not at the customer.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Conformité HACCP automatisée. Traçabilité de chaque ingrédient au produit fini — numériquement, instantanément. Monitoring de température avec alertes. Gestion de rappels en minutes.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>🏗️ Construction / Engineering</h4>
-                    <p><strong>Your project updates are a weekly email from the site foreman. Your clients want real-time visibility. Your PMs are drowning in admin.</strong></p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Project progress visible to everyone who needs it — live. Field inspection apps that work offline. Resource planning that prevents double-booking. Subcontractor portals so they submit their own progress. Client reports that generate themselves. All the documents in one searchable place.</p>
+                    <h4 data-en="🏗️ Construction / Engineering" data-fr="🏗️ Construction / Ingénierie">🏗️ Construction / Engineering</h4>
+                    <p class="lang-en"><strong>Your project updates are a weekly email from the site foreman. Your clients want real-time visibility. Your PMs are drowning in admin.</strong></p>
+                    <p class="lang-fr"><strong>Vos mises à jour de projets c'est un email hebdomadaire du contremaître. Vos clients veulent de la visibilité en temps réel. Vos chargés de projet sont noyés dans l'admin.</strong></p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Project progress visible to everyone who needs it — live. Field inspection apps that work offline. Resource planning that prevents double-booking. Subcontractor portals so they submit their own progress. Client reports that generate themselves. All the documents in one searchable place.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Progrès de projet visible pour tous ceux qui en ont besoin — en direct. Apps d'inspection terrain qui marchent hors ligne. Portails sous-traitants. Rapports clients qui se génèrent tout seuls.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>📦 Distribution / Logistics</h4>
-                    <p><strong>You're shipping 500 orders a day and still using paper pick lists. Your warehouse team is fast — but they could be 3x faster with the right tools.</strong></p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Warehouse management that optimizes pick routes. Order tracking your customers can access themselves. Inventory forecasting that predicts what you'll need next month based on actual trends. Supplier scorecards that show who delivers on time and who doesn't. All in one place.</p>
+                    <h4 data-en="📦 Distribution / Logistics" data-fr="📦 Distribution / Logistique">📦 Distribution / Logistics</h4>
+                    <p class="lang-en"><strong>You're shipping 500 orders a day and still using paper pick lists. Your warehouse team is fast — but they could be 3x faster with the right tools.</strong></p>
+                    <p class="lang-fr"><strong>Vous shippez 500 commandes par jour avec des listes de cueillette en papier. Votre équipe d'entrepôt est rapide — mais pourrait être 3x plus rapide.</strong></p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Warehouse management that optimizes pick routes. Order tracking your customers can access themselves. Inventory forecasting that predicts what you'll need next month based on actual trends. Supplier scorecards that show who delivers on time and who doesn't. All in one place.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Gestion d'entrepôt qui optimise les routes de cueillette. Suivi de commandes accessible par vos clients. Prévision d'inventaire basée sur les vraies tendances.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>💼 Professional Services / Consulting</h4>
-                    <p><strong>Your consultants are billing $200/hour but spending 20% of their time on timesheets, reports, and admin. That's $40/hour of value walking out the door.</strong></p>
-                    <p style="color:var(--accent-cyan);margin-top:0.75rem;">Time tracking that's actually painless. Project management tailored to how YOU work. Client portals where they see progress without calling you. Reports that write themselves from your project data. A knowledge base that captures your team's expertise so it doesn't leave when they do.</p>
+                    <h4 data-en="💼 Professional Services / Consulting" data-fr="💼 Services professionnels / Consultation">💼 Professional Services / Consulting</h4>
+                    <p class="lang-en"><strong>Your consultants are billing $200/hour but spending 20% of their time on timesheets, reports, and admin. That's $40/hour of value walking out the door.</strong></p>
+                    <p class="lang-fr"><strong>Vos consultants facturent 200$/heure mais passent 20% de leur temps sur les timesheets, rapports et admin. C'est 40$/heure de valeur qui sort par la porte.</strong></p>
+                    <p class="lang-en" style="color:var(--accent-cyan);margin-top:0.75rem;">Time tracking that's actually painless. Project management tailored to how YOU work. Client portals where they see progress without calling you. Reports that write themselves from your project data. A knowledge base that captures your team's expertise so it doesn't leave when they do.</p>
+                    <p class="lang-fr" style="color:var(--accent-cyan);margin-top:0.75rem;">Suivi de temps indolore. Gestion de projets adaptée à VOTRE façon de travailler. Portails clients. Rapports qui s'écrivent tout seuls. Une base de connaissances qui capture l'expertise de votre équipe.</p>
                 </div>
             </div>
         </div>
@@ -933,32 +1018,32 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>From idea to impact in weeks, not months.</h2>
+                <h2 data-en="From idea to impact in weeks, not months." data-fr="De l'idée à l'impact en semaines, pas en mois.">From idea to impact in weeks, not months.</h2>
             </div>
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-number">1</div>
-                    <h4 class="step-title">Discover</h4>
-                    <p class="step-duration">(1-2 weeks)</p>
-                    <p class="step-description">We meet your team, analyze your processes, identify opportunities.</p>
+                    <h4 class="step-title" data-en="Discover" data-fr="Découverte">Discover</h4>
+                    <p class="step-duration" data-en="(1-2 weeks)" data-fr="(1-2 semaines)">(1-2 weeks)</p>
+                    <p class="step-description" data-en="We meet your team, analyze your processes, identify opportunities." data-fr="On rencontre votre équipe, on analyse vos processus, on identifie les opportunités.">We meet your team, analyze your processes, identify opportunities.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
-                    <h4 class="step-title">Design</h4>
-                    <p class="step-duration">(2-3 weeks)</p>
-                    <p class="step-description">Architecture, prototypes, and a clear development plan.</p>
+                    <h4 class="step-title" data-en="Design" data-fr="Conception">Design</h4>
+                    <p class="step-duration" data-en="(2-3 weeks)" data-fr="(2-3 semaines)">(2-3 weeks)</p>
+                    <p class="step-description" data-en="Architecture, prototypes, and a clear development plan." data-fr="Architecture, prototypes et un plan de développement clair.">Architecture, prototypes, and a clear development plan.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
-                    <h4 class="step-title">Build</h4>
-                    <p class="step-duration">(4-12 weeks)</p>
-                    <p class="step-description">Agile sprints, bi-weekly demos, continuous adjustments.</p>
+                    <h4 class="step-title" data-en="Build" data-fr="Développement">Build</h4>
+                    <p class="step-duration" data-en="(4-12 weeks)" data-fr="(4-12 semaines)">(4-12 weeks)</p>
+                    <p class="step-description" data-en="Agile sprints, bi-weekly demos, continuous adjustments." data-fr="Sprints agiles, démos aux 2 semaines, ajustements continus.">Agile sprints, bi-weekly demos, continuous adjustments.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
-                    <h4 class="step-title">Launch</h4>
-                    <p class="step-duration">(1-2 weeks)</p>
-                    <p class="step-description">Deployment, team training, and post-launch support.</p>
+                    <h4 class="step-title" data-en="Launch" data-fr="Livraison">Launch</h4>
+                    <p class="step-duration" data-en="(1-2 weeks)" data-fr="(1-2 semaines)">(1-2 weeks)</p>
+                    <p class="step-description" data-en="Deployment, team training, and post-launch support." data-fr="Déploiement, formation de vos équipes et support post-lancement.">Deployment, team training, and post-launch support.</p>
                 </div>
             </div>
         </div>
@@ -968,8 +1053,8 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Connect everything</h2>
-                <p class="subtitle">We integrate with your existing systems — ERP, CRM, databases, APIs.</p>
+                <h2 data-en="Connect everything" data-fr="Connectez tout">Connect everything</h2>
+                <p class="subtitle" data-en="We integrate with your existing systems — ERP, CRM, databases, APIs." data-fr="On s'intègre à vos systèmes existants — ERP, CRM, bases de données, APIs.">We integrate with your existing systems — ERP, CRM, databases, APIs.</p>
             </div>
             <div class="integration-logos">
                 <div class="logo-item">Odoo</div>
@@ -981,20 +1066,24 @@
             </div>
             <div class="ai-features">
                 <div class="feature-card">
-                    <h4>ERP implementation (Odoo specialist)</h4>
-                    <p><strong>You've outgrown QuickBooks but SAP would bankrupt you.</strong> Odoo gives you enterprise-grade ERP at SME prices. We deploy it, customize it to your workflows, migrate your data, and train your team. Not a generic install — your ERP, your way.</p>
+                    <h4 data-en="ERP implementation (Odoo specialist)" data-fr="Implémentation ERP (spécialiste Odoo)">ERP implementation (Odoo specialist)</h4>
+                    <p class="lang-en"><strong>You've outgrown QuickBooks but SAP would bankrupt you.</strong> Odoo gives you enterprise-grade ERP at SME prices. We deploy it, customize it to your workflows, migrate your data, and train your team. Not a generic install — your ERP, your way.</p>
+                    <p class="lang-fr"><strong>Vous avez dépassé QuickBooks mais SAP vous mettrait en faillite.</strong> Odoo vous donne un ERP de calibre entreprise au prix PME. On le déploie, le personnalise à vos workflows, migre vos données et forme votre équipe. Pas une installation générique — votre ERP, à votre façon.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Cloud migration (Azure Canada)</h4>
-                    <p><strong>Your server is in a closet and your IT guy is worried.</strong> We move your applications to Azure Canada — secure, scalable, backed up, and compliant. Your data stays in Canada. Your team accesses everything from anywhere. Sleep better at night.</p>
+                    <h4 data-en="Cloud migration (Azure Canada)" data-fr="Migration cloud (Azure Canada)">Cloud migration (Azure Canada)</h4>
+                    <p class="lang-en"><strong>Your server is in a closet and your IT guy is worried.</strong> We move your applications to Azure Canada — secure, scalable, backed up, and compliant. Your data stays in Canada. Your team accesses everything from anywhere. Sleep better at night.</p>
+                    <p class="lang-fr"><strong>Votre serveur est dans un placard et votre gars de TI est inquiet.</strong> On déménage vos applications sur Azure Canada — sécurisé, scalable, sauvegardé, conforme. Vos données restent au Canada. Votre équipe accède à tout de partout.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>API development & integration</h4>
-                    <p><strong>Your ERP doesn't talk to your CRM. Your CRM doesn't talk to your website. Your team copy-pastes between 4 systems.</strong> We build the bridges. Clean APIs that make your systems work together automatically. One source of truth instead of four.</p>
+                    <h4 data-en="API development & integration" data-fr="Développement et intégration d'APIs">API development & integration</h4>
+                    <p class="lang-en"><strong>Your ERP doesn't talk to your CRM. Your CRM doesn't talk to your website. Your team copy-pastes between 4 systems.</strong> We build the bridges. Clean APIs that make your systems work together automatically. One source of truth instead of four.</p>
+                    <p class="lang-fr"><strong>Votre ERP parle pas à votre CRM. Votre CRM parle pas à votre site web. Votre équipe fait du copy-paste entre 4 systèmes.</strong> On bâtit les ponts. Des APIs propres qui font communiquer vos systèmes automatiquement. Une source de vérité au lieu de quatre.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Data pipelines & engineering</h4>
-                    <p><strong>You have data everywhere but insights nowhere.</strong> We build the plumbing that collects, cleans, and organizes your data so AI can actually use it. From raw sensor readings to executive dashboards — the foundation everything else is built on.</p>
+                    <h4 data-en="Data pipelines & engineering" data-fr="Pipelines de données et ingénierie">Data pipelines & engineering</h4>
+                    <p class="lang-en"><strong>You have data everywhere but insights nowhere.</strong> We build the plumbing that collects, cleans, and organizes your data so AI can actually use it. From raw sensor readings to executive dashboards — the foundation everything else is built on.</p>
+                    <p class="lang-fr"><strong>Vous avez des données partout mais des insights nulle part.</strong> On bâtit la plomberie qui collecte, nettoie et organise vos données pour que l'IA puisse les utiliser. Des lectures de capteurs brutes aux dashboards exécutifs.</p>
                 </div>
             </div>
         </div>
@@ -1004,28 +1093,51 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Proudly Quebec. Globally ready.</h2>
+                <h2 data-en="Proudly Quebec. Globally ready." data-fr="Fièrement québécois. Prêt pour le monde.">Proudly Quebec. Globally ready.</h2>
             </div>
             <div class="trust-cards">
                 <div class="trust-card">
                     <div class="trust-icon">🛡️</div>
-                    <h4>Loi 25 Compliant</h4>
-                    <p>Full compliance with Quebec's data privacy law.</p>
+                    <h4 data-en="Loi 25 Compliant" data-fr="Conforme Loi 25">Loi 25 Compliant</h4>
+                    <p data-en="Full compliance with Quebec's data privacy law." data-fr="Conformité complète avec la loi sur la protection des données du Québec.">Full compliance with Quebec's data privacy law.</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">🇨🇦</div>
-                    <h4>Azure Canada Hosted</h4>
-                    <p>Your data stays in Canada. Period.</p>
+                    <h4 data-en="Azure Canada Hosted" data-fr="Hébergé Azure Canada">Azure Canada Hosted</h4>
+                    <p data-en="Your data stays in Canada. Period." data-fr="Vos données restent au Canada. Point.">Your data stays in Canada. Period.</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">🇫🇷</div>
-                    <h4>Bilingual Service</h4>
-                    <p>We work in French and English.</p>
+                    <h4 data-en="Bilingual Service" data-fr="Service bilingue">Bilingual Service</h4>
+                    <p data-en="We work in French and English." data-fr="On travaille en français et en anglais.">We work in French and English.</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">💰</div>
-                    <h4>Grant Guidance</h4>
-                    <p>We help you access RS&DE, NRC-IRAP, and CDAEIA credits.</p>
+                    <h4 data-en="Grant Guidance" data-fr="Accompagnement subventions">Grant Guidance</h4>
+                    <p data-en="We help you access RS&DE, NRC-IRAP, and CDAEIA credits." data-fr="On vous aide à accéder aux crédits RS&DE, PARI-CNRC et CDAEIA.">We help you access RS&DE, NRC-IRAP, and CDAEIA credits.</p>
+                </div>
+            </div>
+
+            <!-- FR-ONLY: Expanded Quebec content -->
+            <div class="lang-fr" style="margin-top:3rem;">
+                <div class="callout-box" style="margin-bottom:2rem;">
+                    <h4 style="color:var(--accent-cyan);margin-bottom:1rem;">🏛️ La Loi 25, on s'en occupe</h4>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem;">Depuis septembre 2023, la Loi 25 impose des obligations strictes aux entreprises québécoises en matière de protection des renseignements personnels. Ça inclut le consentement, la gestion des incidents, la nomination d'un responsable de la protection et la transparence avec vos clients.</p>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem;"><strong style="color:var(--text-primary);">Chez PinnAI, on intègre la conformité Loi 25 dès la conception de vos logiciels.</strong> Pas un ajout après coup — c'est dans l'ADN de chaque solution qu'on bâtit. Vos données et celles de vos clients sont protégées par défaut.</p>
+                    <p style="color:var(--accent-cyan);">✅ Politiques de confidentialité · ✅ Gestion du consentement · ✅ Registre d'incidents · ✅ Hébergement Azure Canada · ✅ Formation de vos équipes</p>
+                </div>
+                <div class="callout-box" style="margin-bottom:2rem;border-color:var(--accent-green);">
+                    <h4 style="color:var(--accent-green);margin-bottom:1rem;">💰 Subventions et crédits d'impôt — on vous guide</h4>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem;">Saviez-vous que vos projets de développement logiciel et d'intégration AI peuvent vous donner droit à des milliers de dollars en crédits d'impôt et subventions?</p>
+                    <p style="color:var(--text-secondary);margin-bottom:0.5rem;">📌 <strong style="color:var(--text-primary);">RS&DE</strong> — Récupérez jusqu'à 50% de vos dépenses en R&D (crédits d'impôt remboursables)</p>
+                    <p style="color:var(--text-secondary);margin-bottom:0.5rem;">📌 <strong style="color:var(--text-primary);">PARI-CNRC</strong> — Jusqu'à 75% de vos salaires R&D couverts (non remboursable)</p>
+                    <p style="color:var(--text-secondary);margin-bottom:0.5rem;">📌 <strong style="color:var(--text-primary);">CDAEIA</strong> — 30% de vos salaires de développement logiciel remboursés</p>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem;">📌 <strong style="color:var(--text-primary);">Scale AI</strong> — Subventions non remboursables pour projets IA</p>
+                    <p style="color:var(--accent-green);">On vous accompagne dans l'identification des programmes et la préparation des demandes. Vous développez, on s'occupe de maximiser vos retours.</p>
+                </div>
+                <div class="callout-box">
+                    <h4 style="color:var(--accent-cyan);margin-bottom:1rem;">🏠 Basés ici. Pour vous.</h4>
+                    <p style="color:var(--text-secondary);">On est pas une firme de consulting de Toronto qui sous-traite en Inde. On est deux entrepreneurs québécois qui connaissent le marché manufacturier QC, qui parlent votre langue, qui comprennent vos réalités. Quand vous nous appelez, c'est nous qui répondons. Vos données restent au Québec, pas chez Amazon aux États-Unis. Et on peut se rencontrer autour d'un café pour parler de votre projet.</p>
                 </div>
             </div>
         </div>
@@ -1035,19 +1147,19 @@
     <section id="about" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>The team behind Pinn<span style="color: var(--accent-cyan);">AI</span></h2>
-                <p class="subtitle">Two tech entrepreneurs who understand industry.</p>
+                <h2 data-en="The team behind PinnAI" data-fr="L'équipe derrière PinnAI">The team behind Pinn<span style="color: var(--accent-cyan);">AI</span></h2>
+                <p class="subtitle" data-en="Two tech entrepreneurs who understand industry." data-fr="Deux entrepreneurs tech qui comprennent l'industrie.">Two tech entrepreneurs who understand industry.</p>
             </div>
             <div class="team-grid">
                 <div class="team-card">
                     <h4>Benoit</h4>
-                    <p class="team-role">Co-founder | AI & Machine Safety</p>
-                    <p>Former DVOLU. Expert in industrial automation and applied artificial intelligence.</p>
+                    <p class="team-role" data-en="Co-founder | AI & Machine Safety" data-fr="Co-fondateur | IA et sécurité machine">Co-founder | AI & Machine Safety</p>
+                    <p data-en="Former DVOLU. Expert in industrial automation and applied artificial intelligence." data-fr="Ex-DVOLU. Expert en automatisation industrielle et intelligence artificielle appliquée.">Former DVOLU. Expert in industrial automation and applied artificial intelligence.</p>
                 </div>
                 <div class="team-card">
                     <h4>Jérémy</h4>
-                    <p class="team-role">Co-founder | ERP & Infrastructure</p>
-                    <p>Odoo & Azure expert. Active manufacturing clients. Systems integration specialist.</p>
+                    <p class="team-role" data-en="Co-founder | ERP & Infrastructure" data-fr="Co-fondateur | ERP et infrastructure">Co-founder | ERP & Infrastructure</p>
+                    <p data-en="Odoo & Azure expert. Active manufacturing clients. Systems integration specialist." data-fr="Expert Odoo et Azure. Clients actifs en manufacturier. Spécialiste intégration de systèmes.">Odoo & Azure expert. Active manufacturing clients. Systems integration specialist.</p>
                 </div>
             </div>
         </div>
@@ -1057,34 +1169,43 @@
     <section id="pricing" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Why custom software is finally affordable</h2>
-                <p class="subtitle">AI has fundamentally changed how software is built. Here's what that means for you.</p>
+                <h2 data-en="Why custom software is finally affordable" data-fr="Pourquoi le software sur mesure est enfin abordable">Why custom software is finally affordable</h2>
+                <p class="subtitle" data-en="AI has fundamentally changed how software is built. Here's what that means for you." data-fr="L'IA a fondamentalement changé la façon dont le logiciel est construit. Voici ce que ça veut dire pour vous.">AI has fundamentally changed how software is built. Here's what that means for you.</p>
             </div>
             <div class="ai-features">
                 <div class="ai-card">
-                    <h4>Development speed</h4>
-                    <p><strong>Before:</strong> Custom software projects used to take 6-12 months and required large teams.</p>
-                    <p><strong>Now:</strong> AI-assisted development cuts timelines by 3-5x. What took months now takes weeks.</p>
+                    <h4 data-en="Development speed" data-fr="Vitesse de développement">Development speed</h4>
+                    <p class="lang-en"><strong>Before:</strong> Custom software projects used to take 6-12 months and required large teams.</p>
+                    <p class="lang-fr"><strong>Avant :</strong> Les projets de logiciel sur mesure prenaient 6-12 mois et nécessitaient de grandes équipes.</p>
+                    <p class="lang-en"><strong>Now:</strong> AI-assisted development cuts timelines by 3-5x. What took months now takes weeks.</p>
+                    <p class="lang-fr"><strong>Maintenant :</strong> Le développement assisté par IA réduit les délais de 3-5x. Ce qui prenait des mois prend maintenant des semaines.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Cost barrier</h4>
-                    <p><strong>Before:</strong> Custom solutions were reserved for enterprises with $500K+ budgets.</p>
-                    <p><strong>Now:</strong> AI tools dramatically reduce development costs, making custom software accessible to SMEs.</p>
+                    <h4 data-en="Cost barrier" data-fr="Barrière de coût">Cost barrier</h4>
+                    <p class="lang-en"><strong>Before:</strong> Custom solutions were reserved for enterprises with $500K+ budgets.</p>
+                    <p class="lang-fr"><strong>Avant :</strong> Les solutions sur mesure étaient réservées aux entreprises avec des budgets de 500K$+.</p>
+                    <p class="lang-en"><strong>Now:</strong> AI tools dramatically reduce development costs, making custom software accessible to SMEs.</p>
+                    <p class="lang-fr"><strong>Maintenant :</strong> Les outils IA réduisent drastiquement les coûts de développement, rendant le logiciel sur mesure accessible aux PME.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Understanding your needs</h4>
-                    <p><strong>Before:</strong> Weeks of requirements gathering, endless meetings, lost-in-translation specs.</p>
-                    <p><strong>Now:</strong> AI-powered context engines understand your processes faster. We capture your reality, not just your requirements.</p>
+                    <h4 data-en="Understanding your needs" data-fr="Comprendre vos besoins">Understanding your needs</h4>
+                    <p class="lang-en"><strong>Before:</strong> Weeks of requirements gathering, endless meetings, lost-in-translation specs.</p>
+                    <p class="lang-fr"><strong>Avant :</strong> Des semaines de collecte de requis, des meetings sans fin, des specs perdues dans la traduction.</p>
+                    <p class="lang-en"><strong>Now:</strong> AI-powered context engines understand your processes faster. We capture your reality, not just your requirements.</p>
+                    <p class="lang-fr"><strong>Maintenant :</strong> Les moteurs de contexte IA comprennent vos processus plus rapidement. On capture votre réalité, pas juste vos requis.</p>
                 </div>
                 <div class="ai-card">
-                    <h4>Maintenance & evolution</h4>
-                    <p><strong>Before:</strong> Every change required expensive developer time and long release cycles.</p>
-                    <p><strong>Now:</strong> AI-assisted maintenance means your software evolves with your business, continuously and affordably.</p>
+                    <h4 data-en="Maintenance & evolution" data-fr="Maintenance et évolution">Maintenance & evolution</h4>
+                    <p class="lang-en"><strong>Before:</strong> Every change required expensive developer time and long release cycles.</p>
+                    <p class="lang-fr"><strong>Avant :</strong> Chaque changement nécessitait du temps de développeur coûteux et de longs cycles de release.</p>
+                    <p class="lang-en"><strong>Now:</strong> AI-assisted maintenance means your software evolves with your business, continuously and affordably.</p>
+                    <p class="lang-fr"><strong>Maintenant :</strong> La maintenance assistée par IA fait que votre logiciel évolue avec votre business, en continu et à moindre coût.</p>
                 </div>
             </div>
             <div class="callout-box">
-                <h4>This is why PinnAI exists.</h4>
-                <p>We combine deep industrial expertise with AI-powered development to deliver custom solutions that were simply not possible — or affordable — two years ago.</p>
+                <h4 data-en="This is why PinnAI exists." data-fr="C'est pour ça que PinnAI existe.">This is why PinnAI exists.</h4>
+                <p class="lang-en">We combine deep industrial expertise with AI-powered development to deliver custom solutions that were simply not possible — or affordable — two years ago.</p>
+                <p class="lang-fr">On combine une expertise industrielle profonde avec le développement propulsé par l'IA pour livrer des solutions sur mesure qui étaient tout simplement impossibles — ou inabordables — il y a deux ans.</p>
             </div>
         </div>
     </section>
@@ -1092,11 +1213,13 @@
     <!-- Final CTA -->
     <section id="contact" class="final-cta">
         <div class="container">
-            <h2>Let's explore what's possible</h2>
-            <p class="subtitle">Every project starts with a conversation. Tell us your challenge — we'll show you how AI can solve it.</p>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">No commitment. No sales pitch. Just a real conversation about your needs.</p>
+            <h2 data-en="Let's explore what's possible" data-fr="Explorons ce qui est possible">Let's explore what's possible</h2>
+            <p class="subtitle lang-en">Every project starts with a conversation. Tell us your challenge — we'll show you how AI can solve it.</p>
+            <p class="subtitle lang-fr">Chaque projet commence par une conversation. Parlez-nous de votre défi — on vous montre comment l'IA peut le résoudre.</p>
+            <p class="lang-en" style="color: var(--text-secondary); margin-bottom: 2rem;">No commitment. No sales pitch. Just a real conversation about your needs.</p>
+            <p class="lang-fr" style="color: var(--text-secondary); margin-bottom: 2rem;">Pas d'engagement. Pas de pitch de vente. Juste une vraie conversation sur vos besoins.</p>
             <div class="cta-contact">
-                <a href="#contact" class="btn btn-primary">Book a free discovery call</a>
+                <a href="#contact" class="btn btn-primary" data-en="Book a free discovery call" data-fr="Réservez un appel découverte gratuit">Book a free discovery call</a>
                 <a href="mailto:info@pinnai.com" class="contact-email">info@pinnai.com</a>
             </div>
         </div>
@@ -1108,27 +1231,63 @@
             <div class="footer-content">
                 <div>
                     <div class="logo">pinn<span class="ai">AI</span></div>
-                    <p style="margin-top: 1rem; color: var(--text-secondary);">Custom software, powered by AI.</p>
+                    <p class="lang-en" style="margin-top: 1rem; color: var(--text-secondary);">Custom software, powered by AI.</p>
+                    <p class="lang-fr" style="margin-top: 1rem; color: var(--text-secondary);">Software sur mesure, propulsé par l'IA.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#services">Services</a>
-                    <a href="#manufacturing">Manufacturing</a>
-                    <a href="#ai-solutions">AI Solutions</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#services" data-en="Services" data-fr="Services">Services</a>
+                    <a href="#manufacturing" data-en="Manufacturing" data-fr="Manufacturier">Manufacturing</a>
+                    <a href="#ai-solutions" data-en="AI Solutions" data-fr="Solutions IA">AI Solutions</a>
+                    <a href="#about" data-en="About" data-fr="À propos">About</a>
+                    <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 PinnAI inc. — Quebec, Canada</p>
                 <div class="footer-links">
-                    <a href="#">Loi 25 Compliant</a>
-                    <a href="#">Privacy Policy</a>
+                    <a href="#" data-en="Loi 25 Compliant" data-fr="Conforme Loi 25">Loi 25 Compliant</a>
+                    <a href="#" data-en="Privacy Policy" data-fr="Politique de confidentialité">Privacy Policy</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Language Toggle System
+        let currentLang = localStorage.getItem('pinnai-lang') || 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('pinnai-lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Toggle data-attribute elements
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+            
+            // Toggle visibility elements
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+            document.querySelectorAll('.lang-fr').forEach(el => {
+                el.style.display = lang === 'fr' ? '' : 'none';
+            });
+            
+            // Toggle active state on buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setLang(currentLang);
+        });
+
         // Sticky navigation with background on scroll
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
